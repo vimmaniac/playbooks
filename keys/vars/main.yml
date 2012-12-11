@@ -1,0 +1,5 @@
+---
+keys_dir: ${playbooks}/keys/files
+
+shell_accounts:
+  - james

@@ -1,0 +1,6 @@
+---
+- name: Motd - Install
+  action: template dest=/etc/motd
+  first_available_file:
+    - ${playbooks_home}/motd/templates/motd.j2-${ansible_fqdn}
+    - ${playbooks_home}/motd/templates/motd.j2

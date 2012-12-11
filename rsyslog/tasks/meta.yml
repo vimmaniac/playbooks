@@ -1,0 +1,5 @@
+---
+- name: replacing rsyslog sysconfig
+  action: copy src=files/etc/sysconfig/rsyslog dest=/etc/sysconfig/rsyslog
+- name: replacing rsyslog etc
+  action: copy src=files/etc/rsyslog-$role.conf dest=/etc/sysconfig/rsyslog.conf

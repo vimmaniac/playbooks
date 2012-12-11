@@ -1,0 +1,16 @@
+---
+# Initialize fireball
+- hosts: sandbox
+  gather_facts: false
+  connection: ssh
+  user: james
+  sudo: yes
+  tasks:
+  - action: fireball
+
+# fireball now!
+- hosts: sandbox
+  connection: fireball
+  tasks:
+  - action: copy src=resolv.cf dest=/etc/resolv.conf
+  - action: template src=bind.in dest=/etc/named.conf mode=0600

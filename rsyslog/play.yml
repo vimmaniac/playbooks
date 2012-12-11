@@ -1,0 +1,5 @@
+---
+- tasks:
+    - include: tasks/meta.yml
+  handlers:
+    - include: handlers/meta.yml

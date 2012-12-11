@@ -1,0 +1,6 @@
+---
+- name: Install Hosts
+  action: template dest=/etc/hosts
+  first_available_file:
+    - ${playbooks_home}/hosts/templates/hosts.j2-${ansible_fqdn}
+    - ${playbooks_home}/hosts/templates/hosts.j2

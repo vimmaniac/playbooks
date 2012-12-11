@@ -1,0 +1,10 @@
+---
+- name: MOTD Playbook
+  hosts: sandbox
+  user: root
+
+  vars:
+    name: motd
+
+  tasks:
+    - include: tasks/main.yml
