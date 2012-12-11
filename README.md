@@ -1,0 +1,4 @@
+playbooks
+=========
+
+Generic ansible playbooks
