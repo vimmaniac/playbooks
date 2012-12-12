@@ -78,7 +78,7 @@ To execute the single playbook you can then run
 
 To execute a strategy you can run
 
-    $ ansible-playbook playbooks-mycompany/sandbox/play.yml
+    $ ansible-playbook strategybooks/sandbox/play.yml
 
 ## Best Practices
 
