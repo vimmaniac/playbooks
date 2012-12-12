@@ -15,5 +15,5 @@ playbooks_global_tasks: ${ansible_home}/playbooks/global/tasks
 playbooks_global_handlers: ${ansible_home}/playbooks/global/handlers
 
 playbooks_home: ${ansible_home}/playbooks
-playbooks_extension: ${ansible_home}/playbooks-callfire
+playbooks_extension: ${ansible_home}/strategybooks
 playbooks_infrastructure: ${ansible_home}/playbooks-infrastructure
