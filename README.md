@@ -63,19 +63,20 @@ The playbooks layout above allows us to use assumptions about the layout so that
 
 Configure you the global playbook for either standalone playbooks or extended playbooks (strategies) to bootstrap the directory paths that are used in each playbook. I will include a best practices section for implementing clean playbook designs so we don't end up with unreusable playbooks much like the puppet and chef equivalence of community modules/receipes.
 
-* You can configure the global playbooks setting by copying template.yml to main.yml:
+You can configure the global playbooks setting by copying template.yml to main.yml
 
     $ cp ${playbooks_home}/global/vars/template.yml ${playbooks_home}/global/vars/main.yml
     $ vi ${playbooks_home}/global/vars/main.yml
 
-* You can configure each module via:
-${playbooks_home}/<module>/vars/main.yml
+You can configure each module via
 
-* To execute the single playbook you can then run:
+    $ vi ${playbooks_home}/<module>/vars/main.yml
+
+To execute the single playbook you can then run
 
     $ ansible-playbook playbooks/<module>/play.yml
 
-* To execute a strategy you can run:
+To execute a strategy you can run
 
     $ ansible-playbook playbooks-mycompany/sandbox/play.yml
 
