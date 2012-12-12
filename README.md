@@ -21,7 +21,7 @@ If the above design goals are met, we should be able to execute the following us
 
 This structure allows us to better archieve our goals. The variable ${ansible_home} can be pointed at /etc/ansible or anywhere you wish deployed on your hosts. This will allow you to implement either push/pull methods without the pain or agony of trying to tailer the playbooks to work where you want them installed. The playbooks will use paths configured in the global playbook.
 
-* My project layout works as such:
+* Project hierarchy:
 
 ```
 ${ansible_home}/
@@ -45,7 +45,19 @@ ${playbooks_home}/
     play.yml
 ```
 
-The playbooks layout above allows us to use assumptions about the layout so that we can assemble strategies to extend or build composite playbooks (strategies). This uses the same idea in programming idioms like java beans and reflections. Structures are good because we need to rely on reproducable layouts to generate variables and such to bootstrap our strategies. It is nice that ansible is flexible, allowing us to do as we please to fit our needs. We all know this will lead to CHAOS with confusing/conflicting goals that are not cohesive and loosly coupled. If I sound like a software engineer, that's because I was one for nearly 10 yrs and sysadmin longer than that. That makes me a good candidate as a DEVOPS?
+* Strategies follow the same structure:
+
+```
+${strategybooks_home}/
+  <strategy>/
+    files/
+    templates/
+    vars/main.yml
+    tasks/main.yml
+    play.yml
+```
+
+The playbooks layout above allows us to use assumptions about the layout so that we can assemble strategies to extend or build composite playbooks (strategies). This pattern is borrowed from programming idioms like javabeans and the use of reflections on them. Structures are good because we need to rely on reproducable layouts/patterns to generate variables and such to bootstrap our strategies. It is nice that ansible is flexible, allowing us to do as we please to fit our needs. We all know this will lead to CHAOS with confusing/conflicting goals that are not cohesive and loosly coupled. If I sound like a software engineer, that's because I was one for nearly 10 yrs and sysadmin longer than that. Sound like a DEVOPS to you yet?
 
 ## Configuring playbooks or strategies
 
