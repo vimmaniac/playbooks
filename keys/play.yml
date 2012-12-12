@@ -1,5 +1,5 @@
 ---
-- name: Motd Playbook
+- name: Keys Playbook
   hosts: all
 
   vars_files:

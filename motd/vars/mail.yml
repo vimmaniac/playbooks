@@ -1,8 +1,0 @@
-#
-# Tunable variables for MOTD
-#
-#
----
-module: Motd
-version: v1.0
-#

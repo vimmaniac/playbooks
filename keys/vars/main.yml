@@ -1,5 +1,14 @@
+#
+# Variables for standalone keys module
+#
 ---
-keys_dir: ${playbooks}/keys/files
+module: keys
+module_path: ${playbooks_home}/${module}
+module_files: ${module_path}/files
+module_templates: ${module_path}/templates
+module_vars: ${module_path}/vars
+module_tasks: ${module_path}/tasks
+module_handlers: ${module_path}/handlers
 
 shell_accounts:
   - james
