@@ -1,5 +1,8 @@
+#
+#
+#
 ---
-- name: Keys - Install Root Public Key
+- name: ${module} - install root public key
   action: template dest=/root/.ssh/authorized_keys
   first_available_file:
   - ${playbooks_extension}/keys/templates/authorized_keys.j2-${ansible_fqdn}
@@ -7,10 +10,10 @@
   - ${module_templates}/keys/templates/authorized_keys.j2-${ansible_fqdn}
   - ${module_templates}/keys/templates/authorized_keys.j2
 
-- name: Keys - Create Home Dir
+- name: ${module} - create home dir
   action: file dest=/home/${item} state=directory owner=${item} group=users mode=0700
   with_items: $shell_accounts
 
-- name: Keys - Install Authorization
+- name: ${module} - install authorization
   action: authorized_key user=${item} key='$FILE(${module_files}/${item}_id_rsa.pub)'
   with_items: $shell_accounts

@@ -1,3 +1,6 @@
+#
+#
+#
 ---
 - name: Keys Playbook
   hosts: all
@@ -7,4 +10,5 @@
   - vars/main.yml
 
   tasks:
+  - include: ../global/tasks/main.yml
   - include: tasks/main.yml

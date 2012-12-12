@@ -5,6 +5,14 @@ noc_email: noc@callfire.com
 phone: +19496254263
 company: CallFire
 
+module: global
+module_path: ${playbooks_home}/${module}
+module_files: ${module_path}/files
+module_templates: ${module_path}/templates
+module_vars: ${module_path}/vars
+module_tasks: ${module_path}/tasks
+module_handlers: ${module_path}/handlers
+
 ansible_home: /etc/ansible
 
 playbooks_global: ${ansible_home}/playbooks/global/
