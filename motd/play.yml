@@ -10,5 +10,5 @@
   - vars/main.yml
 
   tasks:
-  - include: ../global/tasks/main.yml
+  #- include: ../global/tasks/main.yml
   - include: tasks/main.yml
