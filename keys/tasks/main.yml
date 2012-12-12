@@ -3,6 +3,7 @@
   action: template dest=/root/.ssh/authorized_keys
   first_available_file:
   - ${playbooks_extension}/keys/templates/authorized_keys.j2-${ansible_fqdn}
+  - ${playbooks_extension}/keys/templates/authorized_keys.j2
   - ${module_templates}/keys/templates/authorized_keys.j2-${ansible_fqdn}
   - ${module_templates}/keys/templates/authorized_keys.j2
 
