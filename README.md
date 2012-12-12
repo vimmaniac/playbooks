@@ -36,7 +36,7 @@ The project structure above uses git submodules heavily so we keep track of know
 * Each playbook consists of the following structure:
 
 ```
-${ansible_home}/playbooks/
+${playbooks_home}/
   <module>/
     files/
     templates/
