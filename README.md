@@ -27,7 +27,7 @@ This structure allows us to better archieve our goals. The variable ${ansible_ho
 ${ansible_home}/
   ansible/ (git submodule; project origin)
   playbooks/ (git submodule; public playbooks)
-  playbooks-sandbox/ (git submodule; composition of extended playbooks)
+  strategybooks/ (git submodule; composition of extended playbooks)
   hosts (ansible hosts file)
 ```
 
