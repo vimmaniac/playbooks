@@ -1,8 +1,8 @@
 #
-#
+# Template Playbook
 #
 ---
-- name: Keys Playbook
+- name: Template Playbook
   hosts: all
 
   vars_files:
@@ -11,4 +11,7 @@
   - ${playbooks_extension}/${playbook}/${playbook_vars_default}
 
   tasks:
-  - include: ${playbook_tasks_default}
+  - ${playbook_tasks_default}
+
+  handlers:
+  - ${playbook_handlers_default}

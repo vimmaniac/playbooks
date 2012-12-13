@@ -2,7 +2,5 @@
 # Variables for standalone motd module
 #
 ---
-module: motd
-module_path: ${playbooks_home}/${module}
+playbook: motd
 version: v1.0
-#

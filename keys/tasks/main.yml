@@ -2,19 +2,19 @@
 #
 #
 ---
-- name: ${module} - install root public key
+- name: ${playbook} - install root public key
   action: template dest=/root/.ssh/authorized_keys
   first_available_file:
-  - ${playbooks_extension}/keys/templates/authorized_keys.j2-${ansible_fqdn}
-  - ${playbooks_extension}/keys/templates/authorized_keys.j2
-  - ${module_templates}/keys/templates/authorized_keys.j2-${ansible_fqdn}
-  - ${module_templates}/keys/templates/authorized_keys.j2
+  - ${playbooks_extension}/${playbook}/templates/authorized_keys.j2-${ansible_fqdn}
+  - ${playbooks_extension}/${playbook}/templates/authorized_keys.j2
+  - ${playbook_templates}/${playbook}/templates/authorized_keys.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/templates/authorized_keys.j2
 
-- name: ${module} - create home dir
+- name: ${playbook} - create home dir
   action: file dest=/home/${item} state=directory owner=${item} group=users mode=0700
   with_items: $shell_accounts
 
-- name: ${module} - install authorization
+- name: ${playbook} - install authorization
   #action: authorized_key user=${item} key='$FILE(${module_files}/${item}_id_rsa.pub)'
-  action: authorized_key user=${item} key='$FILE(${playbooks_extension}/${module}/files/${item}_id_rsa.pub)'
+  action: authorized_key user=${item} key='$FILE(${playbooks_extension}/${playbook}/files/${item}_id_rsa.pub)'
   with_items: $shell_accounts

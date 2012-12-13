@@ -4,8 +4,11 @@
 - name: Global Playbook
   hosts: all
 
+  # This begins our bootstrap of variables
+  
   vars_files:
   - vars/main.yml
 
-  tasks:
-  - include: tasks/main.yml
+  #tasks:
+  #- include: ${playbook_tasks_default}
+  #- include: tasks/main.yml

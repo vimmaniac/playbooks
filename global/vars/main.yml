@@ -1,27 +1,43 @@
+#
+# This playbook configures your basic structure
+#
 ---
+playbook: global
 author: James H Nguyen
 author_email: james+ansible@callfire.com
 noc_email: noc@callfire.com
 phone: +19496254263
 company: CallFire
 
-module: global
-module_path: ${playbooks_home}/${module}
-module_files: ${module_path}/files
-module_templates: ${module_path}/templates
-module_vars: ${module_path}/vars
-module_tasks: ${module_path}/tasks
-module_handlers: ${module_path}/handlers
+# base (can change this)
 
 ansible_home: /etc/ansible
-
-playbooks_global: ${ansible_home}/playbooks/global/
-playbooks_global_files: ${ansible_home}/playbooks/global/files
-playbooks_global_templates: ${ansible_home}/playbooks/global/templates
-playbooks_global_vars: ${ansible_home}/playbooks/global/vars
-playbooks_global_tasks: ${ansible_home}/playbooks/global/tasks
-playbooks_global_handlers: ${ansible_home}/playbooks/global/handlers
-
 playbooks_home: ${ansible_home}/playbooks
 playbooks_extension: ${ansible_home}/strategybooks
-playbooks_infrastructure: ${ansible_home}/playbooks-infrastructure
+
+# playbook structure (does not change)
+
+default_yml: main.yml
+
+playbook_files_default: files/${default_yml}
+playbook_templates_default: templates/${default_yml}
+playbook_vars_default: vars/${default_yml}
+playbook_tasks_default: tasks/${default_yml}
+playbook_handlers_default: handlers/${default_yml}
+
+playbook_path: ${playbooks_home}/${playbook}
+
+playbook_files: ${playbook_path}/files
+playbook_templates: ${playbook_path}/templates
+playbook_vars: ${playbook_path}/vars
+playbook_tasks: ${playbook_path}/tasks
+playbook_handlers: ${playbook_path}/handlers
+
+# global playbook structure (does not change)
+
+playbooks_global: ${ansible_home}/playbooks/${playbook}
+playbooks_global_files: ${playbooks_global}/files
+playbooks_global_templates: ${playbooks_global}/templates
+playbooks_global_vars: ${playbooks_global}/vars
+playbooks_global_tasks: ${playbooks_global}/tasks
+playbooks_global_handlers: ${playbooks_global}/handlers

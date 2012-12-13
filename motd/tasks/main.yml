@@ -2,10 +2,10 @@
 #
 #
 ---
-- name: ${module} - install
+- name: ${playbook} - install
   action: template dest=/etc/motd
   first_available_file:
-  - ${playbooks_extension}/motd/templates/motd.j2-${ansible_fqdn}
-  - ${playbooks_extension}/motd/templates/motd.j2
-  - ${playbooks_home}/motd/templates/motd.j2-${ansible_fqdn}
-  - ${playbooks_home}/motd/templates/motd.j2
+  - ${playbooks_extension}/${playbook}/templates/motd.j2-${ansible_fqdn}
+  - ${playbooks_extension}/${playbook}/templates/motd.j2
+  - ${playbooks_home}/${playbook}/templates/motd.j2-${ansible_fqdn}
+  - ${playbooks_home}/${playbook}/templates/motd.j2

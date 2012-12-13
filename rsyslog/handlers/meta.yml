@@ -1,3 +1,0 @@
----
-- name: restart rsyslog
-  action: service action=rsyslog state=restarted
