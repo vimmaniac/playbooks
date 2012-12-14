@@ -7,5 +7,5 @@
   first_available_file:
   - ${playbooks_extension}/${playbook}/templates/motd.j2-${ansible_fqdn}
   - ${playbooks_extension}/${playbook}/templates/motd.j2
-  - ${playbooks_home}/${playbook}/templates/motd.j2-${ansible_fqdn}
-  - ${playbooks_home}/${playbook}/templates/motd.j2
+  - ${playbook_templates}/motd.j2-${ansible_fqdn}
+  - ${playbook_templates}/motd.j2

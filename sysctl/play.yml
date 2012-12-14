@@ -1,13 +1,13 @@
 #
-#
+# Template Playbook
 #
 ---
-- name: Motd Playbook
+- name: Sysctl Playbook
   hosts: all
 
   # not working if defined here for some reason
   #vars:
-  #  playbook: motd
+  #  playbook: template
   #  version: 1.0
 
   vars_files:
@@ -17,3 +17,6 @@
 
   tasks:
   - include: ${playbook_tasks_default}
+
+  #handlers:
+  #- include: ${playbook_handlers_default}

@@ -2,8 +2,13 @@
 #
 #
 ---
-- name: ${playbook}
-  action: command echo ${playbook}
+- name: ${playbook} - install tuned ulimit
+  action: copy dest=/etc/security/limits.conf owner=root group=root mode=0644
+  first_available_file:
+  - ${playbooks_extension}/${playbook}/files/limits-optimized.conf-${ansible_fqdn}
+  - ${playbooks_extension}/${playbook}/files/limits-optimized.conf
+  - ${playbook_files}/limits-optimized.conf-${ansible_fqdn}
+  - ${playbook_files}/limits-optimized.conf
 
 # Example of how to manage static files
 #
@@ -28,7 +33,7 @@
 # Example of copying each file over that matches the given pattern
 #- name: ${playbook} - install from glob
 #  action: copy src=$item dest=/etc/callfire/ owner=root mode=600
-#  with_fileglob: ${playbook_files}/etc/callfire/*
+#  with_fileglob: ${playbook_templates}/${playbook}/files/etc/callfire/*
 
 # Example of how to create a directory dynamically from a list
 #

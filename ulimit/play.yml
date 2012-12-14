@@ -1,14 +1,9 @@
 #
-#
+# Ulimit Playbook
 #
 ---
-- name: Motd Playbook
+- name: Ulimit Playbook
   hosts: all
-
-  # not working if defined here for some reason
-  #vars:
-  #  playbook: motd
-  #  version: 1.0
 
   vars_files:
   - ../global/vars/main.yml
@@ -17,3 +12,6 @@
 
   tasks:
   - include: ${playbook_tasks_default}
+
+  #handlers:
+  #- include: ${playbook_handlers_default}

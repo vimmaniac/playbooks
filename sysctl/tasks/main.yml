@@ -2,8 +2,13 @@
 #
 #
 ---
-- name: ${playbook}
-  action: command echo ${playbook}
+- name: ${playbook} - install tuned sysctl
+  action: copy dest=/etc/sysctl.conf owner=root group=root mode=0644
+  first_available_file:
+  - ${playbooks_extension}/${playbook}/files/sysctl.conf-optimized-${ansible_fqdn}
+  - ${playbooks_extension}/${playbook}/files/sysctl.conf-optimized
+  - ${playbook_files}/sysctl.conf-optimized-${ansible_fqdn}
+  - ${playbook_files}/sysctl.conf-optimized
 
 # Example of how to manage static files
 #

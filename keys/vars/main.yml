@@ -6,4 +6,4 @@ playbook: keys
 version: 1.0
 
 shell_accounts:
-  - james
+- james

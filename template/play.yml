@@ -5,13 +5,20 @@
 - name: Template Playbook
   hosts: all
 
+  # * not working if defined here for some reason
+  # * you must change the playbook name in vars/main.yml according to the
+  #   directory name of this playbook
+  #vars:
+  #  playbook: template
+  #  version: 1.0
+
   vars_files:
   - ../global/vars/main.yml
   - ${playbook_vars_default}
   - ${playbooks_extension}/${playbook}/${playbook_vars_default}
 
   tasks:
-  - ${playbook_tasks_default}
+  - include: ${playbook_tasks_default}
 
-  handlers:
-  - ${playbook_handlers_default}
+  #handlers:
+  #- include: ${playbook_handlers_default}
