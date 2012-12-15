@@ -2,7 +2,7 @@
 #
 #
 ---
-- name: ${playbook} - install tuned sysctl
+- name: ${playbook} - install optimized sysctl
   action: copy dest=/etc/sysctl.conf owner=root group=root mode=0644
   first_available_file:
   - ${playbooks_extension}/${playbook}/files/sysctl.conf-optimized-${ansible_fqdn}

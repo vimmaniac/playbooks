@@ -1,0 +1,12 @@
+#
+#
+#
+---
+playbook: yum
+version: 1.0
+
+#remove_pkgs:
+#- syslog-ng
+
+#install_pkgs:
+#- rsyslog

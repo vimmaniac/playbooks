@@ -15,6 +15,5 @@
   with_items: $shell_accounts
 
 - name: ${playbook} - install authorization
-  #action: authorized_key user=${item} key='$FILE(${module_files}/${item}_id_rsa.pub)'
   action: authorized_key user=${item} key='$FILE(${playbooks_extension}/${playbook}/files/${item}_id_rsa.pub)'
   with_items: $shell_accounts
