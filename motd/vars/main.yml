@@ -1,6 +1,0 @@
-#
-# Variables for standalone motd module
-#
----
-playbook: motd
-version: 1.0

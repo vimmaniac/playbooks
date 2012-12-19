@@ -1,0 +1,23 @@
+#
+#
+#
+---
+- name: root authorized_keys
+  action: template dest=/root/.ssh/authorized_keys
+  first_available_file:
+  - ${playbook_templates_private}/keys/authorized_keys.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/keys/authorized_keys.j2-${host_group}
+  - ${playbook_templates_private}/keys/authorized_keys.j2-${datacentre}
+  - ${playbook_templates_private}/keys/authorized_keys.j2
+  - ${playbook_templates}/keys/authorized_keys.j2-${ansible_fqdn}
+  - ${playbook_templates}/keys/authorized_keys.j2-${datacentre}
+  - ${playbook_templates}/keys/authorized_keys.j2-${host_group}
+  - ${playbook_templates}/keys/authorized_keys.j2
+
+- name: user home
+  action: file dest=/home/${item} state=directory owner=${item} group=users mode=0700
+  with_items: $shell_accounts
+
+- name: user authorized_keys
+  action: authorized_key user=${item} key='$FILE(${playbook_files_private}/keys/${item}_id_rsa.pub)'
+  with_items: $shell_accounts

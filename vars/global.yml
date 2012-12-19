@@ -1,0 +1,24 @@
+#
+# This playbook configures your basic structure
+#
+---
+author: James H Nguyen
+author_email: james+ansible@callfire.com
+noc_email: noc@callfire.com
+phone: +19496254263
+company: CallFire
+
+ansible_home: /etc/ansible
+playbooks_home: ${ansible_home}/playbooks
+
+playbook_files: ${playbooks_home}/files
+playbook_templates: ${playbooks_home}/templates
+playbook_vars: ${playbooks_home}/vars
+playbook_tasks: ${playbooks_home}/tasks
+playbook_handlers: ${playbooks_home}/handlers
+
+playbook_files_private: ${ansible_home}/files_private
+playbook_templates_private: ${ansible_home}/templates_private
+playbook_vars_private: ${ansible_home}/vars_private
+playbook_tasks_private: ${ansible_home}/tasks_private
+playbook_handlers_private: ${ansible_home}/handlers_private

@@ -1,0 +1,14 @@
+#
+#
+#
+---
+- name: Rebrand Playbook
+  hosts: delegator-rebrand
+
+  vars:
+    playbook: rebrand
+    group: delegator-rebrand
+
+- include: base.yml
+#- include: mysql.yml
+#- include: jboss.yml

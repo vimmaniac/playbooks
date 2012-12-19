@@ -1,9 +1,0 @@
-#
-# Variables for standalone keys module
-#
----
-playbook: keys
-version: 1.0
-
-shell_accounts:
-- james
