@@ -8,6 +8,8 @@
   - php-nusoap
   - php-mysql
   - php-xml
+  tags:
+  - php.pkgs
 
 - copy: dest=/etc/php.ini owner=root group=root mode=0644
   first_available_file:
@@ -19,3 +21,7 @@
   - ${playbook_files}/${playbook}/php.ini-${host_group}
   - ${playbook_files}/${playbook}/php.ini-${datacentre}
   - ${playbook_files}/${playbook}/php.ini
+  notify:
+  - restat httpd
+  tags:
+  - php.cfg

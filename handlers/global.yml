@@ -5,5 +5,8 @@
 - name: restart sysctl
   command: sysctl -p
 
+- name: restart httpd
+  service: name=httpd state=restarted
+
 - name: restart mysqld
   service: name=mysqld state=restarted
