@@ -1,0 +1,12 @@
+#
+#
+#
+---
+- name: Dynamic Playbook
+  hosts: ${host}
+
+  vars:
+    group: ${group}
+ 
+- include: base.yml
+- include: playbook.yml playbook=${play} tags=${play}

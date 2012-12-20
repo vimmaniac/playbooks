@@ -5,8 +5,9 @@
 - name: Base Playbook
   hosts: all
 
-  vars_files:
-  - vars/global.yml
+  # replaced with group_vars/all
+  #vars_files:
+  #- vars/global.yml
 
 - include: playbook.yml playbook=motd tags=motd
 - include: playbook.yml playbook=keys tags=keys

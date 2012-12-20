@@ -8,8 +8,10 @@
   tags:
   - httpd.pkgs
 
-- copy: dest=/etc/httpd/conf.d state=preset
+- copy: dest=/etc/httpd state=preset
   with_fileglob:
   - ${playbook_files}/${playbook}/*
+  notify:
+  - restart httpd
   tags:
   - httpd.cfg

@@ -7,7 +7,7 @@
 
   vars:
     group: lamp
-
+ 
 - include: base.yml
 - include: playbook.yml playbook=apache tags=apache
 - include: playbook.yml playbook=php tags=php
