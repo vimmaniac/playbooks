@@ -2,6 +2,12 @@
 #
 #
 ---
+- yum: pkg=${item} state=installed
+  with_items:
+  - mysql-server
+  tags:
+  - mysql.pkgs
+
 - copy: dest=/etc/my.cnf
   first_available_file:
   - ${playbook_files_private}/mysql/my.cnf-${ansible_fqdn}
@@ -15,8 +21,8 @@
   notify:
   - restart mysqld
   tags:
-  - mysql.config
+  - mysql.cfg
 
 - mysql_user: name=${default_user} password=${default_passwd} priv=*.*:ALL state=present
   tags:
-  - mysql.setup
+  - mysql.init

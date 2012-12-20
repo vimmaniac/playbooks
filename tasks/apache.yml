@@ -1,0 +1,15 @@
+#
+#
+#
+---
+- yum: pkg=${item} state=installed
+  with_items:
+  - mod_ssl
+  tags:
+  - httpd.pkgs
+
+- copy: dest=/etc/httpd/conf.d state=preset
+  with_fileglob:
+  - ${playbook_files}/${playbook}/*
+  tags:
+  - httpd.cfg
