@@ -2,11 +2,11 @@
 #
 #
 ---
-#- name: yum remove pkgs
+# TODO: add repo sources here
+
 - yum: pkg=${item} state=absent
   with_items: ${remove_pkgs}
 
-#- name: yum install pkgs
 - yum: pkg=${item} state=installed
   with_items: ${install_pkgs}
 

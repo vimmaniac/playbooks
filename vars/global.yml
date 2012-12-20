@@ -2,12 +2,6 @@
 # This playbook configures your basic structure
 #
 ---
-author: James H Nguyen
-author_email: james+ansible@callfire.com
-noc_email: noc@callfire.com
-phone: +19496254263
-company: CallFire
-
 ansible_home: /etc/ansible
 playbooks_home: ${ansible_home}/playbooks
 

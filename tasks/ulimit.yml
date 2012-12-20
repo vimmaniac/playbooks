@@ -2,14 +2,13 @@
 #
 #
 ---
-#- name: optimized ulimit
 - copy: dest=/etc/security/limits.conf owner=root group=root mode=0644
   first_available_file:
-  - ${playbook_files_private}/ulimit/limits-optimized.conf-${ansible_fqdn}
-  - ${playbook_files_private}/ulimit/limits-optimized.conf-${host_group}
-  - ${playbook_files_private}/ulimit/limits-optimized.conf-${datacentre}
-  - ${playbook_files_private}/ulimit/limits-optimized.conf
-  - ${playbook_files}/ulimit/limits-optimized.conf-${ansible_fqdn}
-  - ${playbook_files}/ulimit/limits-optimized.conf-${host_group}
-  - ${playbook_files}/ulimit/limits-optimized.conf-${datacentre}
-  - ${playbook_files}/ulimit/limits-optimized.conf
+  - ${playbook_files_private}/${playbook}/limits-optimized.conf-${ansible_fqdn}
+  - ${playbook_files_private}/${playbook}/limits-optimized.conf-${host_group}
+  - ${playbook_files_private}/${playbook}/limits-optimized.conf-${datacentre}
+  - ${playbook_files_private}/${playbook}/limits-optimized.conf
+  - ${playbook_files}/${playbook}/limits-optimized.conf-${ansible_fqdn}
+  - ${playbook_files}/${playbook}/limits-optimized.conf-${host_group}
+  - ${playbook_files}/${playbook}/limits-optimized.conf-${datacentre}
+  - ${playbook_files}/${playbook}/limits-optimized.conf

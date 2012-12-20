@@ -8,11 +8,13 @@
   vars:
     version: 1.0
 
+  # see if we can git rid of this using group_vars/all
   vars_files:
   - vars/global.yml
 
   tasks:
+#  - command: echo ${playbook_tasks}/${playbook}.yml
   - include: ${playbook_tasks}/${playbook}.yml
 
-  handlers:
+#  handlers:
   - include: ${playbook_handlers}/global.yml

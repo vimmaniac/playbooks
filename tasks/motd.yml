@@ -4,11 +4,11 @@
 ---
 - template: dest=/etc/motd
   first_available_file:
-  - ${playbook_templates_private}/motd/motd.j2-${ansible_fqdn}
-  - ${playbook_templates_private}/motd/motd.j2-${host_group}
-  - ${playbook_templates_private}/motd/motd.j2-${datacentre}
-  - ${playbook_templates_private}/motd/motd.j2
-  - ${playbook_templates}/motd/motd.j2-${ansible_fqdn}
-  - ${playbook_templates}/motd/motd.j2-${host_group}
-  - ${playbook_templates}/motd/motd.j2-${datacentre}
-  - ${playbook_templates}/motd/motd.j2
+  - ${playbook_templates_private}/${playbook}/motd.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/motd.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/motd.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/motd.j2
+  - ${playbook_templates}/${playbook}/motd.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/motd.j2-${host_group}
+  - ${playbook_templates}/${playbook}/motd.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/motd.j2

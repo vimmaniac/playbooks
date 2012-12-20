@@ -1,5 +1,5 @@
 #
-#
+# ie. ansible-playbook playbooks/play.yml --extra-vars="host=all group=delegator-rebrand play=mysql" --tags="mysql.cfg"
 #
 ---
 - name: Dynamic Playbook
@@ -9,4 +9,4 @@
     group: ${group}
  
 - include: base.yml
-- include: playbook.yml playbook=${play} tags=${play}
+- include: playbook.yml playbook=${play}

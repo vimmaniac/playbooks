@@ -5,6 +5,9 @@
 - name: restart sysctl
   command: sysctl -p
 
+- name: restart nscd
+  service: name=nscd state=restarted
+
 - name: restart httpd
   service: name=httpd state=restarted
 
