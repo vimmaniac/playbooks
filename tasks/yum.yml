@@ -2,12 +2,12 @@
 #
 #
 ---
-- name: yum remove pkgs
-  action: yum pkg=${item} state=absent
+#- name: yum remove pkgs
+- yum: pkg=${item} state=absent
   with_items: ${remove_pkgs}
 
-- name: yum install pkgs
-  action: yum pkg=${item} state=installed
+#- name: yum install pkgs
+- yum: pkg=${item} state=installed
   with_items: ${install_pkgs}
 
 # Example of how to manage static files

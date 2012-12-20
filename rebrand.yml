@@ -6,9 +6,9 @@
   hosts: delegator-rebrand
 
   vars:
-    playbook: rebrand
+    #playbook: rebrand
     group: delegator-rebrand
 
-- include: base.yml
-#- include: mysql.yml
+- include: base.yml tags=base
+#- include: playbook.yml playbook=mysql tags=mysql
 #- include: jboss.yml

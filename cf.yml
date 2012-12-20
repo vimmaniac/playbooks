@@ -1,0 +1,12 @@
+#
+#
+#
+---
+- name: CallFire Playbook
+  hosts: all
+
+  vars:
+    playbook: cf
+    group: all
+
+- include: base.yml

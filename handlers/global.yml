@@ -1,0 +1,9 @@
+#
+#
+#
+---
+- name: restart sysctl
+  command: sysctl -p
+
+- name: restart mysqld
+  service: name=mysqld state=restarted

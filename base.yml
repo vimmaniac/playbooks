@@ -4,15 +4,12 @@
 ---
 - name: Base Playbook
   hosts: all
-  #- *.kernelfire.com
-  #- *.*.kernelfire.com
 
   vars_files:
   - vars/global.yml
 
-  tasks:
-  - include: ${playbook_tasks}/motd.yml
-  - include: ${playbook_tasks}/keys.yml
-  - include: ${playbook_tasks}/ulimit.yml
-  - include: ${playbook_tasks}/sysctl.yml
-  - include: ${playbook_tasks}/yum.yml
+- include: playbook.yml playbook=motd tags=motd
+- include: playbook.yml playbook=keys tags=keys
+- include: playbook.yml playbook=ulimit tags=ulimit
+- include: playbook.yml playbook=sysctl tags=sysctl
+- include: playbook.yml playbook=yum tags=yum

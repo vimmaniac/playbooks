@@ -2,7 +2,7 @@
 #
 #
 ---
-- action: template dest=/etc/motd
+- template: dest=/etc/motd
   first_available_file:
   - ${playbook_templates_private}/motd/motd.j2-${ansible_fqdn}
   - ${playbook_templates_private}/motd/motd.j2-${host_group}

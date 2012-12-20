@@ -1,0 +1,19 @@
+#
+# Proxy playbook
+#
+---
+- name: Proxy Playbook
+  hosts: all
+
+  vars:
+    #playbook: ${playbook}
+    version: 1.0
+
+  vars_files:
+  - vars/global.yml
+
+  tasks:
+  - include: ${playbook_tasks}/${playbook}.yml
+
+  handlers:
+  - include: ${playbook_handlers}/global.yml

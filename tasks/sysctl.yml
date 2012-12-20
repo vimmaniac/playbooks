@@ -2,8 +2,7 @@
 #
 #
 ---
-- name: optimized sysctl
-  action: copy dest=/etc/sysctl.conf owner=root group=root mode=0644
+- copy: dest=/etc/sysctl.conf owner=root group=root mode=0643
   first_available_file:
   - ${playbook_files_private}/sysctl/sysctl.conf-optimized-${ansible_fqdn}
   - ${playbook_files_private}/sysctl/sysctl.conf-optimized-${host_group}
@@ -13,3 +12,7 @@
   - ${playbook_files}/sysctl/sysctl.conf-optimized-${host_group}
   - ${playbook_files}/sysctl/sysctl.conf-optimized-${datacentre}
   - ${playbook_files}/sysctl/sysctl.conf-optimized
+  notify:
+  - restart sysctl
+  tags:
+  - sysctl.config

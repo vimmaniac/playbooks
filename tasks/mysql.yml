@@ -1,0 +1,22 @@
+#
+#
+#
+---
+- copy: dest=/etc/my.cnf
+  first_available_file:
+  - ${playbook_files_private}/mysql/my.cnf-${ansible_fqdn}
+  - ${playbook_files_private}/mysql/my.cnf-${host_group}
+  - ${playbook_files_private}/mysql/my.cnf-${datacentre}
+  - ${playbook_files_private}/mysql/my.cnf
+  - ${playbook_files}/mysql/my.cnf-${ansible_fqdn}
+  - ${playbook_files}/mysql/my.cnf-${host_group}
+  - ${playbook_files}/mysql/my.cnf-${datacentre}
+  - ${playbook_files}/mysql/my.cnf
+  notify:
+  -restart mysqld
+  tags:
+  - mysql.config
+
+- mysql_user: name=${default_user} password=${default_passwd} priv=*.*:ALL state=present
+  tags:
+  - mysql.setup

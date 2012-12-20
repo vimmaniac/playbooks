@@ -1,0 +1,5 @@
+[datacentre1:children]
+lamp
+
+[lamp]
+localhost
