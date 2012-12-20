@@ -5,6 +5,7 @@
 - yum: pkg=${item} state=installed
   with_items:
   - mysql-server
+  - MySQL-python
   tags:
   - mysql.pkgs
 

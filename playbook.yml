@@ -6,7 +6,6 @@
   hosts: all
 
   vars:
-    #playbook: ${playbook}
     version: 1.0
 
   vars_files:

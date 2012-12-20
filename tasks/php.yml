@@ -1,0 +1,21 @@
+#
+#
+#
+---
+- yum: pkg=${item} state=installed
+  with_items:
+  - php-soap
+  - php-nusoap
+  - php-mysql
+  - php-xml
+
+- copy: dest=/etc/php.ini owner=root group=root mode=0644
+  first_available_file:
+  - ${playbook_files_private}/${playbook}/php.ini-${ansible_fqdn}
+  - ${playbook_files_private}/${playbook}/php.ini-${host_group}
+  - ${playbook_files_private}/${playbook}/php.ini-${datacentre}
+  - ${playbook_files_private}/${playbook}/php.ini
+  - ${playbook_files}/${playbook}/php.ini-${ansible_fqdn}
+  - ${playbook_files}/${playbook}/php.ini-${host_group}
+  - ${playbook_files}/${playbook}/php.ini-${datacentre}
+  - ${playbook_files}/${playbook}/php.ini
