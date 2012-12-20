@@ -10,5 +10,5 @@
     group: delegator-rebrand
 
 - include: base.yml tags=base
-#- include: playbook.yml playbook=mysql tags=mysql
+- include: playbook.yml playbook=mysql tags=mysql
 #- include: jboss.yml

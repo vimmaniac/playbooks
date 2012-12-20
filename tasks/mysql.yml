@@ -13,7 +13,7 @@
   - ${playbook_files}/mysql/my.cnf-${datacentre}
   - ${playbook_files}/mysql/my.cnf
   notify:
-  -restart mysqld
+  - restart mysqld
   tags:
   - mysql.config
 
