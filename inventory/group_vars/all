@@ -8,18 +8,27 @@ noc_email: noc@email.com
 phone: +11111111111
 company: CompanyName
 
-ansible_home: /etc/ansible
-playbooks_home: ${ansible_home}/playbooks
+# Uncomment to change/manage local root password
+#root_passwd: changeme
 
-playbook_files: ${playbooks_home}/files
-playbook_templates: ${playbooks_home}/templates
-playbook_vars: ${playbooks_home}/vars
-playbook_tasks: ${playbooks_home}/tasks
-playbook_handlers: ${playbooks_home}/handlers
 
-playbook_files_private: ${ansible_home}/files_private
-playbook_templates_private: ${ansible_home}/templates_private
-playbook_vars_private: ${ansible_home}/vars_private
-playbook_tasks_private: ${ansible_home}/tasks_private
-playbook_handlers_private: ${ansible_home}/handlers_private
 
+
+
+# Does not work for us here because playbook includes are preprocessed before
+# ansibe loads any of this into memory. So for now we have to include this in
+# our playbook.
+#ansible_home: /etc/ansible
+#playbooks_home: ${ansible_home}/playbooks
+
+#playbook_files: ${playbooks_home}/files
+#playbook_templates: ${playbooks_home}/templates
+#playbook_vars: ${playbooks_home}/vars
+#playbook_tasks: ${playbooks_home}/tasks
+#playbook_handlers: ${playbooks_home}/handlers
+
+#playbook_files_private: ${ansible_home}/files_private
+#playbook_templates_private: ${ansible_home}/templates_private
+#playbook_vars_private: ${ansible_home}/vars_private
+#playbook_tasks_private: ${ansible_home}/tasks_private
+#playbook_handlers_private: ${ansible_home}/handlers_private

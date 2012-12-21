@@ -8,6 +8,7 @@
   - php-nusoap
   - php-mysql
   - php-xml
+  - phpmyadmin
   tags:
   - php.pkgs
 
@@ -25,3 +26,5 @@
   - restat httpd
   tags:
   - php.cfg
+
+# TODO: place holder to manage phpmyadmin configs
