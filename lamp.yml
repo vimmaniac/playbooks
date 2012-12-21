@@ -1,5 +1,8 @@
 #
+# Basic LAMP stack playbook
 #
+# TODO: document all tags that can be used in base and other playbooks
+# ie. apache.cfg, mysql.cfg, mysql.init.root, mysql.init.db
 #
 ---
 - name: Lamp Playbook
