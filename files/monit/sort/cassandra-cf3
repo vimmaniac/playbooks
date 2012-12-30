@@ -1,0 +1,7 @@
+# Managed by Puppet
+# puppet:/etc/puppet/modules/monit/files/etc/monit.d/cassandra-cf3
+##
+
+check process cassandra-cf3 with pidfile /var/run/cassandra/cassandra.pid
+	group cassandra-cf3
+	if totalmem > 2048 MB for 5 cycles then alert

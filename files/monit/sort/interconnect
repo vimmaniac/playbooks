@@ -1,0 +1,2 @@
+check host coresite-equinix with address <equinix_ip>
+	if failed icmp type echo count 3 with timeout 15 seconds for 3 cycles then alert

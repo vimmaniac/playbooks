@@ -1,4 +1,41 @@
 #
-# TODO: Monit Tasks
+# Monit Tasks
 #
 ---
+- yum: pkg=${item} state=installed
+  with_items:
+  - monit
+  tags:
+  - monit.pkgs
+
+- template: dest=/etc/monitrc owner=root group=root mode=0700
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/monit.d/monitrc.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/monit.d/monitrc.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/monit.d/monitrc.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/monit.d/monitrc.j2
+  - ${playbook_templates}/${playbook}/monit.d/monitrc.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/monit.d/monitrc.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/monit.d/monitrc.j2-${host_group}
+  - ${playbook_templates}/${playbook}/monit.d/monitrc.j2
+  tags:
+  - monit.cfg
+  - monit
+  - cfg
+
+- copy: src=${item} dest=/etc/monit.d/
+  with_fileglob:
+  - ${playbook_files_private}/${playbook}/${ansible_fqdn}/*
+  - ${playbook_files_private}/${playbook}/${host_group}/*
+  - ${playbook_files_private}/${playbook}/${datacentre}/*
+  - ${playbook_files_private}/${playbook}/monit.d/*
+  - ${playbook_files}/${playbook}/${ansible_fqdn}/*
+  - ${playbook_files}/${playbook}/${host_group}/*
+  - ${playbook_files}/${playbook}/${datacentre}/*
+  - ${playbook_files}/${playbook}/monit.d/*
+  notify:
+  - restart monit
+  tags:
+  - monit.cfg
+  - monit
+  - cfg

@@ -1,0 +1,17 @@
+# Managed by Puppet
+# puppet:/etc/puppet/modules/monit/files/etc/monit.d/freeswitch
+##
+
+check process freeswitch with pidfile /usr/local/freeswitch/log/freeswitch.pid
+	start program = “/usr/local/freeswitch/bin/freeswitch -nc -hp”
+	stop program = “/usr/local/freeswitch/bin/freeswitch -stop”
+	if totalmem > 1000.0 MB for 5 cycles then alert
+	if totalmem > 1500.0 MB for 5 cycles then alert
+	if totalmem > 2000.0 MB for 5 cycles then alert
+	#if totalmem > 2000.0 MB for 5 cycles then restart
+	if cpu > 60% for 5 cycles then alert
+	if failed port 5060 type udp protocol SIP then alert
+	#if failed port 5060 type udp protocol SIP 
+	#   target me@foo.bar and maxforward 10 
+	#then restart
+	#if 5 restarts within 5 cycles then timeout

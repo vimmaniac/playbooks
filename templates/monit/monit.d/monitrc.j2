@@ -1,0 +1,17 @@
+# {{ ansible_managed }}
+##
+
+set daemon 60
+set logfile syslog facility log_daemon
+#set mailserver smtp.gmail.com port 587 bluenerv "bluenerv+monit@gmail.com"
+#password "d3l3t3m3n0t" using tlsv1 with timeout 30 seconds
+set mailserver {{ smtp_server }}
+set mail-format {
+	from: monit@{{ ansible_fqdn }}
+	subject: $SERVICE $EVENT $HOST
+	}
+set alert {{ noc_email }}
+set httpd port 2812 and use the address localhost
+allow admin:m0n1t
+#SSL ENABLE
+#PEMFILE /var/certs/monit.pem

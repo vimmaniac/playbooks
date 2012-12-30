@@ -1,0 +1,6 @@
+# Managed by Puppet
+# puppet:/etc/puppet/modules/monit/files/etc/monit.d/caller
+##
+
+check program caller with path "/etc/puppet/utils/callers/monit/isDefunct.sh"
+	if status == 0 then alert

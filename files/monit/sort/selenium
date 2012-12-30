@@ -1,0 +1,9 @@
+# Managed by Puppet
+# puppet:/etc/puppet/modules/$my_project/files/monit/$my_zone/etc/monit.d/selenium
+##
+
+check process selenium-server with pidfile /var/run/selenium-server.pid
+start program = "/etc/puppet/utils/selenium/startSeleniumServer.sh"
+stop program = "/bin/kill `cat /var/run/selenium-server.pid`"
+if failed port 4444 then restart
+if 5 restarts within 5 cycles then timeout

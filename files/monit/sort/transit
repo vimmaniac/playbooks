@@ -1,0 +1,2 @@
+check host equinix-level3 with address <any_external_ip>
+	if failed icmp type echo count 5 with timeout 15 seconds for 3 cycles then alert

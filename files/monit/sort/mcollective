@@ -1,0 +1,8 @@
+# Managed by Puppet
+# puppet:/etc/puppet/modules/monit/files/etc/monit.d/mcollective
+##
+
+check process mcollective with pidfile /var/run/mcollectived.pid
+	start program = "/sbin/service mcollective start"
+	stop program = "/sbin/service mcollective stop"
+	if 5 restarts within 5 cycles then timeout

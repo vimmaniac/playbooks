@@ -1,0 +1,10 @@
+# Managed by Puppet
+# puppet:/etc/puppet/modules/monit/files/etc/monit.d/activemq
+##
+
+check process activemq with pidfile /var/run/activemq/activemq.pid
+	group activemq
+	start program = "/sbin/service activemq start"
+	stop program = "/sbin/service activemq stop"
+	if failed host localhost port 6163 then restart
+	if 5 restarts within 5 cycles then timeout
