@@ -1,0 +1,12 @@
+#
+# TODO: Iptables Tasks
+#
+# Required Variables:
+# * lan_nic
+# * wan_nic
+# Optional Variables:
+# * iptables_nat
+# * iptables_filter
+# * iptables_block
+# 
+---

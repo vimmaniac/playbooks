@@ -12,6 +12,6 @@
     group: lamp
 
 - include: base.yml
-- include: playbook.yml playbook=apache tags=apache
+- include: playbook.yml playbook=httpd tags=httpd
 - include: playbook.yml playbook=php tags=php
 - include: playbook.yml playbook=mysql tags=mysql

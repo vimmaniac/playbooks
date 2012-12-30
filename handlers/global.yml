@@ -8,6 +8,15 @@
 - name: restart nscd
   service: name=nscd state=restarted
 
+- name: restart ntpd
+  service: name=ntpd state=restarted
+
+- name: restart iptables
+  service: name=iptables state=restarted
+
+- name: restart monit
+  service: name=monit state=restarted
+
 - name: restart httpd
   service: name=httpd state=restarted
 

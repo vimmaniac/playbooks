@@ -1,5 +1,5 @@
 #
-#
+# Apache HTTP Tasks
 #
 ---
 - yum: pkg=${item} state=installed
@@ -7,6 +7,8 @@
   - mod_ssl
   tags:
   - httpd.pkgs
+  - httpd
+  - pkgs
 
 - copy: dest=/etc/httpd state=preset
   with_fileglob:
@@ -15,3 +17,5 @@
   - restart httpd
   tags:
   - httpd.cfg
+  - httpd
+  - cfg
