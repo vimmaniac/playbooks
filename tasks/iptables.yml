@@ -6,7 +6,66 @@
 # * wan_nic
 # Optional Variables:
 # * iptables_nat
-# * iptables_filter
+# * iptables_allow
 # * iptables_block
 # 
 ---
+- copy: dest=/etc/sysconfig/iptables-config
+  first_available_file:
+  - ${playbook_files_private}/${playbook}/iptables-config-${ansible_fqdn}
+  - ${playbook_files_private}/${playbook}/iptables-config-${host_group}
+  - ${playbook_files_private}/${playbook}/iptables-config-${datacentre}
+  - ${playbook_files_private}/${playbook}/iptables-config
+  - ${playbook_files}/${playbook}/iptables-config-${ansible_fqdn}
+  - ${playbook_files}/${playbook}/iptables-config-${datacentre}
+  - ${playbook_files}/${playbook}/iptables-config-${host_group}
+  - ${playbook_files}/${playbook}/iptables-config
+  notify:
+  - restart iptables
+  tags:
+  - iptables.cfg
+
+- template: dest=/etc/sysconfig/iptables-nat
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/iptables-nat.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/iptables-nat.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/iptables-nat.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/iptables-nat.j2
+  - ${playbook_templates}/${playbook}/iptables-nat.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/iptables-nat.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/iptables-nat.j2-${host_group}
+  - ${playbook_templates}/${playbook}/iptables-nat.j2
+  notify:
+  - restart iptables
+  tags:
+  - iptables.cfg.nat
+
+- template: dest=/etc/sysconfig/iptables-allow
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/iptables-allow.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/iptables-allow.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/iptables-allow.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/iptables-allow.j2
+  - ${playbook_templates}/${playbook}/iptables-allow.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/iptables-allow.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/iptables-allow.j2-${host_group}
+  - ${playbook_templates}/${playbook}/iptables-allow.j2
+  notify:
+  - restart iptables
+  tags:
+  - iptables.cfg.allow
+
+- template: dest=/etc/sysconfig/iptables-block
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/iptables-block.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/iptables-block.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/iptables-block.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/iptables-block.j2
+  - ${playbook_templates}/${playbook}/iptables-block.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/iptables-block.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/iptables-block.j2-${host_group}
+  - ${playbook_templates}/${playbook}/iptables-block.j2
+  notify:
+  - restart iptables
+  tags:
+  - iptables.cfg.block

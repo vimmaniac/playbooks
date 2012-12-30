@@ -4,21 +4,35 @@
 ---
 - name: restart sysctl
   command: sysctl -p
+  tags:
+  - sysctl.service
 
 - name: restart nscd
   service: name=nscd state=restarted
+  tags:
+  - nscd.service
 
 - name: restart ntpd
   service: name=ntpd state=restarted
+  tags:
+  - ntpd.service
 
 - name: restart iptables
   service: name=iptables state=restarted
+  tags:
+  - iptables.service
 
 - name: restart monit
   service: name=monit state=restarted
+  tags:
+  - monit.service
 
 - name: restart httpd
   service: name=httpd state=restarted
+  tags:
+  - httpd.service
 
 - name: restart mysqld
   service: name=mysqld state=restarted
+  tags:
+  - mysqld.service

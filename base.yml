@@ -11,3 +11,5 @@
 - include: playbook.yml playbook=ulimit tags=ulimit
 - include: playbook.yml playbook=sysctl tags=sysctl
 - include: playbook.yml playbook=yum tags=yum
+- include: playbook.yml playbook=iptables tags=iptables
+- include: playbook.yml playbook=ldap tags=ldap

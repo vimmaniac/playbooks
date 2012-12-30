@@ -2,3 +2,29 @@
 # TODO: Ldap Tasks
 #
 ---
+- template: dest=/etc/openldap/ldap.conf
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/etc_openldap_ldap.conf.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/etc_openldap_ldap.conf.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/etc_openldap_ldap.conf.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/etc_openldap_ldap.conf.j2
+  - ${playbook_templates}/${playbook}/etc_openldap_ldap.conf.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/etc_openldap_ldap.conf.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/etc_openldap_ldap.conf.j2-${host_group}
+  - ${playbook_templates}/${playbook}/etc_openldap_ldap.conf.j2
+  tags:
+  - ldap.cfg
+
+- template: dest=/etc/ldap.conf
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/etc_ldap.conf.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/etc_ldap.conf.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/etc_ldap.conf.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/etc_ldap.conf.j2
+  - ${playbook_templates}/${playbook}/etc_ldap.conf.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/etc_ldap.conf.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/etc_ldap.conf.j2-${host_group}
+  - ${playbook_templates}/${playbook}/etc_ldap.conf.j2
+  tags:
+  - ldap.cfg
+
