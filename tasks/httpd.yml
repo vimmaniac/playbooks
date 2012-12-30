@@ -10,9 +10,16 @@
   - httpd
   - pkgs
 
-- copy: dest=/etc/httpd state=preset
+- copy: src={item} dest=/etc/httpd/
   with_fileglob:
-  - ${playbook_files}/${playbook}/*
+  - ${playbook_files_private}/${playbook}/${ansible_fqdn}/*
+  - ${playbook_files_private}/${playbook}/${host_group}/*
+  - ${playbook_files_private}/${playbook}/${datacentre}/*
+  - ${playbook_files_private}/${playbook}/default/*
+  - ${playbook_files}/${playbook}/${ansible_fqdn}/*
+  - ${playbook_files}/${playbook}/${host_group}/*
+  - ${playbook_files}/${playbook}/${datacentre}/*
+  - ${playbook_files}/${playbook}/default/*
   notify:
   - restart httpd
   tags:

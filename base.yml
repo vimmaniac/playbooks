@@ -1,5 +1,5 @@
 #
-# Base system playboko
+# Base system playbook
 #
 ---
 - name: Base Playbook
@@ -11,5 +11,6 @@
 - include: playbook.yml playbook=ulimit tags=ulimit
 - include: playbook.yml playbook=sysctl tags=sysctl
 - include: playbook.yml playbook=yum tags=yum
+- include: playbook.yml playbook=logrotate tags=logrotate
 - include: playbook.yml playbook=iptables tags=iptables
 - include: playbook.yml playbook=ldap tags=ldap

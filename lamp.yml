@@ -6,7 +6,7 @@
 #
 ---
 - name: Lamp Playbook
-  hosts: lamp
+  hosts: all
 
   vars:
     group: lamp

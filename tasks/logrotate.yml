@@ -1,4 +1,32 @@
 #
-# TODO: Logrotate Tasks
+# Logrotate Tasks
 #
 ---
+- copy: dest=/etc/logrotate.conf
+  first_available_file:
+  - ${playbook_files_private}/${playbook}/logrotate.conf-${ansible_fqdn}
+  - ${playbook_files_private}/${playbook}/logrotate.conf-${host_group}
+  - ${playbook_files_private}/${playbook}/logrotate.conf-${datacentre}
+  - ${playbook_files_private}/${playbook}/logrotate.conf
+  - ${playbook_files}/${playbook}/logrotate.conf-${ansible_fqdn}
+  - ${playbook_files}/${playbook}/logrotate.conf-${host_group}
+  - ${playbook_files}/${playbook}/logrotate.conf-${datacentre}
+  - ${playbook_files}/${playbook}/logrotate.conf
+  tags:
+  - logrotate.cfg
+
+# TODO: possible bugs
+# src has to be included here. broken shorthand. 
+# host_group needs to be defined in host_vars/$fqdn
+- copy: src=${item} dest=/etc/logrotate.d/
+  with_fileglob:
+  - ${playbook_files_private}/${playbook}/${ansible_fqdn}/*
+  - ${playbook_files_private}/${playbook}/${host_group}/*
+  - ${playbook_files_private}/${playbook}/${datacentre}/*
+  - ${playbook_files_private}/${playbook}/logrotate.d/*
+  - ${playbook_files}/${playbook}/${ansible_fqdn}/*
+  - ${playbook_files}/${playbook}/${host_group}/*
+  - ${playbook_files}/${playbook}/${datacentre}/*
+  - ${playbook_files}/${playbook}/logrotate.d/*
+  tags:
+  - logrotate.d
