@@ -2,16 +2,16 @@
 # Logrotate Tasks
 #
 ---
-- copy: dest=/etc/logrotate.conf
+- template: dest=/etc/logrotate.conf
   first_available_file:
-  - ${playbook_files_private}/${playbook}/logrotate.conf-${ansible_fqdn}
-  - ${playbook_files_private}/${playbook}/logrotate.conf-${host_group}
-  - ${playbook_files_private}/${playbook}/logrotate.conf-${datacentre}
-  - ${playbook_files_private}/${playbook}/logrotate.conf
-  - ${playbook_files}/${playbook}/logrotate.conf-${ansible_fqdn}
-  - ${playbook_files}/${playbook}/logrotate.conf-${host_group}
-  - ${playbook_files}/${playbook}/logrotate.conf-${datacentre}
-  - ${playbook_files}/${playbook}/logrotate.conf
+  - ${playbook_templates_private}/${playbook}/logrotate.conf.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/logrotate.conf.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/logrotate.conf.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/logrotate.conf.j2
+  - ${playbook_templates}/${playbook}/logrotate.conf.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/logrotate.conf.j2-${host_group}
+  - ${playbook_templates}/${playbook}/logrotate.conf.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/logrotate.conf.j2
   tags:
   - logrotate.cfg
 

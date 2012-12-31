@@ -22,10 +22,10 @@
   tags:
   - iptables.service
 
-- name: restart monit
-  service: name=monit state=restarted
-  tags:
-  - monit.service
+#- name: restart monit
+#  service: name=monit state=restarted
+#  tags:
+#  - monit.service
 
 - name: restart httpd
   service: name=httpd state=restarted

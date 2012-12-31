@@ -1,4 +1,18 @@
 #
-# TODO: Nsswitch Tasks
+# Nsswitch Tasks
 #
 ---
+- template: src=${item} dest=/etc/nsswitch.conf owner=root group=root mode=0644
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/nsswitch.conf.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/nsswitch.conf.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/nsswitch.conf.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/nsswitch.conf.j2
+  - ${playbook_templates}/${playbook}/nsswitch.conf.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/nsswitch.conf.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/nsswitch.conf.j2-${host_group}
+  - ${playbook_templates}/${playbook}/nsswitch.conf.j2
+  notify:
+  - restart nscd
+  tags:
+  - nsswitch.cfg

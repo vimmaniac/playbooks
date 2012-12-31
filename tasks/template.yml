@@ -1,49 +1,54 @@
 #
-# REFERENCE: tasks
+# TEMPLATE Tasks
 #
 ---
 - yum: pkg=${item} state=installed
   with_items:
-  - mysql-server
-  - MySQL-python
+  - pkg1
+  - pkg2
   tags:
-  - mysql.pkgs
+  - template.pkgs
 
-- copy: dest=/etc/httpd state=preset
+# manage tree structure
+- copy: src=${item} dest=/etc/httpd owner=root group=root mode=0600
   with_fileglob:
-  - ${playbook_files}/${playbook}/*
+  - ${playbook_files}/${playbook}/${ansible_fqdn}/*
+  - ${playbook_files}/${playbook}/${host_group}/*
+  - ${playbook_files}/${playbook}/${datacentre}/*
+  - ${playbook_files}/${playbook}/default/*
   notify:
-  - restart httpd
+  - restart template
   tags:
-  - httpd.cfg
-  - httpd
+  - template.cfg
+  - template
   - cfg
 
-- copy: dest=/etc/my.cnf
+# manage static configs
+- copy: src=${item} dest=/etc/template.cnf owner=root group=root mode=0600
   first_available_file:
-  - ${playbook_files_private}/${playbook}/my.cnf-${ansible_fqdn}
-  - ${playbook_files_private}/${playbook}/my.cnf-${host_group}
-  - ${playbook_files_private}/${playbook}/my.cnf-${datacentre}
-  - ${playbook_files_private}/${playbook}/my.cnf
-  - ${playbook_files}/${playbook}/my.cnf-${ansible_fqdn}
-  - ${playbook_files}/${playbook}/my.cnf-${host_group}
-  - ${playbook_files}/${playbook}/my.cnf-${datacentre}
-  - ${playbook_files}/${playbook}/my.cnf
+  - ${playbook_files_private}/${playbook}/template.cnf-${ansible_fqdn}
+  - ${playbook_files_private}/${playbook}/template.cnf-${host_group}
+  - ${playbook_files_private}/${playbook}/template.cnf-${datacentre}
+  - ${playbook_files_private}/${playbook}/template.cnf
+  - ${playbook_files}/${playbook}/template.cnf-${ansible_fqdn}
+  - ${playbook_files}/${playbook}/template.cnf-${host_group}
+  - ${playbook_files}/${playbook}/template.cnf-${datacentre}
+  - ${playbook_files}/${playbook}/template.cnf
   notify:
-  - restart mysqld
+  - restart template
   tags:
-  - mysql.cfg
+  - template.cfg
 
-- template: dest=/root/.my.cnf
+# manage dynamic configs
+- template: src=${item} dest=/etc/template.cnf owner=root group=root mode=0600
   first_available_file:
-  - ${playbook_templates_private}/${playbook}/user.my.cnf.j2-${ansible_fqdn}
-  - ${playbook_templates_private}/${playbook}/user.my.cnf.j2-${host_group}
-  - ${playbook_templates_private}/${playbook}/user.my.cnf.j2-${datacentre}
-  - ${playbook_templates_private}/${playbook}/user.my.cnf.j2
-  - ${playbook_templates}/${playbook}/user.my.cnf.j2-${ansible_fqdn}
-  - ${playbook_templates}/${playbook}/user.my.cnf.j2-${datacentre}
-  - ${playbook_templates}/${playbook}/user.my.cnf.j2-${host_group}
-  - ${playbook_templates}/${playbook}/user.my.cnf.j2
+  - ${playbook_templates_private}/${playbook}/template.cnf.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/template.cnf.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/template.cnf.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/template.cnf.j2
+  - ${playbook_templates}/${playbook}/template.cnf.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/template.cnf.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/template.cnf.j2-${host_group}
+  - ${playbook_templates}/${playbook}/template.cnf.j2
   tags:
-  - mysql.cfg
-
+  - template.cfg

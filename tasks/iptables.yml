@@ -10,16 +10,16 @@
 # * iptables_block
 # 
 ---
-- copy: dest=/etc/sysconfig/iptables-config
+- template: dest=/etc/sysconfig/iptables-config
   first_available_file:
-  - ${playbook_files_private}/${playbook}/iptables-config-${ansible_fqdn}
-  - ${playbook_files_private}/${playbook}/iptables-config-${host_group}
-  - ${playbook_files_private}/${playbook}/iptables-config-${datacentre}
-  - ${playbook_files_private}/${playbook}/iptables-config
-  - ${playbook_files}/${playbook}/iptables-config-${ansible_fqdn}
-  - ${playbook_files}/${playbook}/iptables-config-${datacentre}
-  - ${playbook_files}/${playbook}/iptables-config-${host_group}
-  - ${playbook_files}/${playbook}/iptables-config
+  - ${playbook_templates_private}/${playbook}/iptables-config.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/iptables-config.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/iptables-config.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/iptables-config.j2
+  - ${playbook_templates}/${playbook}/iptables-config.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/iptables-config.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/iptables-config.j2-${host_group}
+  - ${playbook_templates}/${playbook}/iptables-config.j2
   notify:
   - restart iptables
   tags:

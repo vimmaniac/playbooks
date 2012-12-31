@@ -9,16 +9,16 @@
   tags:
   - mysql.pkgs
 
-- copy: dest=/etc/my.cnf
+- template: dest=/etc/my.cnf
   first_available_file:
-  - ${playbook_files_private}/${playbook}/my.cnf-${ansible_fqdn}
-  - ${playbook_files_private}/${playbook}/my.cnf-${host_group}
-  - ${playbook_files_private}/${playbook}/my.cnf-${datacentre}
-  - ${playbook_files_private}/${playbook}/my.cnf
-  - ${playbook_files}/${playbook}/my.cnf-${ansible_fqdn}
-  - ${playbook_files}/${playbook}/my.cnf-${host_group}
-  - ${playbook_files}/${playbook}/my.cnf-${datacentre}
-  - ${playbook_files}/${playbook}/my.cnf
+  - ${playbook_templates_private}/${playbook}/my.cnf.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/my.cnf.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/my.cnf.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/my.cnf.j2
+  - ${playbook_templates}/${playbook}/my.cnf.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/my.cnf.j2-${host_group}
+  - ${playbook_templates}/${playbook}/my.cnf.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/my.cnf.j2
   notify:
   - restart mysqld
   tags:
