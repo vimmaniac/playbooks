@@ -16,4 +16,5 @@
 - include: playbook.yml playbook=ldap tags=ldap
 - include: playbook.yml playbook=nscd tags=nscd
 - include: playbook.yml playbook=nsswitch tags=nsswitch
+- include: playbook.yml playbook=ntp tags=ntp
 - include: playbook.yml playbook=monit tags=monit
