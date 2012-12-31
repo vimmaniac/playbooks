@@ -12,16 +12,16 @@
   tags:
   - php.pkgs
 
-- copy: dest=/etc/php.ini owner=root group=root mode=0644
+- template: dest=/etc/php.ini owner=root group=root mode=0644
   first_available_file:
-  - ${playbook_files_private}/${playbook}/php.ini-${ansible_fqdn}
-  - ${playbook_files_private}/${playbook}/php.ini-${host_group}
-  - ${playbook_files_private}/${playbook}/php.ini-${datacentre}
-  - ${playbook_files_private}/${playbook}/php.ini
-  - ${playbook_files}/${playbook}/php.ini-${ansible_fqdn}
-  - ${playbook_files}/${playbook}/php.ini-${host_group}
-  - ${playbook_files}/${playbook}/php.ini-${datacentre}
-  - ${playbook_files}/${playbook}/php.ini
+  - ${playbook_templates_private}/${playbook}/php.ini.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/php.ini.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/php.ini.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/php.ini.j2
+  - ${playbook_templates}/${playbook}/php.ini.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/php.ini.j2-${host_group}
+  - ${playbook_templates}/${playbook}/php.ini.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/php.ini.j2
   notify:
   - restat httpd
   tags:
