@@ -22,10 +22,10 @@
   tags:
   - iptables.service
 
-#- name: restart monit
-#  service: name=monit state=restarted
-#  tags:
-#  - monit.service
+- name: restart monit
+  service: name=monit state=restarted
+  tags:
+  - monit.service
 
 - name: restart httpd
   service: name=httpd state=restarted
@@ -36,3 +36,8 @@
   service: name=mysqld state=restarted
   tags:
   - mysqld.service
+
+- name: restart snmpd
+  service: name=snmpd state=restarted
+  tags:
+  - snmpd.service

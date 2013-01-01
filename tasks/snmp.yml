@@ -1,4 +1,39 @@
 #
-# TODO: Snmp Tasks
+# Snmp Tasks
 #
 ---
+- yum: pkg=${item} state=installed
+  with_items:
+  - net-snmp
+  tags:
+  - snmp.pkgs
+
+- template: src=${item} dest=/etc/sysconfig/snmpd.options owner=root group=root mode=0755
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/snmpd.options.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/snmpd.options.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/snmpd.options.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/snmpd.options.j2
+  - ${playbook_templates}/${playbook}/snmpd.options.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/snmpd.options.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/snmpd.options.j2-${host_group}
+  - ${playbook_templates}/${playbook}/snmpd.options.j2
+  notify:
+  - restart snmpd
+  tags:
+  - snmp.cfg
+
+- template: src=${item} dest=/etc/snmp/snmpd.conf owner=root group=root mode=0644
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/snmpd.conf.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/snmpd.conf.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/snmpd.conf.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/snmpd.conf.j2
+  - ${playbook_templates}/${playbook}/snmpd.conf.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/snmpd.conf.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/snmpd.conf.j2-${host_group}
+  - ${playbook_templates}/${playbook}/snmpd.conf.j2
+  notify:
+  - restart snmpd
+  tags:
+  - snmp.cfg
