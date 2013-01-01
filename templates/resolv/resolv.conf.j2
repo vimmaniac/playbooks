@@ -1,0 +1,6 @@
+# {{ ansible_managed }}
+search {% for domain in search_domains %}{{ domain }} {% endfor %}
+
+{% for ip in dns_servers %}
+nameserver {{ ip }}
+{% endfor %}
