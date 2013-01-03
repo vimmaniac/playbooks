@@ -23,3 +23,4 @@
 - include: playbook.yml playbook=profiled tags=profiled
 - include: playbook.yml playbook=snmp tags=snmp
 - include: playbook.yml playbook=monit tags=monit
+- include: playbook.yml playbook=sudoers tags=sudoers
