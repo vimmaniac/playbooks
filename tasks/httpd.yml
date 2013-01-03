@@ -10,7 +10,7 @@
   - httpd
   - pkgs
 
-- copy: src={item} dest=/etc/httpd/
+- copy: src=${item} dest=/etc/httpd/
   with_fileglob:
   - ${playbook_files_private}/${playbook}/${ansible_fqdn}/*
   - ${playbook_files_private}/${playbook}/${host_group}/*
