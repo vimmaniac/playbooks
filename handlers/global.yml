@@ -41,3 +41,8 @@
   service: name=snmpd state=restarted
   tags:
   - snmpd.service
+
+- name: restart denyhosts
+  service: name=denyhosts state=restarted
+  tags:
+  - denyhosts.service
