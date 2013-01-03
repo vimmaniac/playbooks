@@ -20,5 +20,6 @@
 - include: playbook.yml playbook=resolv tags=resolv
 - include: playbook.yml playbook=ntp tags=ntp
 - include: playbook.yml playbook=aliases tags=aliases
+- include: playbook.yml playbook=profiled tags=profiled
 - include: playbook.yml playbook=snmp tags=snmp
 - include: playbook.yml playbook=monit tags=monit

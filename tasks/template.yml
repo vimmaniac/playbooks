@@ -12,6 +12,10 @@
 # manage tree structure
 - copy: src=${item} dest=/etc/httpd owner=root group=root mode=0600
   with_fileglob:
+  - ${playbook_files_private}/${playbook}/${ansible_fqdn}/*
+  - ${playbook_files_private}/${playbook}/${host_group}/*
+  - ${playbook_files_private}/${playbook}/${datacentre}/*
+  - ${playbook_files_private}/${playbook}/default/*
   - ${playbook_files}/${playbook}/${ansible_fqdn}/*
   - ${playbook_files}/${playbook}/${host_group}/*
   - ${playbook_files}/${playbook}/${datacentre}/*

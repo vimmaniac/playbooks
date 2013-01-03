@@ -8,8 +8,8 @@
 - name: Lamp Playbook
   hosts: all
 
-  vars:
-    group: lamp
+  #vars:
+  #  group: lamp
 
 - include: base.yml
 - include: playbook.yml playbook=httpd tags=httpd

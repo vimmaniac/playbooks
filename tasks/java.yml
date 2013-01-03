@@ -1,0 +1,9 @@
+#
+# Java Tasks
+#
+---
+- yum: pkg=${item} state=installed
+  with_items:
+  - jdk
+  tags:
+  - java.pkgs
