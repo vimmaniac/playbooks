@@ -4,7 +4,7 @@ Reusable playbooks users can leverage to build upon. Included is a LAMP playbook
 
 If you want, you can also nest the lamp playbook to include a more specific setup that your environment requires. You can add/remove tasks to the base playbook to suite your platform requirements. I've taken extra steps to ensure that these are generic enough configurations so all one would have to do is start with a simpler base and simply add/include prebuilt tasks/playbooks to build more complex appliances. I'm currently using this repo as my own building block in production to provision our company datacentres and cloud instances. This model can be used in both push/pull and or just a glorifed ssh loop style management.
 
-The playbooks here are tested and used on CentOS 5/6. Feel free to include logic to support more distrabutions.
+The playbooks here were tested and used on CentOS 5/6. Feel free to include logic to support more distrabutions.
 
 Thoughts and contributions are much appreciated so that we can have a rich user community that do not all have the same wheel. ;)
 
@@ -28,4 +28,4 @@ Some default sub-tags used in my playbooks for fine grain push management includ
     - cfg
     - init
 
-This comes in handy you just want to sync configurations without the additional init or install process of a playbook.
+This comes in handy if you just want to sync configuration files without any additional processes that come from a playbook.
