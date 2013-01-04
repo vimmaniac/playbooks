@@ -15,8 +15,8 @@
   - ${playbook_templates_private}/${playbook}/denyhosts.conf.j2-${datacentre}
   - ${playbook_templates_private}/${playbook}/denyhosts.conf.j2
   - ${playbook_templates}/${playbook}/denyhosts.conf.j2-${ansible_fqdn}
-  - ${playbook_templates}/${playbook}/denyhosts.conf.j2-${datacentre}
   - ${playbook_templates}/${playbook}/denyhosts.conf.j2-${host_group}
+  - ${playbook_templates}/${playbook}/denyhosts.conf.j2-${datacentre}
   - ${playbook_templates}/${playbook}/denyhosts.conf.j2
   tags:
   - denyhosts.cfg

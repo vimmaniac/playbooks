@@ -9,8 +9,8 @@
   - ${playbook_templates_private}/${playbook}/aliases.j2-${datacentre}
   - ${playbook_templates_private}/${playbook}/aliases.j2
   - ${playbook_templates}/${playbook}/aliases.j2-${ansible_fqdn}
-  - ${playbook_templates}/${playbook}/aliases.j2-${datacentre}
   - ${playbook_templates}/${playbook}/aliases.j2-${host_group}
+  - ${playbook_templates}/${playbook}/aliases.j2-${datacentre}
   - ${playbook_templates}/${playbook}/aliases.j2
   tags:
   - aliases.cfg

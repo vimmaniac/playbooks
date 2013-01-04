@@ -10,6 +10,10 @@
 
 - copy: src=${item} dest=/etc/ntp/
   with_fileglob:
+  - ${playbook_files_private}/${playbook}/${ansible_fqdn}/*
+  - ${playbook_files_private}/${playbook}/${host_group}/*
+  - ${playbook_files_private}/${playbook}/${datacentre}/*
+  - ${playbook_files_private}/${playbook}/etc_ntp/*
   - ${playbook_files}/${playbook}/${ansible_fqdn}/*
   - ${playbook_files}/${playbook}/${host_group}/*
   - ${playbook_files}/${playbook}/${datacentre}/*
@@ -28,8 +32,8 @@
   - ${playbook_templates_private}/${playbook}/ntp.conf.j2-${datacentre}
   - ${playbook_templates_private}/${playbook}/ntp.conf.j2
   - ${playbook_templates}/${playbook}/ntp.conf.j2-${ansible_fqdn}
-  - ${playbook_templates}/${playbook}/ntp.conf.j2-${datacentre}
   - ${playbook_templates}/${playbook}/ntp.conf.j2-${host_group}
+  - ${playbook_templates}/${playbook}/ntp.conf.j2-${datacentre}
   - ${playbook_templates}/${playbook}/ntp.conf.j2
   notify:
   - restart ntpd

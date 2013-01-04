@@ -14,8 +14,8 @@
   - ${playbook_templates_private}/${playbook}/bashrc.j2-${datacentre}
   - ${playbook_templates_private}/${playbook}/bashrc.j2
   - ${playbook_templates}/${playbook}/bashrc.j2-${ansible_fqdn}
-  - ${playbook_templates}/${playbook}/bashrc.j2-${datacentre}
   - ${playbook_templates}/${playbook}/bashrc.j2-${host_group}
+  - ${playbook_templates}/${playbook}/bashrc.j2-${datacentre}
   - ${playbook_templates}/${playbook}/bashrc.j2
   tags:
   - root.bashrc
@@ -27,8 +27,8 @@
   - ${playbook_templates_private}/${playbook}/bash_profile.j2-${datacentre}
   - ${playbook_templates_private}/${playbook}/bash_profile.j2
   - ${playbook_templates}/${playbook}/bash_profile.j2-${ansible_fqdn}
-  - ${playbook_templates}/${playbook}/bash_profile.j2-${datacentre}
   - ${playbook_templates}/${playbook}/bash_profile.j2-${host_group}
+  - ${playbook_templates}/${playbook}/bash_profile.j2-${datacentre}
   - ${playbook_templates}/${playbook}/bash_profile.j2
   tags:
   - root.bashrc
@@ -40,8 +40,8 @@
   - ${playbook_templates_private}/${playbook}/bash_logout.j2-${datacentre}
   - ${playbook_templates_private}/${playbook}/bash_logout.j2
   - ${playbook_templates}/${playbook}/bash_logout.j2-${ansible_fqdn}
-  - ${playbook_templates}/${playbook}/bash_logout.j2-${datacentre}
   - ${playbook_templates}/${playbook}/bash_logout.j2-${host_group}
+  - ${playbook_templates}/${playbook}/bash_logout.j2-${datacentre}
   - ${playbook_templates}/${playbook}/bash_logout.j2
   tags:
   - root.bashrc

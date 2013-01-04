@@ -31,8 +31,8 @@
   - ${playbook_templates_private}/${playbook}/user.my.cnf.j2-${datacentre}
   - ${playbook_templates_private}/${playbook}/user.my.cnf.j2
   - ${playbook_templates}/${playbook}/user.my.cnf.j2-${ansible_fqdn}
-  - ${playbook_templates}/${playbook}/user.my.cnf.j2-${datacentre}
   - ${playbook_templates}/${playbook}/user.my.cnf.j2-${host_group}
+  - ${playbook_templates}/${playbook}/user.my.cnf.j2-${datacentre}
   - ${playbook_templates}/${playbook}/user.my.cnf.j2
   tags:
   - mysql.cfg

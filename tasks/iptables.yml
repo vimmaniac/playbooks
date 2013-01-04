@@ -17,8 +17,8 @@
   - ${playbook_templates_private}/${playbook}/iptables-config.j2-${datacentre}
   - ${playbook_templates_private}/${playbook}/iptables-config.j2
   - ${playbook_templates}/${playbook}/iptables-config.j2-${ansible_fqdn}
-  - ${playbook_templates}/${playbook}/iptables-config.j2-${datacentre}
   - ${playbook_templates}/${playbook}/iptables-config.j2-${host_group}
+  - ${playbook_templates}/${playbook}/iptables-config.j2-${datacentre}
   - ${playbook_templates}/${playbook}/iptables-config.j2
   notify:
   - restart iptables
@@ -32,8 +32,8 @@
   - ${playbook_templates_private}/${playbook}/iptables-nat.j2-${datacentre}
   - ${playbook_templates_private}/${playbook}/iptables-nat.j2
   - ${playbook_templates}/${playbook}/iptables-nat.j2-${ansible_fqdn}
-  - ${playbook_templates}/${playbook}/iptables-nat.j2-${datacentre}
   - ${playbook_templates}/${playbook}/iptables-nat.j2-${host_group}
+  - ${playbook_templates}/${playbook}/iptables-nat.j2-${datacentre}
   - ${playbook_templates}/${playbook}/iptables-nat.j2
   notify:
   - restart iptables
@@ -47,8 +47,8 @@
   - ${playbook_templates_private}/${playbook}/iptables-allow.j2-${datacentre}
   - ${playbook_templates_private}/${playbook}/iptables-allow.j2
   - ${playbook_templates}/${playbook}/iptables-allow.j2-${ansible_fqdn}
-  - ${playbook_templates}/${playbook}/iptables-allow.j2-${datacentre}
   - ${playbook_templates}/${playbook}/iptables-allow.j2-${host_group}
+  - ${playbook_templates}/${playbook}/iptables-allow.j2-${datacentre}
   - ${playbook_templates}/${playbook}/iptables-allow.j2
   notify:
   - restart iptables
@@ -62,8 +62,8 @@
   - ${playbook_templates_private}/${playbook}/iptables-block.j2-${datacentre}
   - ${playbook_templates_private}/${playbook}/iptables-block.j2
   - ${playbook_templates}/${playbook}/iptables-block.j2-${ansible_fqdn}
-  - ${playbook_templates}/${playbook}/iptables-block.j2-${datacentre}
   - ${playbook_templates}/${playbook}/iptables-block.j2-${host_group}
+  - ${playbook_templates}/${playbook}/iptables-block.j2-${datacentre}
   - ${playbook_templates}/${playbook}/iptables-block.j2
   notify:
   - restart iptables

@@ -9,8 +9,8 @@
   - ${playbook_templates_private}/keys/authorized_keys.j2-${datacentre}
   - ${playbook_templates_private}/keys/authorized_keys.j2
   - ${playbook_templates}/keys/authorized_keys.j2-${ansible_fqdn}
-  - ${playbook_templates}/keys/authorized_keys.j2-${datacentre}
   - ${playbook_templates}/keys/authorized_keys.j2-${host_group}
+  - ${playbook_templates}/keys/authorized_keys.j2-${datacentre}
   - ${playbook_templates}/keys/authorized_keys.j2
   tags:
   - keys.root

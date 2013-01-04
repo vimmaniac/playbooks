@@ -15,8 +15,8 @@
   - ${playbook_templates_private}/${playbook}/monit.d/monitrc.j2-${datacentre}
   - ${playbook_templates_private}/${playbook}/monit.d/monitrc.j2
   - ${playbook_templates}/${playbook}/monit.d/monitrc.j2-${ansible_fqdn}
-  - ${playbook_templates}/${playbook}/monit.d/monitrc.j2-${datacentre}
   - ${playbook_templates}/${playbook}/monit.d/monitrc.j2-${host_group}
+  - ${playbook_templates}/${playbook}/monit.d/monitrc.j2-${datacentre}
   - ${playbook_templates}/${playbook}/monit.d/monitrc.j2
   tags:
   - monit.cfg
