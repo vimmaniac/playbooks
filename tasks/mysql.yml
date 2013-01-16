@@ -37,13 +37,14 @@
   tags:
   - mysql.cfg
 
-- mysql_user: name=${mysql_root_user} password=${mysql_root_passwd} priv=*.*:ALL state=present
-  only_if: "'${first_run}' == '1'"
+# ansible-playbook strategybooks/rebrand.yml --tags 'mysql' --extra-vars 'first_run=1'
+- mysql_user: login_host=localhost name=${mysql_root_user} password=${mysql_root_passwd} priv=*.*:ALL state=present state=present
+  when_string: ${first_run} == '1'
   tags:
   - mysql.init.root
 
-- mysql_user: login_user=${mysql_root_user} login_password=${mysql_root_passwd} name=${mysql_root_user} password=${mysql_root_passwd} priv=*.*:ALL state=present
-  only_if: "'${first_run}' == '0'"
+- mysql_user: login_user=${mysql_root_user} login_password=${mysql_root_passwd} name=${mysql_user} password=${mysql_passwd} priv=*.*:ALL state=present
+  when_string: ${first_run} == '1'
   tags:
   - mysql.root
 

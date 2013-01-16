@@ -1,0 +1,129 @@
+#
+# Jboss Tasks
+#
+---
+- user: name=jboss comment="Jboss" uid=487 shell=/sbin/nologin state=present
+
+- template: src=${item} dest=/etc/init.d/jboss owner=root group=root mode=0755
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/etc_initd_jboss.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/etc_initd_jboss.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/etc_initd_jboss.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/etc_initd_jboss.j2
+  - ${playbook_templates}/${playbook}/etc_initd_jboss.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/etc_initd_jboss.j2-${host_group}
+  - ${playbook_templates}/${playbook}/etc_initd_jboss.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/etc_initd_jboss.j2
+  #notify:
+  #- restart template
+  tags:
+  - jboss.cfg
+  - jboss
+  - cfg
+
+- template: src=${item} dest=/usr/jboss/server/default/deploy/mysql-ds.xml owner=jboss group=jboss mode=0644
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/usr_jboss_server_default_deploy_mysql-ds.xml.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/usr_jboss_server_default_deploy_mysql-ds.xml.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/usr_jboss_server_default_deploy_mysql-ds.xml.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/usr_jboss_server_default_deploy_mysql-ds.xml.j2
+  - ${playbook_templates}/${playbook}/usr_jboss_server_default_deploy_mysql-ds.xml.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/usr_jboss_server_default_deploy_mysql-ds.xml.j2-${host_group}
+  - ${playbook_templates}/${playbook}/usr_jboss_server_default_deploy_mysql-ds.xml.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/usr_jboss_server_default_deploy_mysql-ds.xml.j2
+  #notify:
+  #- restart template
+  tags:
+  - jboss.cfg
+  - jboss
+  - cfg
+
+- template: src=${item} dest=/usr/jboss/server/default/deploy/mysqlmq-ds.xml owner=jboss group=jboss mode=0644
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/usr_jboss_server_default_deploy_mysqlmq-ds.xml.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/usr_jboss_server_default_deploy_mysqlmq-ds.xml.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/usr_jboss_server_default_deploy_mysqlmq-ds.xml.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/usr_jboss_server_default_deploy_mysqlmq-ds.xml.j2
+  - ${playbook_templates}/${playbook}/usr_jboss_server_default_deploy_mysqlmq-ds.xml.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/usr_jboss_server_default_deploy_mysqlmq-ds.xml.j2-${host_group}
+  - ${playbook_templates}/${playbook}/usr_jboss_server_default_deploy_mysqlmq-ds.xml.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/usr_jboss_server_default_deploy_mysqlmq-ds.xml.j2
+  #notify:
+  #- restart template
+  tags:
+  - jboss.cfg
+  - jboss
+  - cfg
+
+- template: src=${item} dest=/usr/jboss/server/default/conf/jboss-log4j.xml owner=jboss group=jboss mode=0644
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/usr_jboss_server_default_conf_jboss-log4j.xml.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/usr_jboss_server_default_conf_jboss-log4j.xml.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/usr_jboss_server_default_conf_jboss-log4j.xml.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/usr_jboss_server_default_conf_jboss-log4j.xml.j2
+  - ${playbook_templates}/${playbook}/usr_jboss_server_default_conf_jboss-log4j.xml.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/usr_jboss_server_default_conf_jboss-log4j.xml.j2-${host_group}
+  - ${playbook_templates}/${playbook}/usr_jboss_server_default_conf_jboss-log4j.xml.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/usr_jboss_server_default_conf_jboss-log4j.xml.j2
+  #notify:
+  #- restart template
+  tags:
+  - jboss.cfg
+  - jboss
+  - cfg
+
+- template: src=${item} dest=/usr/jboss/server/default/deploy/jboss-web.deployer/server.xml owner=jboss group=jboss mode=0644
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/usr_jboss_server_default_deploy_jbosswebdeployer_server.xml.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/usr_jboss_server_default_deploy_jbosswebdeployer_server.xml.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/usr_jboss_server_default_deploy_jbosswebdeployer_server.xml.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/usr_jboss_server_default_deploy_jbosswebdeployer_server.xml.j2
+  - ${playbook_templates}/${playbook}/usr_jboss_server_default_deploy_jbosswebdeployer_server.xml.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/usr_jboss_server_default_deploy_jbosswebdeployer_server.xml.j2-${host_group}
+  - ${playbook_templates}/${playbook}/usr_jboss_server_default_deploy_jbosswebdeployer_server.xml.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/usr_jboss_server_default_deploy_jbosswebdeployer_server.xml.j2
+  #notify:
+  #- restart template
+  tags:
+  - jboss.cfg
+  - jboss
+  - cfg
+
+- shell: chown -R jboss:jboss /usr/jboss && touch /usr/jboss/perm1.ansible  creates=/usr/jboss/perm1.ansible
+
+- shell: chown -R jboss:jboss /usr/local/${jboss_package} && touch /usr/jboss/perm2.ansible creates=/usr/jboss/perm2.ansible
+
+- copy: src=${item} dest=/usr/jboss/server/default/conf/ owner=root group=root mode=0755
+  with_fileglob:
+  - ${playbook_files_private}/${playbook}/${ansible_fqdn}/conf/*
+  - ${playbook_files_private}/${playbook}/${host_group}/conf/*
+  - ${playbook_files_private}/${playbook}/${datacentre}/conf/*
+  - ${playbook_files_private}/${playbook}/default/conf/*
+  - ${playbook_files}/${playbook}/${ansible_fqdn}/conf/*
+  - ${playbook_files}/${playbook}/${host_group}/conf/*
+  - ${playbook_files}/${playbook}/${datacentre}/conf/*
+  - ${playbook_files}/${playbook}/default/conf/*
+  #notify:
+  #- restart template
+  tags:
+  - jboss.cfg
+  - jboss
+  - cfg
+
+- copy: src=${item} dest=/usr/jboss/server/default/deploy owner=root group=root mode=0755
+  with_fileglob:
+  - ${playbook_files_private}/${playbook}/${ansible_fqdn}/deploy/*
+  - ${playbook_files_private}/${playbook}/${host_group}/deploy/*
+  - ${playbook_files_private}/${playbook}/${datacentre}/deploy/*
+  - ${playbook_files_private}/${playbook}/default/deploy/*
+  - ${playbook_files}/${playbook}/${ansible_fqdn}/deploy/*
+  - ${playbook_files}/${playbook}/${host_group}/deploy/*
+  - ${playbook_files}/${playbook}/${datacentre}/deploy/*
+  - ${playbook_files}/${playbook}/default/deploy/*
+  #notify:
+  #- restart template
+  tags:
+  - jboss.cfg
+  - jboss
+  - cfg
+

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+{{ ansible_managed }}
+//-->
+
+<datasources>
+ <no-tx-datasource>
+  <jndi-name>{{ jboss_jndi_name }}</jndi-name>
+  <connection-url>{{ jboss_jndi_connection_url }}</connection-url>
+        <driver-class>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</driver-class>
+        <user-name>{{ jboss_jndi_username }}</user-name>
+        <password>{{ jboss_jndi_password }}</password>   
+        <min-pool-size>{{ jboss_jndi_min_pool_size }}</min-pool-size>
+        <max-pool-size>{{ jboss_jndi_max_pool_size }}</max-pool-size>
+        <blocking-timeout-millis>5000</blocking-timeout-millis>
+        <idle-timeout-minutes>5</idle-timeout-minutes>
+ </no-tx-datasource>
+</datasources>

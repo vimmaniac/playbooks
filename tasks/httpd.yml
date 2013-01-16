@@ -10,7 +10,7 @@
   - httpd
   - pkgs
 
-- copy: src=${item} dest=/etc/httpd/
+- copy: src=${item} dest=/etc/httpd/ owner=root group=root mode=0644
   with_fileglob:
   - ${playbook_files_private}/${playbook}/${ansible_fqdn}/*
   - ${playbook_files_private}/${playbook}/${host_group}/*
@@ -26,3 +26,90 @@
   - httpd.cfg
   - httpd
   - cfg
+
+- file: path=/etc/httpd/conf state=directory owner=root group=root mode=0755
+  tags:
+  - httpd.cfg
+  - httpd
+  - cfg
+
+- file: path=/etc/httpd/conf/ssl state=directory owner=root group=root mode=0755
+  tags:
+  - httpd.cfg
+  - httpd
+  - cfg
+
+- file: path=/etc/httpd/conf.d state=directory owner=root group=root mode=0755
+  tags:
+  - httpd.cfg
+  - httpd
+  - cfg
+
+- copy: src=${item} dest=/etc/httpd/conf/ owner=root group=root mode=0644
+  with_fileglob:
+  - ${playbook_files_private}/${playbook}/${ansible_fqdn}/conf/*
+  - ${playbook_files_private}/${playbook}/${host_group}/conf/*
+  - ${playbook_files_private}/${playbook}/${datacentre}/conf/*
+  - ${playbook_files_private}/${playbook}/default/conf/*
+  - ${playbook_files}/${playbook}/${ansible_fqdn}/conf/*
+  - ${playbook_files}/${playbook}/${host_group}/conf/*
+  - ${playbook_files}/${playbook}/${datacentre}/conf/*
+  - ${playbook_files}/${playbook}/default/conf/*
+  notify:
+  - restart httpd
+  tags:
+  - httpd.cfg
+  - httpd
+  - cfg
+
+- copy: src=${item} dest=/etc/httpd/conf/ssl/ owner=root group=root mode=0644
+  with_fileglob:
+  - ${playbook_files_private}/${playbook}/${ansible_fqdn}/conf/ssl/*
+  - ${playbook_files_private}/${playbook}/${host_group}/conf/ssl/*
+  - ${playbook_files_private}/${playbook}/${datacentre}/conf/ssl/*
+  - ${playbook_files_private}/${playbook}/default/conf/ssl/*
+  - ${playbook_files}/${playbook}/${ansible_fqdn}/conf/ssl/*
+  - ${playbook_files}/${playbook}/${host_group}/conf/ssl/*
+  - ${playbook_files}/${playbook}/${datacentre}/conf/ssl/*
+  - ${playbook_files}/${playbook}/default/conf/ssl/*
+  notify:
+  - restart httpd
+  tags:
+  - httpd.cfg
+  - httpd
+  - cfg
+
+- copy: src=${item} dest=/etc/httpd/conf.d/ owner=root group=root mode=0644
+  with_fileglob:
+  - ${playbook_files_private}/${playbook}/${ansible_fqdn}/conf.d/*
+  - ${playbook_files_private}/${playbook}/${host_group}/conf.d/*
+  - ${playbook_files_private}/${playbook}/${datacentre}/conf.d/*
+  - ${playbook_files_private}/${playbook}/default/conf.d/*
+  - ${playbook_files}/${playbook}/${ansible_fqdn}/conf.d/*
+  - ${playbook_files}/${playbook}/${host_group}/conf.d/*
+  - ${playbook_files}/${playbook}/${datacentre}/conf.d/*
+  - ${playbook_files}/${playbook}/default/conf.d/*
+  notify:
+  - restart httpd
+  tags:
+  - httpd.cfg
+  - httpd
+  - cfg
+
+- copy: src=${item} dest=/etc/httpd/modules/ owner=root group=root mode=0755
+  with_fileglob:
+  - ${playbook_files_private}/${playbook}/${ansible_fqdn}/modules/*
+  - ${playbook_files_private}/${playbook}/${host_group}/modules/*
+  - ${playbook_files_private}/${playbook}/${datacentre}/modules/*
+  - ${playbook_files_private}/${playbook}/default/modules/*
+  - ${playbook_files}/${playbook}/${ansible_fqdn}/modules/*
+  - ${playbook_files}/${playbook}/${host_group}/modules/*
+  - ${playbook_files}/${playbook}/${datacentre}/modules/*
+  - ${playbook_files}/${playbook}/default/modules/*
+  notify:
+  - restart httpd
+  tags:
+  - httpd.cfg
+  - httpd
+  - cfg
+

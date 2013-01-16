@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+{{ ansible_managed }}
+//-->
+
+<!-- $Id: mysql-ds.xml 63175 2007-05-21 16:26:06Z rrajesh $ -->
+<!--  Datasource config for MySQL using 3.0.9 available from:
+http://www.mysql.com/downloads/api-jdbc-stable.html
+-->
+
+<datasources>
+  <local-tx-datasource>
+    <jndi-name>{{ jbossmq_jndi_name }}</jndi-name>
+    <connection-url>{{ jbossmq_jndi_url }}</connection-url>
+    <driver-class>com.mysql.jdbc.Driver</driver-class>
+    <user-name>{{ jbossmq_jndi_username }}</user-name>
+    <password>{{ jbossmq_jndi_password }}</password>
+    <exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.MySQLExceptionSorter</exception-sorter-class-name>
+    <metadata>
+       <type-mapping>mySQL</type-mapping>
+    </metadata>
+  </local-tx-datasource>
+</datasources>
