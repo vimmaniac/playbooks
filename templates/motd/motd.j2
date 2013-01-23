@@ -2,7 +2,7 @@
   '. ___ .'                                                           ,,,,,    
  '  (> <) '                                                          /(o o)\   
 ooO--(_)--Ooo-----------------------------------------------------ooO--(_)--Ooo
-{{ ansible_managed }}
+{{ ansible_managed|wordwrap(width=80, break_long_words=True) }}
 
 Hostname: {{ ansible_hostname }}
 Contact: {{ noc_email }}

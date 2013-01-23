@@ -6,4 +6,4 @@ password={{ mysql_root_passwd }}
 socket=/var/lib/mysql/mysql.sock
   
 [mysql]
-prompt=LAMP [\\u@\\h] ON \\d>\\_
+prompt={{ ansible_hostname|upper }} [\\u@\\h] ON \\d>\\_

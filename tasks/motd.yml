@@ -12,3 +12,5 @@
   - ${playbook_templates}/${playbook}/motd.j2-${host_group}
   - ${playbook_templates}/${playbook}/motd.j2-${datacentre}
   - ${playbook_templates}/${playbook}/motd.j2
+  tags:
+  - motd
