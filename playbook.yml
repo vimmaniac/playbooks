@@ -3,7 +3,7 @@
 #
 ---
 - name: Proxy Playbook
-  hosts: all
+  hosts: ${hosts}
 
   vars:
     version: 1.0

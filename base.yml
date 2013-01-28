@@ -3,7 +3,7 @@
 #
 ---
 - name: Base Playbook
-  hosts: all
+  hosts: ${hosts}
 
 - include: playbook.yml playbook=root tags=root
 - include: playbook.yml playbook=motd tags=motd
