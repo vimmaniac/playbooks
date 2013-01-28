@@ -19,6 +19,7 @@
 
 - name: restart iptables
   service: name=iptables state=restarted
+  ignore_errors: yes
   tags:
   - iptables.service
 
