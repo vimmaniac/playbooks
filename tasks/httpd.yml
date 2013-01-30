@@ -113,3 +113,6 @@
   - httpd
   - cfg
 
+- service: name=httpd enabled=yes state=started
+  tags:
+  - httpd.srv

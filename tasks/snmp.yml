@@ -37,3 +37,7 @@
   - restart snmpd
   tags:
   - snmp.cfg
+
+- service: name=snmpd enabled=yes state=started
+  tags:
+  - snmpd.srv

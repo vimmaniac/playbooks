@@ -41,3 +41,7 @@
   - ntp.cfg
   - ntpd
   - cfg
+
+- service: name=ntpd enabled=yes state=started
+  tags:
+  - ntp.srv

@@ -56,3 +56,8 @@
   - ${playbook_templates}/${playbook}/template.cnf.j2
   tags:
   - template.cfg
+
+# manage service
+- service: name=templated enabled=yes state=started
+  tags:
+  - templated.srv
