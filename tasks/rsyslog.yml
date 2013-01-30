@@ -10,13 +10,17 @@
 
 - template: src=${item} dest=/etc/rsyslog.conf owner=root group=root mode=0644
   first_available_file:
-  - ${playbook_templates_private}/${playbook}/resolv.conf.j2-${ansible_fqdn}
-  - ${playbook_templates_private}/${playbook}/resolv.conf.j2-${host_group}
-  - ${playbook_templates_private}/${playbook}/resolv.conf.j2-${datacentre}
-  - ${playbook_templates_private}/${playbook}/resolv.conf.j2
-  - ${playbook_templates}/${playbook}/resolv.conf.j2-${ansible_fqdn}
-  - ${playbook_templates}/${playbook}/resolv.conf.j2-${host_group}
-  - ${playbook_templates}/${playbook}/resolv.conf.j2-${datacentre}
-  - ${playbook_templates}/${playbook}/resolv.conf.j2
+  - ${playbook_templates_private}/${playbook}/rsyslog.conf.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/rsyslog.conf.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/rsyslog.conf.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/rsyslog.conf.j2
+  - ${playbook_templates}/${playbook}/rsyslog.conf.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/rsyslog.conf.j2-${host_group}
+  - ${playbook_templates}/${playbook}/rsyslog.conf.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/rsyslog.conf.j2
   tags:
-  - resolv.cfg
+  - rsyslog.cfg
+
+- service: name=rsyslog enabled=yes state=started
+  tags:
+  - rsyslog.srv

@@ -65,3 +65,7 @@
   with_items: ${databases}
   tags:
   - mysql.init.db
+
+- service: name=mysqld enabled=yes state=started
+  tags:
+  - mysql.srv

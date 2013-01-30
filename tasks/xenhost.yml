@@ -9,7 +9,7 @@
   - xenhost.pkgs
 
 # remove default virbr0 from xen installs
-- file: src=/etc/libvirt/qemu/networks/autostart/default.xml state=absent
+- file: dest=/etc/libvirt/qemu/networks/autostart/default.xml state=absent
   tags:
   - xenhost.cfg
   - xenhost
@@ -30,7 +30,7 @@
   - xenhost
   - cfg
 
-- template: src=${item} dest=/etc/xen/scripts/network-bridge-dual-vlan owner=root group=root mode=0744
+- template: src=${item} dest=/etc/xen/scripts/network-bridge-dual-vlan owner=root group=root mode=0755
   first_available_file:
   - ${playbook_templates_private}/${playbook}/etc_xen_scripts_network-bridge-dual-vlan.j2-${ansible_fqdn}
   - ${playbook_templates_private}/${playbook}/etc_xen_scripts_network-bridge-dual-vlan.j2-${host_group}
@@ -44,6 +44,42 @@
   - xenhost.cfg
   - xenhost
   - cfg
+
+- file: dest=/etc/sysconfig/network-scripts/ifcfg-lom state=absent
+  tags:
+  - xenhost.network
+  - xenhost
+  - network
+
+- template: src=${item} dest=/etc/sysconfig/network-scripts/ifcfg-eth1.2 owner=root group=root mode=0644
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/etc_sysconfig_network-scripts_ifcfg-eth1.2.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/etc_sysconfig_network-scripts_ifcfg-eth1.2.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/etc_sysconfig_network-scripts_ifcfg-eth1.2.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/etc_sysconfig_network-scripts_ifcfg-eth1.2.j2
+  - ${playbook_templates}/${playbook}/etc_sysconfig_network-scripts_ifcfg-eth1.2.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/etc_sysconfig_network-scripts_ifcfg-eth1.2.j2-${host_group}
+  - ${playbook_templates}/${playbook}/etc_sysconfig_network-scripts_ifcfg-eth1.2.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/etc_sysconfig_network-scripts_ifcfg-eth1.2.j2
+  tags:
+  - xenhost.network
+  - xenhost
+  - network
+
+- template: src=${item} dest=/etc/sysconfig/network-scripts/ifcfg-eth1.3 owner=root group=root mode=0644
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/etc_sysconfig_network-scripts_ifcfg-eth1.3.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/etc_sysconfig_network-scripts_ifcfg-eth1.3.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/etc_sysconfig_network-scripts_ifcfg-eth1.3.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/etc_sysconfig_network-scripts_ifcfg-eth1.3.j2
+  - ${playbook_templates}/${playbook}/etc_sysconfig_network-scripts_ifcfg-eth1.3.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/etc_sysconfig_network-scripts_ifcfg-eth1.3.j2-${host_group}
+  - ${playbook_templates}/${playbook}/etc_sysconfig_network-scripts_ifcfg-eth1.3.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/etc_sysconfig_network-scripts_ifcfg-eth1.3.j2
+  tags:
+  - xenhost.network
+  - xenhost
+  - network
 
 # manage tree structure
 #- copy: src=${item} dest=/etc/httpd owner=root group=root mode=0600
