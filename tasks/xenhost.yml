@@ -1,0 +1,94 @@
+#
+# Xenhost Tasks
+#
+---
+- yum: pkg=${item} state=installed
+  with_items:
+  - vconfig
+  tags:
+  - xenhost.pkgs
+
+# remove default virbr0 from xen installs
+- file: src=/etc/libvirt/qemu/networks/autostart/default.xml state=absent
+  tags:
+  - xenhost.cfg
+  - xenhost
+  - cfg
+
+- template: src=${item} dest=/etc/xen/xend-config.sxp owner=root group=root mode=0644
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/etc_xen_xend-config.sxp.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/etc_xen_xend-config.sxp.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/etc_xen_xend-config.sxp.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/etc_xen_xend-config.sxp.j2
+  - ${playbook_templates}/${playbook}/etc_xen_xend-config.sxp.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/etc_xen_xend-config.sxp.j2-${host_group}
+  - ${playbook_templates}/${playbook}/etc_xen_xend-config.sxp.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/etc_xen_xend-config.sxp.j2
+  tags:
+  - xenhost.cfg
+  - xenhost
+  - cfg
+
+- template: src=${item} dest=/etc/xen/scripts/network-bridge-dual-vlan owner=root group=root mode=0744
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/etc_xen_scripts_network-bridge-dual-vlan.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/etc_xen_scripts_network-bridge-dual-vlan.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/etc_xen_scripts_network-bridge-dual-vlan.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/etc_xen_scripts_network-bridge-dual-vlan.j2
+  - ${playbook_templates}/${playbook}/etc_xen_scripts_network-bridge-dual-vlan.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/etc_xen_scripts_network-bridge-dual-vlan.j2-${host_group}
+  - ${playbook_templates}/${playbook}/etc_xen_scripts_network-bridge-dual-vlan.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/etc_xen_scripts_network-bridge-dual-vlan.j2
+  tags:
+  - xenhost.cfg
+  - xenhost
+  - cfg
+
+# manage tree structure
+#- copy: src=${item} dest=/etc/httpd owner=root group=root mode=0600
+#  with_fileglob:
+#  - ${playbook_files_private}/${playbook}/${ansible_fqdn}/*
+#  - ${playbook_files_private}/${playbook}/${host_group}/*
+#  - ${playbook_files_private}/${playbook}/${datacentre}/*
+#  - ${playbook_files_private}/${playbook}/default/*
+#  - ${playbook_files}/${playbook}/${ansible_fqdn}/*
+#  - ${playbook_files}/${playbook}/${host_group}/*
+#  - ${playbook_files}/${playbook}/${datacentre}/*
+#  - ${playbook_files}/${playbook}/default/*
+#  notify:
+#  - restart template
+#  tags:
+#  - template.cfg
+#  - template
+#  - cfg
+
+# manage static configs
+#- copy: src=${item} dest=/etc/template.cnf owner=root group=root mode=0600
+#  first_available_file:
+#  - ${playbook_files_private}/${playbook}/template.cnf-${ansible_fqdn}
+#  - ${playbook_files_private}/${playbook}/template.cnf-${host_group}
+#  - ${playbook_files_private}/${playbook}/template.cnf-${datacentre}
+#  - ${playbook_files_private}/${playbook}/template.cnf
+#  - ${playbook_files}/${playbook}/template.cnf-${ansible_fqdn}
+#  - ${playbook_files}/${playbook}/template.cnf-${host_group}
+#  - ${playbook_files}/${playbook}/template.cnf-${datacentre}
+#  - ${playbook_files}/${playbook}/template.cnf
+#  notify:
+#  - restart template
+#  tags:
+#  - template.cfg
+
+# manage dynamic configs
+#- template: src=${item} dest=/etc/template.cnf owner=root group=root mode=0600
+#  first_available_file:
+#  - ${playbook_templates_private}/${playbook}/template.cnf.j2-${ansible_fqdn}
+#  - ${playbook_templates_private}/${playbook}/template.cnf.j2-${host_group}
+#  - ${playbook_templates_private}/${playbook}/template.cnf.j2-${datacentre}
+#  - ${playbook_templates_private}/${playbook}/template.cnf.j2
+#  - ${playbook_templates}/${playbook}/template.cnf.j2-${ansible_fqdn}
+#  - ${playbook_templates}/${playbook}/template.cnf.j2-${host_group}
+#  - ${playbook_templates}/${playbook}/template.cnf.j2-${datacentre}
+#  - ${playbook_templates}/${playbook}/template.cnf.j2
+#  tags:
+#  - template.cfg

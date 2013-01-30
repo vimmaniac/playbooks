@@ -1,0 +1,8 @@
+#!/bin/sh
+# {{ ansible_managed }}
+
+# setup internal nic with 2 external vlans 2 & 3
+dir=$(dirname "$0")
+"$dir/network-bridge" "$@" vifnum=0 bridge=xenbr0 netdev=eth0  
+"$dir/network-bridge" "$@" vifnum=1 bridge=xenbr1 netdev=eth1.2
+"$dir/network-bridge" "$@" vifnum=2 bridge=xenbr2 netdev=eth1.3
