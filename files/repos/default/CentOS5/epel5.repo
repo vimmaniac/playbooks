@@ -1,0 +1,6 @@
+[epel5-x86_64]
+name=epel5-x86_64
+baseurl=http://dl.fedoraproject.org/pub/epel/5/x86_64/
+enabled=1
+priority=99
+gpgcheck=0

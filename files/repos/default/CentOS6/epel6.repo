@@ -1,0 +1,6 @@
+[epel6-x86_64]
+name=epel6-x86_64
+baseurl=http://dl.fedoraproject.org/pub/epel/6/x86_64/
+enabled=1 
+priority=99
+gpgcheck=0

@@ -10,6 +10,7 @@
 - include: playbook.yml playbook=keys tags=keys
 - include: playbook.yml playbook=ulimit tags=ulimit
 - include: playbook.yml playbook=sysctl tags=sysctl
+- include: playbook.yml playbook=repos tags=repos
 - include: playbook.yml playbook=yum tags=yum
 - include: playbook.yml playbook=rsyslog tags=rsyslog
 - include: playbook.yml playbook=logrotate tags=logrotate
