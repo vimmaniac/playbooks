@@ -11,14 +11,14 @@
 
 - copy: src=${item} dest=/etc/yum.repos.d owner=root group=root mode=0644
   with_fileglob:
-  - ${playbook_files_private}/${playbook}/${ansible_fqdn}/${ansible_lsb.id}${ansible_lsb.major_release}*
-  - ${playbook_files_private}/${playbook}/${host_group}/${ansible_lsb.id}${ansible_lsb.major_release}*
-  - ${playbook_files_private}/${playbook}/${datacentre}/${ansible_lsb.id}${ansible_lsb.major_release}*
-  - ${playbook_files_private}/${playbook}/default/${ansible_lsb.id}${ansible_lsb.major_release}*
-  - ${playbook_files}/${playbook}/${ansible_fqdn}/${ansible_lsb.id}${ansible_lsb.major_release}*
-  - ${playbook_files}/${playbook}/${host_group}/${ansible_lsb.id}${ansible_lsb.major_release}*
-  - ${playbook_files}/${playbook}/${datacentre}/${ansible_lsb.id}${ansible_lsb.major_release}*
-  - ${playbook_files}/${playbook}/default/${ansible_lsb.id}${ansible_lsb.major_release}*
+  - ${playbook_files_private}/${playbook}/${ansible_fqdn}/${ansible_lsb.id}${ansible_lsb.major_release}/*
+  - ${playbook_files_private}/${playbook}/${host_group}/${ansible_lsb.id}${ansible_lsb.major_release}/*
+  - ${playbook_files_private}/${playbook}/${datacentre}/${ansible_lsb.id}${ansible_lsb.major_release}/*
+  - ${playbook_files_private}/${playbook}/default/${ansible_lsb.id}${ansible_lsb.major_release}/*
+  - ${playbook_files}/${playbook}/${ansible_fqdn}/${ansible_lsb.id}${ansible_lsb.major_release}/*
+  - ${playbook_files}/${playbook}/${host_group}/${ansible_lsb.id}${ansible_lsb.major_release}/*
+  - ${playbook_files}/${playbook}/${datacentre}/${ansible_lsb.id}${ansible_lsb.major_release}/*
+  - ${playbook_files}/${playbook}/default/${ansible_lsb.id}${ansible_lsb.major_release}/*
   tags:
   - repos.cfg
   - repos
