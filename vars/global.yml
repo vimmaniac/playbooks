@@ -1,5 +1,5 @@
 #
-# This playbook configures your basic structure
+# Configures basic playbooks structure
 #
 ---
 ansible_home: /etc/ansible
@@ -11,11 +11,6 @@ playbook_vars: ${playbooks_home}/vars
 playbook_tasks: ${playbooks_home}/tasks
 playbook_handlers: ${playbooks_home}/handlers
 
-#playbook_files_private: ${ansible_home}/files_private
-#playbook_templates_private: ${ansible_home}/templates_private
-#playbook_vars_private: ${ansible_home}/vars_private
-#playbook_tasks_private: ${ansible_home}/tasks_private
-#playbook_handlers_private: ${ansible_home}/handlers_private
 playbook_files_private: ${ansible_home}/strategybooks/files_private
 playbook_templates_private: ${ansible_home}/strategybooks/templates_private
 playbook_vars_private: ${ansible_home}/strategybooks/vars_private
