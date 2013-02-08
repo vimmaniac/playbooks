@@ -11,4 +11,4 @@ export ANSIBLE_LIBRARY="$ANSIBLE_HOME/library"
 export MANPATH=$PREFIX_MANPATH:$MANPATH
 
 alias playbook="python26 /etc/ansible/ansible/bin/ansible-playbook --extra-vars \"hosts=`hostname`\" --connection=local"
-alias playbook-update='cd /etc/ansible; git pull; git submodule update; cd -'
+alias playbook-update='cd /etc/ansible; git reset --hard; git pull; git submodule update; cd -'
