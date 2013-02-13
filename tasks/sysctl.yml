@@ -2,7 +2,7 @@
 # Sysctl Tasks
 #
 ---
-- copy: dest=/etc/sysctl.conf owner=root group=root mode=0643
+- copy: dest=/etc/sysctl.conf owner=root group=root mode=0644
   first_available_file:
   - ${playbook_files_private}/${playbook}/sysctl.conf-optimized-${ansible_fqdn}
   - ${playbook_files_private}/${playbook}/sysctl.conf-optimized-${host_group}
