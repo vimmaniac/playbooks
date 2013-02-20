@@ -17,10 +17,12 @@
 
 - file: dest=/home/${item} state=directory owner=${item} group=users mode=0700
   with_items: $shell_accounts
+  when_set: $shell_accounts
   tags:
   - keys.home
 
 - authorized_key: user=${item} key='$FILE(${playbook_files_private}/keys/${item}_id_rsa.pub)'
   with_items: $shell_accounts
+  when_set: $shell_accounts
   tags:
   - keys.user
