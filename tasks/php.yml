@@ -23,7 +23,7 @@
   - ${playbook_templates}/${playbook}/php.ini.j2-${datacentre}
   - ${playbook_templates}/${playbook}/php.ini.j2
   notify:
-  - restat httpd
+  - restart httpd
   tags:
   - php.cfg
 

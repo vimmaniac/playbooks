@@ -6,10 +6,10 @@
 #
 ---
 - name: Lamp Playbook
-  hosts: all
+  hosts: lamp
 
   #vars:
-  #  group: lamp
+  #  hosts: lamp
 
 - include: base.yml
 - include: playbook.yml playbook=httpd tags=httpd

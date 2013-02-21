@@ -27,3 +27,4 @@
 - include: playbook.yml playbook=monit tags=monit
 - include: playbook.yml playbook=sudoers tags=sudoers
 - include: playbook.yml playbook=denyhosts tags=denyhosts
+- include: playbook.yml playbook=properties tags=properties
