@@ -2,8 +2,8 @@
 # Root Tasks
 #
 ---
-- user: name=root password=$root_passwd state=present
-  only_if: is_set('$root_passwd')
+- user: name=root password=${root_passwd} state=present
+  when_set: ${root_passwd}
   tags:
   - root.passwd
 

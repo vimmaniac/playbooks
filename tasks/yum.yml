@@ -6,6 +6,8 @@
 
 - yum: pkg=${item} state=absent
   with_items: ${remove_pkgs}
+  when_set: ${remove_pkgs}
 
 - yum: pkg=${item} state=installed
   with_items: ${install_pkgs}
+  when_set: ${install_pkgs}
