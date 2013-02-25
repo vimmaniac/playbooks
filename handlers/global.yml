@@ -4,6 +4,7 @@
 ---
 - name: restart sysctl
   command: sysctl -p
+  ignore_errors: yes
   tags:
   - sysctl.service
 
