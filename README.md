@@ -29,3 +29,5 @@ Some default sub-tags used in my playbooks for fine grain push management includ
     - init
 
 This comes in handy if you just want to sync configuration files without any additional processes that come from a playbook.
+
+## Workflow for contributors
