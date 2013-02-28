@@ -7,13 +7,13 @@
 ANSIBLE_ROOT=/etc/ansible
 ANSIBLE_HOME=/etc/ansible/ansible
 
-PREFIX_PYTHONPATH="$ANSIBLE_HOME/lib"
-PREFIX_PATH="$ANSIBLE_HOME/bin"
-PREFIX_MANPATH="$ANSIBLE_HOME/docs/man"
-export PYTHONPATH=$PREFIX_PYTHONPATH:$PYTHONPATH
-export PATH=$PREFIX_PATH:$PATH
-export ANSIBLE_LIBRARY="$ANSIBLE_HOME/library"
-export MANPATH=$PREFIX_MANPATH:$MANPATH
+PREFIX_PYTHONPATH="${ANSIBLE_HOME}/lib"
+PREFIX_PATH="${ANSIBLE_HOME}/bin"
+PREFIX_MANPATH="${ANSIBLE_HOME}/docs/man"
+export PYTHONPATH=${PREFIX_PYTHONPATH}:${PYTHONPATH}
+export PATH=${PREFIX_PATH}:${PATH}
+export ANSIBLE_LIBRARY="${ANSIBLE_HOME}/library"
+export MANPATH=${PREFIX_MANPATH}:${MANPATH}
 
 
 
@@ -23,8 +23,9 @@ export MANPATH=$PREFIX_MANPATH:$MANPATH
 # Aliases
 #
 
-alias cf-update="cd ${ANSIBLE_ROOT}; git stash; git pull; git submodule update; cd -"
+alias cf-updateplays="cd ${ANSIBLE_ROOT}; git stash; git pull; git submodule update; cd -"
 alias cf-viewstash="cd ${ANSIBLE_ROOT}; git stash show; cd -"
+alias cf-viewenv="cd ${ANSIBLE_ROOT}; git branch -l; cd -"
 
 
 
@@ -59,7 +60,7 @@ function cf-viewplay() {
 function cf-play() {
 	if [ ! -z ${1} ]
 	then
-		python ${1} --extra-vars "hosts=`hostname`" --connection=local ${2}
+		${ANSIBLE_HOME}/bin/ansible-playbook ${1} --extra-vars "hosts=`hostname`" --connection=local ${2}
 	else
 		echo 'cf-play /path/to/playbook.yml'
 	fi
