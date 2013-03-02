@@ -31,3 +31,10 @@ Some default sub-tags used in my playbooks for fine grain push management includ
 This comes in handy if you just want to sync configuration files without any additional processes that come from a playbook.
 
 ## Workflow for contributors
+    * fork repo
+    * clone from your fork
+    * create feature branch in your clone
+    * develop in feature branch
+    * push feature branch up to your origin
+    * send pull request from feature branch to upstream develop branch
+    * await merge from upstream or fix pull request based on feedback

@@ -1,3 +1,0 @@
----
-- name: ${playbook}
-  action: command echo ${playbook}
