@@ -60,8 +60,23 @@ function cf-viewplay() {
 function cf-play() {
 	if [ ! -z ${1} ]
 	then
+		# try to look in strategybooks first
+		if [ -f ${ANSIBLE_ROOT}/strategybooks/${1}.yml ]
+		then
+			${ANSIBLE_HOME}/bin/ansible-playbook ${ANSIBLE_ROOT}/strategybooks/${1}.yml --extra-vars "hosts=`hostname`" --connection=local ${2}
+			exit
+		fi
+
+		# now try to look in playbooks
+		if [ -f ${ANSIBLE_ROOT}/playbooks/${1}.yml ]
+		then
+			${ANSIBLE_HOME}/bin/ansible-playbook ${ANSIBLE_ROOT}/playbooks/${1}.yml --extra-vars "hosts=`hostname`" --connection=local ${2}
+			exit
+		fi
+
+		# defaults to executing explicit playbook path
 		${ANSIBLE_HOME}/bin/ansible-playbook ${1} --extra-vars "hosts=`hostname`" --connection=local ${2}
 	else
-		echo 'cf-play /path/to/playbook.yml'
+		echo 'cf-play /path/to/playbook.yml || cf-play playbook'
 	fi
 }
