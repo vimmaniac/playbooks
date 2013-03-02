@@ -23,9 +23,9 @@ export MANPATH=${PREFIX_MANPATH}:${MANPATH}
 # Aliases
 #
 
-alias cf-updateplays="cd ${ANSIBLE_ROOT}; git stash; git pull; git submodule update; cd -"
-alias cf-viewstash="cd ${ANSIBLE_ROOT}; git stash show; cd -"
-alias cf-viewenv="cd ${ANSIBLE_ROOT}; git branch -l; cd -"
+alias cf-updateplays="cd ${ANSIBLE_ROOT}; git stash; git pull; git submodule update; cd - >/dev/null 2>&1"
+alias cf-viewstash="cd ${ANSIBLE_ROOT}; git stash show; cd - >/dev/null 2>&1"
+alias cf-viewenv="cd ${ANSIBLE_ROOT}; git branch -l; cd - >/dev/null 2>&1"
 
 
 
@@ -41,7 +41,7 @@ function cf-setenv() {
 	then
 		cd ${ANSIBLE_ROOT}
 		git checkout ${1}
-		cd -
+		cd - >/dev/null 2>&1
 	else
 		echo 'cf-env [master|develop]'
 	fi
