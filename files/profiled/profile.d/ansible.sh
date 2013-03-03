@@ -65,18 +65,19 @@ function cf-play() {
 		if [ -f ${ANSIBLE_ROOT}/strategybooks/${1}.yml ]
 		then
 			${ANSIBLE_HOME}/bin/ansible-playbook ${ANSIBLE_ROOT}/strategybooks/${1}.yml --extra-vars "hosts=`hostname`" --connection=local ${2}
-			exit
+			return $?
 		fi
 
 		# now try to look in playbooks
 		if [ -f ${ANSIBLE_ROOT}/playbooks/${1}.yml ]
 		then
 			${ANSIBLE_HOME}/bin/ansible-playbook ${ANSIBLE_ROOT}/playbooks/${1}.yml --extra-vars "hosts=`hostname`" --connection=local ${2}
-			exit
+			return $?
 		fi
 
 		# defaults to executing explicit playbook path
 		${ANSIBLE_HOME}/bin/ansible-playbook ${1} --extra-vars "hosts=`hostname`" --connection=local ${2}
+		return $?
 	else
 		echo 'cf-play /path/to/playbook.yml || cf-play playbook'
 	fi
