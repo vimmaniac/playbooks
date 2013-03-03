@@ -24,19 +24,6 @@
   tags:
   - mysql.cfg
 
-- template: dest=/root/.my.cnf
-  first_available_file:
-  - ${playbook_templates_private}/${playbook}/user.my.cnf.j2-${ansible_fqdn}
-  - ${playbook_templates_private}/${playbook}/user.my.cnf.j2-${host_group}
-  - ${playbook_templates_private}/${playbook}/user.my.cnf.j2-${datacentre}
-  - ${playbook_templates_private}/${playbook}/user.my.cnf.j2
-  - ${playbook_templates}/${playbook}/user.my.cnf.j2-${ansible_fqdn}
-  - ${playbook_templates}/${playbook}/user.my.cnf.j2-${host_group}
-  - ${playbook_templates}/${playbook}/user.my.cnf.j2-${datacentre}
-  - ${playbook_templates}/${playbook}/user.my.cnf.j2
-  tags:
-  - mysql.cfg
-
 # ansible-playbook strategybooks/rebrand.yml --tags 'mysql' --extra-vars 'first_run=1'
 - mysql_user: login_host=localhost name=${mysql_root_user} password=${mysql_root_passwd} priv=*.*:ALL state=present state=present
   #when_string: ${first_run} == '1'
@@ -71,6 +58,19 @@
   ignore_errors: yes
   tags:
   - mysql.init.db
+
+- template: dest=/root/.my.cnf
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/user.my.cnf.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/user.my.cnf.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/user.my.cnf.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/user.my.cnf.j2
+  - ${playbook_templates}/${playbook}/user.my.cnf.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/user.my.cnf.j2-${host_group}
+  - ${playbook_templates}/${playbook}/user.my.cnf.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/user.my.cnf.j2
+  tags:
+  - mysql.cfg
 
 - service: name=mysqld enabled=yes state=started
   ignore_errors: yes
