@@ -53,7 +53,7 @@ function cf-viewplay() {
 	then
 		cf-play ${1} "--check --diff"
 	else
-		echo 'cf-viewplay /path/to/playbook.yml'
+		echo 'cf-viewplay /path/to/playbook.yml || playbook'
 	fi
 }
 # @param1 path to playbook
@@ -79,6 +79,6 @@ function cf-play() {
 		${ANSIBLE_HOME}/bin/ansible-playbook ${1} --extra-vars "hosts=`hostname`" --connection=local ${2}
 		return $?
 	else
-		echo 'cf-play /path/to/playbook.yml || cf-play playbook'
+		echo 'cf-play /path/to/playbook.yml || playbook'
 	fi
 }

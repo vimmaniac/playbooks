@@ -39,33 +39,40 @@
 
 # ansible-playbook strategybooks/rebrand.yml --tags 'mysql' --extra-vars 'first_run=1'
 - mysql_user: login_host=localhost name=${mysql_root_user} password=${mysql_root_passwd} priv=*.*:ALL state=present state=present
-  when_string: ${first_run} == '1'
+  #when_string: ${first_run} == '1'
+  ignore_errors: yes
   tags:
   - mysql.init.root
 
 - mysql_user: login_user=${mysql_root_user} login_password=${mysql_root_passwd} name=${mysql_user} password=${mysql_passwd} priv=*.*:ALL state=present
-  when_string: ${first_run} == '1'
+  #when_string: ${first_run} == '1'
+  ignore_errors: yes
   tags:
   - mysql.root
 
 # BROKEN MODULE
-#- mysql_user: login_host="127.0.0.1" host="127.0.0.1" name=${mysql_root_user} password=${mysql_root_passwd} priv=*.*:ALL state=present
-#  tags:
-#  - mysql.init.root.127
+- mysql_user: login_host="127.0.0.1" host="127.0.0.1" name=${mysql_root_user} password=${mysql_root_passwd} priv=*.*:ALL state=present
+  ignore_errors: yes
+  tags:
+  - mysql.init.root.127
 
-#- mysql_user: login_host=localhost login_user=${mysql_root_user} login_password=${mysql_root_passwd} host="${ansible_fqdn}" name=${mysql_root_user} password=${mysql_root_passwd} priv=*.*:ALL state=present
-#  tags:
-#  - mysql.init.root.fqdn
+- mysql_user: login_host=localhost login_user=${mysql_root_user} login_password=${mysql_root_passwd} host="${ansible_fqdn}" name=${mysql_root_user} password=${mysql_root_passwd} priv=*.*:ALL state=present
+  ignore_errors: yes
+  tags:
+  - mysql.init.root.fqdn
 
-#- mysql_user: login_host=localhost login_user=${mysql_root_user} login_password=${mysql_root_passwd} host=localhost name=${mysql_user} password=${mysql_passwd} priv=*.*:ALL state=present
-#  tags:
-#  - mysql.init.user
+- mysql_user: login_host=localhost login_user=${mysql_root_user} login_password=${mysql_root_passwd} host=localhost name=${mysql_user} password=${mysql_passwd} priv=*.*:ALL state=present
+  ignore_errors: yes
+  tags:
+  - mysql.init.user
 
 - mysql_db: login_user=${mysql_root_user} login_password=${mysql_root_passwd} name=${item} state=present
   with_items: ${databases}
+  ignore_errors: yes
   tags:
   - mysql.init.db
 
 - service: name=mysqld enabled=yes state=started
+  ignore_errors: yes
   tags:
   - mysql.srv
