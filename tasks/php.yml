@@ -2,10 +2,11 @@
 # Php Tasks
 #
 ---
+# TODO: externalize this list
 - yum: pkg=${item} state=installed
+  ignore_errors: yes
   with_items:
   - php-soap
-  - php-nusoap
   - php-mysql
   - php-xml
   - phpmyadmin
