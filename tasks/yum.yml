@@ -5,9 +5,11 @@
 # TODO: add repo sources here
 
 - yum: pkg=${item} state=absent
+  ignore_errors: yes
   with_items: ${remove_pkgs}
   when_set: ${remove_pkgs}
 
 - yum: pkg=${item} state=installed
+  ignore_errors: yes
   with_items: ${install_pkgs}
   when_set: ${install_pkgs}
