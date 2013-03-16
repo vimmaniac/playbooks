@@ -1,0 +1,16 @@
+#
+# M4 Tasks
+#
+---
+- template: src=${item} dest=${m4_dir}/${m4} owner=root group=root mode=0640
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/${m4}.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/${m4}.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/${m4}.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/${m4}.j2
+  - ${playbook_templates}/${playbook}/${m4}.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/${m4}.j2-${host_group}
+  - ${playbook_templates}/${playbook}/${m4}.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/${m4}.j2
+  tags:
+  - m4.cfg
