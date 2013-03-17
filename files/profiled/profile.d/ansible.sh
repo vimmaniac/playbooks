@@ -72,49 +72,49 @@ function cf-searchplay() {
 	fi
 	return 1
 }
-# @param1 path to playbook
-# @param2 optional tags
+# @param1 playbook
+# @param2 additional ansible-playbook params
 function cf-viewplay() {
 	if [ ! -z ${1} ]
 	then
-		cf-searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --check --diff --extra-vars "hosts=`hostname`" --connection=local ${2}
+		cf-searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --check --diff --extra-vars "hosts=`hostname`" --connection=local ${@:2}
 	else
-		echo 'cf-viewplay [/path/to/playbook.yml|playbook] ["tags"]' && return 1
+		echo 'cf-viewplay [/path/to/playbook.yml|playbook] ...' && return 1
 	fi
 	return $?
 }
-# @param1 path to playbook
-# @param2 optional tags
+# @param1 playbook
+# @param2 additional ansible-playbook params
 function cf-play() {
 	if [ ! -z ${1} ]
 	then
-		cf-searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --extra-vars "hosts=`hostname`" --connection=local ${2}
+		cf-searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --extra-vars "hosts=`hostname`" --connection=local ${@:2}
 	else
-		echo 'cf-play [/path/to/playbook.yml|playbook]' && return 1
+		echo 'cf-play [/path/to/playbook.yml|playbook] ...' && return 1
 	fi
 	return $?
 }
-# @param1 path to playbook
+# @param1 playbook
 # @param2 hostname
-# @param3 optional tags
+# @param3 additional ansible-playbook params
 function cf-viewplayremote() {
 	if [ ! -z ${1} ] && [ ! -z ${2} ]
 	then
-		cf-searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --check --diff --extra-vars "hosts=${2}" ${3}
+		cf-searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --check --diff --extra-vars "hosts=${2}" ${@:3}
 	else
-		echo 'cf-viewplayremote [/path/to/playbook.yml|playbook] [hostname] ["tags"]' && return 1
+		echo 'cf-viewplayremote [/path/to/playbook.yml|playbook] [hostname] ...' && return 1
 	fi
 	return $?
 }
-# @param1 path to playbook
+# @param1 playbook
 # @param2 hostname
-# @param3 optional dryrun mode
+# @param3 additional ansible-playbook params
 function cf-playremote() {
 	if [ ! -z ${1} ] && [ ! -z ${2} ]
 	then
-		cf-searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --extra-vars "hosts=${2}" ${3}
+		cf-searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --extra-vars "hosts=${2}" ${@:3}
 	else
-		echo 'cf-playremote [/path/to/playbook.yml|playbook] [hostname]' && return 1
+		echo 'cf-playremote [/path/to/playbook.yml|playbook] [hostname] ...' && return 1
 	fi
 	return $?
 }
