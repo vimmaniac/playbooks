@@ -44,7 +44,7 @@ function cf-setenv() {
 		git checkout ${1}
 		cd - >/dev/null 2>&1
 	else
-		echo 'cf-env [master|develop]'
+		echo 'cf-setenv [master|develop]'
 	fi
 }
 # @param1 path to playbook
@@ -53,7 +53,17 @@ function cf-viewplay() {
 	then
 		cf-play ${1} "--check --diff"
 	else
-		echo 'cf-viewplay /path/to/playbook.yml || playbook'
+		echo 'cf-viewplay [/path/to/playbook.yml|playbook]'
+	fi
+}
+# @param1 path to playbook
+# @param2 hostname
+function cf-viewplayremote() {
+	if [ ! -z ${1} ] || [ ! -z ${2} ]
+	then
+		cf-playremote ${1} ${2} "--check --diff"
+	else
+		echo 'cf-viewplayremote [/path/to/playbook.yml|playbook] [hostname]'
 	fi
 }
 # @param1 path to playbook
@@ -79,6 +89,33 @@ function cf-play() {
 		${ANSIBLE_HOME}/bin/ansible-playbook ${1} --extra-vars "hosts=`hostname`" --connection=local ${2}
 		return $?
 	else
-		echo 'cf-play /path/to/playbook.yml || playbook'
+		echo 'cf-play [/path/to/playbook.yml|playbook]'
+	fi
+}
+# @param1 path to playbook
+# @param2 hostname
+# @param3 optional dryrun mode
+function cf-playremote() {
+	if [ ! -z ${1} ] || [ ! -z ${2} ]
+	then
+		# try to look in strategybooks first
+		if [ -f ${ANSIBLE_ROOT}/strategybooks/${1}.yml ]
+		then
+			${ANSIBLE_HOME}/bin/ansible-playbook ${ANSIBLE_ROOT}/strategybooks/${1}.yml --extra-vars "hosts=${2}" ${3}
+			return $?
+		fi
+
+		# now try to look in playbooks
+		if [ -f ${ANSIBLE_ROOT}/playbooks/${1}.yml ]
+		then
+			${ANSIBLE_HOME}/bin/ansible-playbook ${ANSIBLE_ROOT}/playbooks/${1}.yml --extra-vars "hosts=${2}" ${3}
+			return $?
+		fi
+
+		# defaults to executing explicit playbook path
+		${ANSIBLE_HOME}/bin/ansible-playbook ${1} --extra-vars "hosts=${2}" ${3}
+		return $?
+	else
+		echo 'cf-playremote [/path/to/playbook.yml|playbook] [hostname]'
 	fi
 }
