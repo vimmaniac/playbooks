@@ -33,6 +33,16 @@ alias cf-viewenv="cd ${ANSIBLE_ROOT}; git branch -l; cd - >/dev/null 2>&1"
 
 
 #
+# Global variables
+#
+
+export PLAYBOOK_PATH=""
+
+
+
+
+
+#
 # Functions
 #
 
@@ -47,75 +57,64 @@ function cf-setenv() {
 		echo 'cf-setenv [master|develop]'
 	fi
 }
-# @param1 path to playbook
-function cf-viewplay() {
-	if [ ! -z ${1} ]
-	then
-		cf-play ${1} "--check --diff"
-	else
-		echo 'cf-viewplay [/path/to/playbook.yml|playbook]'
-	fi
-}
-# @param1 path to playbook
-# @param2 hostname
-function cf-viewplayremote() {
-	if [ ! -z ${1} ] || [ ! -z ${2} ]
-	then
-		cf-playremote ${1} ${2} "--check --diff"
-	else
-		echo 'cf-viewplayremote [/path/to/playbook.yml|playbook] [hostname]'
-	fi
-}
-# @param1 path to playbook
-# @param2 optional dryrun mode
-function cf-play() {
+# @param1 playbook
+function cf-searchplay() {
 	if [ ! -z ${1} ]
 	then
 		# try to look in strategybooks first
-		if [ -f ${ANSIBLE_ROOT}/strategybooks/${1}.yml ]
-		then
-			${ANSIBLE_HOME}/bin/ansible-playbook ${ANSIBLE_ROOT}/strategybooks/${1}.yml --extra-vars "hosts=`hostname`" --connection=local ${2}
-			return $?
-		fi
+		[ -f ${ANSIBLE_ROOT}/strategybooks/${1}.yml ] && PLAYBOOK_PATH="${ANSIBLE_ROOT}/strategybooks/${1}.yml" && return 0
 
 		# now try to look in playbooks
-		if [ -f ${ANSIBLE_ROOT}/playbooks/${1}.yml ]
-		then
-			${ANSIBLE_HOME}/bin/ansible-playbook ${ANSIBLE_ROOT}/playbooks/${1}.yml --extra-vars "hosts=`hostname`" --connection=local ${2}
-			return $?
-		fi
+		[ -f ${ANSIBLE_ROOT}/playbooks/${1}.yml ] && PLAYBOOK_PATH="${ANSIBLE_ROOT}/playbooks/${1}.yml" && return 0
 
 		# defaults to executing explicit playbook path
-		${ANSIBLE_HOME}/bin/ansible-playbook ${1} --extra-vars "hosts=`hostname`" --connection=local ${2}
-		return $?
-	else
-		echo 'cf-play [/path/to/playbook.yml|playbook]'
+		PLAYBOOK_PATH="${1}" && return 0
 	fi
+	return 1
+}
+# @param1 path to playbook
+# @param2 optional tags
+function cf-viewplay() {
+	if [ ! -z ${1} ]
+	then
+		cf-searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --check --diff --extra-vars "hosts=`hostname`" --connection=local ${2}
+	else
+		echo 'cf-viewplay [/path/to/playbook.yml|playbook] ["tags"]' && return 1
+	fi
+	return $?
+}
+# @param1 path to playbook
+# @param2 optional tags
+function cf-play() {
+	if [ ! -z ${1} ]
+	then
+		cf-searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --extra-vars "hosts=`hostname`" --connection=local ${2}
+	else
+		echo 'cf-play [/path/to/playbook.yml|playbook]' && return 1
+	fi
+	return $?
+}
+# @param1 path to playbook
+# @param2 hostname
+# @param3 optional tags
+function cf-viewplayremote() {
+	if [ ! -z ${1} ] && [ ! -z ${2} ]
+	then
+		cf-searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --check --diff --extra-vars "hosts=${2}" ${3}
+	else
+		echo 'cf-viewplayremote [/path/to/playbook.yml|playbook] [hostname] ["tags"]' && return 1
+	fi
+	return $?
 }
 # @param1 path to playbook
 # @param2 hostname
 # @param3 optional dryrun mode
 function cf-playremote() {
-	if [ ! -z ${1} ] || [ ! -z ${2} ]
+	if [ ! -z ${1} ] && [ ! -z ${2} ]
 	then
-		# try to look in strategybooks first
-		if [ -f ${ANSIBLE_ROOT}/strategybooks/${1}.yml ]
-		then
-			${ANSIBLE_HOME}/bin/ansible-playbook ${ANSIBLE_ROOT}/strategybooks/${1}.yml --extra-vars "hosts=${2}" ${3}
-			return $?
-		fi
-
-		# now try to look in playbooks
-		if [ -f ${ANSIBLE_ROOT}/playbooks/${1}.yml ]
-		then
-			${ANSIBLE_HOME}/bin/ansible-playbook ${ANSIBLE_ROOT}/playbooks/${1}.yml --extra-vars "hosts=${2}" ${3}
-			return $?
-		fi
-
-		# defaults to executing explicit playbook path
-		${ANSIBLE_HOME}/bin/ansible-playbook ${1} --extra-vars "hosts=${2}" ${3}
-		return $?
+		cf-searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --extra-vars "hosts=${2}" ${3}
 	else
-		echo 'cf-playremote [/path/to/playbook.yml|playbook] [hostname]'
+		echo 'cf-playremote [/path/to/playbook.yml|playbook] [hostname]' && return 1
 	fi
+	return $?
 }
