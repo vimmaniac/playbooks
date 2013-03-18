@@ -2,6 +2,10 @@
 # M4 Tasks
 #
 ---
+- file: path=${m4_dir} state=directory owner=root group=root mode=0700
+  tags:
+  - m4.init
+
 - template: src=${item} dest=${m4_dir}/${m4} owner=root group=root mode=0640
   first_available_file:
   - ${playbook_templates_private}/${playbook}/${m4}.j2-${ansible_fqdn}
