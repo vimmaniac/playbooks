@@ -3,12 +3,14 @@
 #
 ---
 - file: dest=${properties_dir} state=directory mode=0770
+  when_set: ${properties_dir}
   tags:
   - properties.cfg
   - properties
   - cfg
 
 - copy: src=${item} dest=${properties_dir} owner=root group=root mode=0640
+  when_set: ${properties_dir}
   with_fileglob:
   - ${playbook_files_private}/${playbook}/${ansible_fqdn}/*
   - ${playbook_files_private}/${playbook}/${host_group}/*
