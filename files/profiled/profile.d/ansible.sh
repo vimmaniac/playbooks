@@ -23,10 +23,10 @@ export MANPATH=${PREFIX_MANPATH}:${MANPATH}
 # Aliases
 #
 
-alias cf-updateplays="cd ${ANSIBLE_ROOT}; git add .; git stash; git pull --rebase; git submodule update; cd - >/dev/null 2>&1"
-alias cf-popstash="cd ${ANSIBLE_ROOT}; git stash pop; cd - >/dev/null 2>&1"
-alias cf-viewstash="cd ${ANSIBLE_ROOT}; git stash show; cd - >/dev/null 2>&1"
-alias cf-viewenv="cd ${ANSIBLE_ROOT}; git branch -l; cd - >/dev/null 2>&1"
+alias cf-system-updateplays="cd ${ANSIBLE_ROOT}; git add .; git stash; git pull --rebase; git submodule update; cd - >/dev/null 2>&1"
+alias cf-system-popstash="cd ${ANSIBLE_ROOT}; git stash pop; cd - >/dev/null 2>&1"
+alias cf-system-viewstash="cd ${ANSIBLE_ROOT}; git stash show; cd - >/dev/null 2>&1"
+alias cf-system-viewenv="cd ${ANSIBLE_ROOT}; git branch -l; cd - >/dev/null 2>&1"
 
 
 
@@ -46,19 +46,8 @@ export PLAYBOOK_PATH=""
 # Functions
 #
 
-# @param1 branch/environment
-function cf-setenv() {
-	if [ ! -z ${1} ]
-	then
-		cd ${ANSIBLE_ROOT}
-		git checkout ${1}
-		cd - >/dev/null 2>&1
-	else
-		echo 'cf-setenv [master|develop]'
-	fi
-}
 # @param1 playbook
-function cf-searchplay() {
+function _searchplay() {
 	if [ ! -z ${1} ]
 	then
 		# try to look in strategybooks first
@@ -72,49 +61,60 @@ function cf-searchplay() {
 	fi
 	return 1
 }
-# @param1 playbook
-# @param2 additional ansible-playbook params
-function cf-viewplay() {
+# @param1 branch/environment
+function cf-sys-setenv() {
 	if [ ! -z ${1} ]
 	then
-		cf-searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --check --diff --extra-vars "hosts=`hostname`" --connection=local ${@:2}
+		cd ${ANSIBLE_ROOT}
+		git checkout ${1}
+		cd - >/dev/null 2>&1
 	else
-		echo 'cf-viewplay [/path/to/playbook.yml|playbook] ...' && return 1
+		echo 'cf-sys-setenv [master|develop]'
+	fi
+}
+# @param1 playbook
+# @param2 additional ansible-playbook params
+function cf-sys-viewplay() {
+	if [ ! -z ${1} ]
+	then
+		_searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --check --diff --extra-vars "hosts=`hostname`" --connection=local ${@:2}
+	else
+		echo 'cf-sys-viewplay [/path/to/playbook.yml|playbook] ...' && return 1
 	fi
 	return $?
 }
 # @param1 playbook
 # @param2 additional ansible-playbook params
-function cf-play() {
+function cf-sys-play() {
 	if [ ! -z ${1} ]
 	then
-		cf-searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --extra-vars "hosts=`hostname`" --connection=local ${@:2}
+		_searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --extra-vars "hosts=`hostname`" --connection=local ${@:2}
 	else
-		echo 'cf-play [/path/to/playbook.yml|playbook] ...' && return 1
+		echo 'cf-sys-play [/path/to/playbook.yml|playbook] ...' && return 1
 	fi
 	return $?
 }
 # @param1 playbook
 # @param2 hostname
 # @param3 additional ansible-playbook params
-function cf-viewplayremote() {
+function cf-sys-viewplayremote() {
 	if [ ! -z ${1} ] && [ ! -z ${2} ]
 	then
-		cf-searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --check --diff --extra-vars "hosts=${2}" ${@:3}
+		_searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --check --diff --extra-vars "hosts=${2}" ${@:3}
 	else
-		echo 'cf-viewplayremote [/path/to/playbook.yml|playbook] [hostname] ...' && return 1
+		echo 'cf-sys-viewplayremote [/path/to/playbook.yml|playbook] [hostname] ...' && return 1
 	fi
 	return $?
 }
 # @param1 playbook
 # @param2 hostname
 # @param3 additional ansible-playbook params
-function cf-playremote() {
+function cf-sys-playremote() {
 	if [ ! -z ${1} ] && [ ! -z ${2} ]
 	then
-		cf-searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --extra-vars "hosts=${2}" ${@:3}
+		_searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --extra-vars "hosts=${2}" ${@:3}
 	else
-		echo 'cf-playremote [/path/to/playbook.yml|playbook] [hostname] ...' && return 1
+		echo 'cf-sys-playremote [/path/to/playbook.yml|playbook] [hostname] ...' && return 1
 	fi
 	return $?
 }
