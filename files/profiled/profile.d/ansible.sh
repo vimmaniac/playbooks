@@ -23,10 +23,10 @@ export MANPATH=${PREFIX_MANPATH}:${MANPATH}
 # Aliases
 #
 
-alias cf-system-updateplays="cd ${ANSIBLE_ROOT}; git add .; git stash; git pull --rebase; git submodule update; cd - >/dev/null 2>&1"
-alias cf-system-popstash="cd ${ANSIBLE_ROOT}; git stash pop; cd - >/dev/null 2>&1"
-alias cf-system-viewstash="cd ${ANSIBLE_ROOT}; git stash show; cd - >/dev/null 2>&1"
-alias cf-system-viewenv="cd ${ANSIBLE_ROOT}; git branch -l; cd - >/dev/null 2>&1"
+alias cf-sys-updateplays="cd ${ANSIBLE_ROOT}; git add .; git stash; git pull --rebase; git submodule update; cd - >/dev/null 2>&1"
+alias cf-sys-popstash="cd ${ANSIBLE_ROOT}; git stash pop; cd - >/dev/null 2>&1"
+alias cf-sys-viewstash="cd ${ANSIBLE_ROOT}; git stash show; cd - >/dev/null 2>&1"
+alias cf-sys-viewenv="cd ${ANSIBLE_ROOT}; git branch -l; cd - >/dev/null 2>&1"
 
 
 
