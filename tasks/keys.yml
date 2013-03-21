@@ -16,15 +16,15 @@
   - keys.root
 
 - file: dest=/home/${item} state=directory owner=${item} group=users mode=0700
-  with_items: ${shell_accounts}
   when_set: ${shell_accounts}
+  with_items: ${shell_accounts}
   tags:
   - keys.home
 
 # TODO: ignore_errors because we don't know why this even executes when ${shell_accounts} is not set
 - authorized_key: user=${item} key='$FILE(${playbook_files_private}/keys/${item}_id_rsa.pub)'
-  with_items: ${shell_accounts}
   when_set: ${shell_accounts}
   ignore_errors: yes
+  with_items: ${shell_accounts}
   tags:
   - keys.user
