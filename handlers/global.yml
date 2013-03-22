@@ -34,6 +34,11 @@
   tags:
   - httpd.service
 
+- name: restart mysql
+  service: name=mysql state=restarted
+  tags:
+  - mysql.service
+
 - name: restart mysqld
   service: name=mysqld state=restarted
   tags:
