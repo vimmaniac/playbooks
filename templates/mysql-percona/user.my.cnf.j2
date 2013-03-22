@@ -1,0 +1,9 @@
+# {{ ansible_managed }}
+
+[client]
+user={{ mysql_root_user }}
+password={{ mysql_root_passwd }}
+socket=/var/lib/mysql/mysql.sock
+  
+[mysql]
+prompt={{ ansible_hostname|upper }} [\\u@\\h] ON \\d>\\_
