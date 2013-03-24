@@ -1,12 +1,12 @@
 #
-# Nexus Tasks
+# Maven Tasks
 #
 ---
-- file: dest=${nexus_m2} state=directory owner=${nexus_user} group=${nexus_group} mode=0755
+- file: dest=${maven_m2} state=directory owner=${maven_user} group=${maven_group} mode=0755
   tags:
-  - nexus.init
+  - maven.init
 
-- template: src=${item} dest=${nexus_m2}/settings.xml owner=${nexus_user} group=${nexus_group} mode=0644
+- template: src=${item} dest=${maven_m2}/settings.xml owner=${maven_user} group=${maven_group} mode=0644
   first_available_file:
   - ${playbook_templates_private}/${playbook}/settings.xml.j2-${ansible_fqdn}
   - ${playbook_templates_private}/${playbook}/settings.xml.j2-${host_group}
@@ -17,4 +17,4 @@
   - ${playbook_templates}/${playbook}/settings.xml.j2-${datacentre}
   - ${playbook_templates}/${playbook}/settings.xml.j2
   tags:
-  - nexus.cfg
+  - maven.cfg
