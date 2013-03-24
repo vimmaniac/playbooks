@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+<!-- 
+    {{ ansible_managed }}
+//-->
+
+    <mirrors>
+        <mirror>
+            <id>{{ nexus_id }}</id>
+            <mirrorOf>*</mirrorOf>
+            <url>{{ nexus_url }}</url>
+        </mirror>
+    </mirrors>
+
+    <profiles>
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <mysql.binary>/usr/bin/mysql</mysql.binary>
+                <mysql.host>{{ nexus_mysql_host }}</mysql.host>
+                <mysql.username>{{ nexus_mysql_user }}</mysql.username>
+                <mysql.password>{{ nexus_mysql_pass }}</mysql.password>
+                <mysql.database>{{ nexus_mysql_database }}</mysql.database>
+                <cluster.id>{{ nexus_cluster_id }}</cluster.id>
+            </properties>
+        </profile>
+    </profiles>
+</settings>
