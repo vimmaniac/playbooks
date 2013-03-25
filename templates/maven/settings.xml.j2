@@ -8,9 +8,9 @@
 
     <mirrors>
         <mirror>
-            <id>{{ nexus_id }}</id>
+            <id>{{ maven_nexus_id }}</id>
             <mirrorOf>*</mirrorOf>
-            <url>{{ nexus_url }}</url>
+            <url>{{ maven_nexus_url }}</url>
         </mirror>
     </mirrors>
 
@@ -21,11 +21,11 @@
             </activation>
             <properties>
                 <mysql.binary>/usr/bin/mysql</mysql.binary>
-                <mysql.host>{{ nexus_mysql_host }}</mysql.host>
-                <mysql.username>{{ nexus_mysql_user }}</mysql.username>
-                <mysql.password>{{ nexus_mysql_pass }}</mysql.password>
-                <mysql.database>{{ nexus_mysql_database }}</mysql.database>
-                <cluster.id>{{ nexus_cluster_id }}</cluster.id>
+                <mysql.host>{{ maven_nexus_mysql_host }}</mysql.host>
+                <mysql.username>{{ maven_nexus_mysql_user }}</mysql.username>
+                <mysql.password>{{ maven_nexus_mysql_pass }}</mysql.password>
+                <mysql.database>{{ maven_nexus_mysql_database }}</mysql.database>
+                <cluster.id>{{ maven_nexus_cluster_id }}</cluster.id>
             </properties>
         </profile>
     </profiles>
