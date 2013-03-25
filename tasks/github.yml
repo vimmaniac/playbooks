@@ -1,0 +1,29 @@
+#
+# Github Tasks
+#
+---
+- file: dest=${build_home}/.ssh state=directory owner=${build_user} group=${build_group} mode=0700
+  tags:
+  - github.init
+  - github
+
+- copy: src=${item} dest=${build_home} owner=${build_user} group=${build_group} mode=0600
+  with_fileglob:
+  - ${playbook_files_private}/${playbook}/${ansible_fqdn}/*
+  - ${playbook_files_private}/${playbook}/${host_group}/*
+  - ${playbook_files_private}/${playbook}/${datacentre}/*
+  - ${playbook_files_private}/${playbook}/default/*
+  - ${playbook_files}/${playbook}/${ansible_fqdn}/*
+  - ${playbook_files}/${playbook}/${host_group}/*
+  - ${playbook_files}/${playbook}/${datacentre}/*
+  - ${playbook_files}/${playbook}/default/*
+  tags:
+  - github.cfg
+  - github
+  - cfg
+
+- file: dest=${build_home}/.ssh/id_rsa state=file owner=${build_user} group=${build_group} mode=0600
+  tags:
+  - github.cfg
+  - github
+  - cfg
