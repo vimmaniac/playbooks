@@ -1,0 +1,26 @@
+#
+# Cassandra Tasks
+#
+---
+- yum: pkg=${item} state=installed
+  with_items:
+  - apache-cassandra1
+  tags:
+  - cassandra.pkgs
+
+- template: src=${item} dest=/etc/cassandra/conf/cassandra.yaml owner=root group=root mode=0644
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/cassandra.yaml.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/cassandra.yaml.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/cassandra.yaml.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/cassandra.yaml.j2
+  - ${playbook_templates}/${playbook}/cassandra.yaml.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/cassandra.yaml.j2-${host_group}
+  - ${playbook_templates}/${playbook}/cassandra.yaml.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/cassandra.yaml.j2
+  tags:
+  - cassandra.cfg
+
+- service: name=cassandra enabled=yes state=started
+  tags:
+  - cassandra.srv
