@@ -1,0 +1,9 @@
+#
+# LDAP 389 Directory Server Playbook
+#
+---
+- name: LDAP 389 Directory Server Playbook
+  hosts: ldap389
+
+- include: base.yml
+- include: playbook.yml playbook=ldap389 tags=ldap389
