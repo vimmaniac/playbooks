@@ -4,7 +4,7 @@
 ---
 - yum: pkg=${item} state=installed
   with_items:
-  - 389-ds-base
+  - 389-ds
   tags:
   - ldap.pkgs
 
