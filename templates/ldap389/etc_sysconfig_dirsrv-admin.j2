@@ -1,0 +1,26 @@
+# {{ ansible_managed }}
+# This file is sourced by dirsrv-admin upon startup to set
+# the default environment for the admin server.
+
+# In order to make more file descriptors available
+# to the server, first make sure the system
+# hard limits are raised, then use ulimit - uncomment
+# out the following line and change the value to the
+# desired value
+# note - if using systemd, ulimit won't work -  you must edit
+# the systemd unit file for directory server to add the
+# LimitNOFILE option - see man systemd.exec for more info
+# ulimit -n 8192
+
+# In order to use SASL/GSSAPI the
+# server needs to know where to find its keytab
+# file - uncomment the following line and set
+# the path and filename appropriately
+# if using systemd, omit the "; export VARNAME" at the end
+# KRB5_KTNAME=/etc/dirsrv/admin-serv/keytab ; export KRB5_KTNAME
+
+# other environment settings can be added here too
+# if using systemd, omit the "; export VARNAME" at the end
+
+# workaround for bug in apache
+export NSS_STRICT_NOFORK=DISABLED

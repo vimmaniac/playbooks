@@ -43,18 +43,18 @@
 #  - template.cfg
 
 # manage dynamic configs
-#- template: src=${item} dest=/etc/template.cnf owner=root group=root mode=0600
-#  first_available_file:
-#  - ${playbook_templates_private}/${playbook}/template.cnf.j2-${ansible_fqdn}
-#  - ${playbook_templates_private}/${playbook}/template.cnf.j2-${host_group}
-#  - ${playbook_templates_private}/${playbook}/template.cnf.j2-${datacentre}
-#  - ${playbook_templates_private}/${playbook}/template.cnf.j2
-#  - ${playbook_templates}/${playbook}/template.cnf.j2-${ansible_fqdn}
-#  - ${playbook_templates}/${playbook}/template.cnf.j2-${host_group}
-#  - ${playbook_templates}/${playbook}/template.cnf.j2-${datacentre}
-#  - ${playbook_templates}/${playbook}/template.cnf.j2
-#  tags:
-#  - template.cfg
+- template: src=${item} dest=/etc/sysconfig/dirsrv-admin owner=root group=root mode=0644
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/etc_sysconfig_dirsrv-admin.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/etc_sysconfig_dirsrv-admin.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/etc_sysconfig_dirsrv-admin.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/etc_sysconfig_dirsrv-admin.j2
+  - ${playbook_templates}/${playbook}/etc_sysconfig_dirsrv-admin.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/etc_sysconfig_dirsrv-admin.j2-${host_group}
+  - ${playbook_templates}/${playbook}/etc_sysconfig_dirsrv-admin.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/etc_sysconfig_dirsrv-admin.j2
+  tags:
+  - ldap.cfg
 
 # manage service
 #- service: name=templated enabled=yes state=started
