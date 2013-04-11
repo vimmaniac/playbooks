@@ -27,6 +27,7 @@ alias cf-sys-updateplays="cd ${ANSIBLE_ROOT}; git add .; git stash; git pull --r
 alias cf-sys-popstash="cd ${ANSIBLE_ROOT}; git stash pop; cd - >/dev/null 2>&1"
 alias cf-sys-viewstash="cd ${ANSIBLE_ROOT}; git stash show; cd - >/dev/null 2>&1"
 alias cf-sys-viewenv="cd ${ANSIBLE_ROOT}; git branch -l; cd - >/dev/null 2>&1"
+alias cf-sys-viewlog="cd ${ANSIBLE_ROOT}; git log; cd - >/dev/null 2>&1"
 
 
 
