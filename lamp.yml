@@ -8,7 +8,7 @@
 - name: Lamp Playbook
   hosts: lamp
 
-- include: base.yml
+- include: base.yml tags=base
 - include: playbook.yml playbook=httpd tags=httpd
 - include: playbook.yml playbook=php tags=php
 - include: playbook.yml playbook=mysql tags=mysql

@@ -5,5 +5,5 @@
 - name: LDAP 389 Directory Server Playbook
   hosts: ldap389
 
-- include: base.yml
+- include: base.yml tags=base
 - include: playbook.yml playbook=ldap389 tags=ldap389
