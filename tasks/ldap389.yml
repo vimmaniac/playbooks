@@ -40,6 +40,32 @@
   tags:
   - ldap.cfg
 
+- copy: src=${item} dest=/etc/ansible/utils/pki/CA/certs/server-cert.crt owner=root group=root mode=0644
+  first_available_file:
+  - ${playbook_files_private}/${playbook}/server-cert.crt-${ansible_fqdn}
+  - ${playbook_files_private}/${playbook}/server-cert.crt-${host_group}
+  - ${playbook_files_private}/${playbook}/server-cert.crt-${datacentre}
+  - ${playbook_files_private}/${playbook}/server-cert.crt
+  - ${playbook_files}/${playbook}/server-cert.crt-${ansible_fqdn}
+  - ${playbook_files}/${playbook}/server-cert.crt-${host_group}
+  - ${playbook_files}/${playbook}/server-cert.crt-${datacentre}
+  - ${playbook_files}/${playbook}/server-cert.crt
+  tags:
+  - ldap.cfg
+
+- copy: src=${item} dest=/etc/ansible/utils/pki/CA/certs/admin-cert.crt owner=root group=root mode=0644
+  first_available_file:
+  - ${playbook_files_private}/${playbook}/admin-cert.crt-${ansible_fqdn}
+  - ${playbook_files_private}/${playbook}/admin-cert.crt-${host_group}
+  - ${playbook_files_private}/${playbook}/admin-cert.crt-${datacentre}
+  - ${playbook_files_private}/${playbook}/admin-cert.crt
+  - ${playbook_files}/${playbook}/admin-cert.crt-${ansible_fqdn}
+  - ${playbook_files}/${playbook}/admin-cert.crt-${host_group}
+  - ${playbook_files}/${playbook}/admin-cert.crt-${datacentre}
+  - ${playbook_files}/${playbook}/admin-cert.crt
+  tags:
+  - ldap.cfg
+
 - template: src=${item} dest=/etc/sysconfig/dirsrv-admin owner=root group=root mode=0644
   first_available_file:
   - ${playbook_templates_private}/${playbook}/etc_sysconfig_dirsrv-admin.j2-${ansible_fqdn}
@@ -67,6 +93,22 @@
   - ldap.cfg
 
 - shell: /usr/sbin/setup-ds-admin.pl --file=/root/.setup-ds-admin.inf --silent creates=/etc/dirsrv/slapd-${ansible_hostname}/dse.ldif
+  tags:
+  - ldap.init
+
+- shell: /usr/bin/certutil -d /etc/dirsrv/slapd-${ansible_hostname} -A -n "CA certificate" -t CT,, -i /etc/openldap/cacerts/cacert.pem
+  tags:
+  - ldap.init
+
+- shell: /usr/bin/certutil -d /etc/dirsrv/slapd-${ansible_hostname} -A -n "server-cert" -t CT,, -i /etc/ansible/utils/pki/CA/certs/server-cert.crt
+  tags:
+  - ldap.init
+
+- shell: /usr/bin/certutil -d /etc/dirsrv/admin-serv -A -n "CA certificate" -t CT,, -i /etc/openldap/cacerts/cacert.pem
+  tags:
+  - ldap.init
+
+- shell: /usr/bin/certutil -d /etc/dirsrv/admin-serv -A -n "admin-cert" -t CT,, -i /etc/ansible/utils/pki/CA/certs/admin-cert.crt
   tags:
   - ldap.init
 
