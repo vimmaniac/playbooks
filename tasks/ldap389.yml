@@ -67,6 +67,8 @@
   - ldap.cfg
 
 - shell: /usr/sbin/setup-ds-admin.pl --file=/root/.setup-ds-admin.inf --silent creates=/etc/dirsrv/slapd-${ansible_hostname}/dse.ldif
+  tags:
+  - ldap.init
 
 # manage service
 #- service: name=templated enabled=yes state=started
