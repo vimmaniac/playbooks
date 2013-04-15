@@ -42,7 +42,6 @@
 #  tags:
 #  - template.cfg
 
-# manage dynamic configs
 - template: src=${item} dest=/etc/sysconfig/dirsrv-admin owner=root group=root mode=0644
   first_available_file:
   - ${playbook_templates_private}/${playbook}/etc_sysconfig_dirsrv-admin.j2-${ansible_fqdn}
@@ -53,6 +52,19 @@
   - ${playbook_templates}/${playbook}/etc_sysconfig_dirsrv-admin.j2-${host_group}
   - ${playbook_templates}/${playbook}/etc_sysconfig_dirsrv-admin.j2-${datacentre}
   - ${playbook_templates}/${playbook}/etc_sysconfig_dirsrv-admin.j2
+  tags:
+  - ldap.cfg
+
+- template: src=${item} dest=/root/.setup-ds-admin.inf owner=root group=root mode=0400
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/root_setup_ds_admin.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/root_setup_ds_admin.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/root_setup_ds_admin.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/root_setup_ds_admin.j2
+  - ${playbook_templates}/${playbook}/root_setup_ds_admin.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/root_setup_ds_admin.j2-${host_group}
+  - ${playbook_templates}/${playbook}/root_setup_ds_admin.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/root_setup_ds_admin.j2
   tags:
   - ldap.cfg
 

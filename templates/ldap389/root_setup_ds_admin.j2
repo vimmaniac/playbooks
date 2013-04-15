@@ -1,0 +1,44 @@
+AdminDomain = {{ ldap389_adminDomain }}
+ConfigDirectoryAdminID = {{ ldap389_adminID }}
+ConfigDirectoryAdminPwd = {{ ldap389_adminPwd }}
+ConfigDirectoryLdapURL = ldap://{{ ansible_fqdn }}:389/o=NetscapeRoot
+FullMachineName = {{ ansible_fqdn }}
+ServerRoot = /usr/lib64/dirsrv
+SuiteSpotGroup = {{ ldap389_sysUser }}
+SuiteSpotUserID = {{ ldap389_sysUser }}
+[admin]
+Port = {{ ldap389_adminPort }}
+ServerAdminID = {{ ldap389_adminID }}
+ServerAdminPwd = {{ ldap389_adminPwd }}
+ServerIpAddress = 0.0.0.0
+SysUser = {{ ldap389_sysUser }}
+[slapd]
+AddOrgEntries = Yes
+AddSampleEntries = No
+HashedRootDNPwd = {{ ldap389_hashedRootDNPwd }}
+InstallLdifFile = suggest
+RootDN = {{ ldap389_rootDN }}
+RootDNPwd = {{ ldap389_rootDNPwd }}
+ServerIdentifier = {{ ansible_hostname }}
+ServerPort = 389
+SlapdConfigForMC = yes
+Suffix = {{ ldap389_suffix }}
+UseExistingMC = 0
+bak_dir = /var/lib/dirsrv/slapd-{{ ansible_hostname }}/bak
+bindir = /usr/bin
+cert_dir = /etc/dirsrv/slapd-{{ ansible_hostname }}
+config_dir = /etc/dirsrv/slapd-{{ ansible_hostname }}
+datadir = /usr/share
+db_dir = /var/lib/dirsrv/slapd-{{ ansible_hostname }}/db
+ds_bename = userRoot
+inst_dir = /usr/lib64/dirsrv/slapd-{{ ansible_hostname }}
+ldif_dir = /var/lib/dirsrv/slapd-{{ ansible_hostname }}/ldif
+localstatedir = /var
+lock_dir = /var/lock/dirsrv/slapd-{{ ansible_hostname }}
+log_dir = /var/log/dirsrv/slapd-{{ ansible_hostname }}
+naming_value = {{ ldap389_naming_value }}
+run_dir = /var/run/dirsrv
+sbindir = /usr/sbin
+schema_dir = /etc/dirsrv/slapd-{{ ansible_hostname }}/schema
+sysconfdir = /etc
+tmp_dir = /tmp
