@@ -5,6 +5,7 @@
 - yum: pkg=${item} state=installed
   with_items:
   - 389-ds
+  - bind-utils
   tags:
   - ldap.pkgs
 
@@ -26,21 +27,18 @@
 #  - template
 #  - cfg
 
-# manage static configs
-#- copy: src=${item} dest=/etc/template.cnf owner=root group=root mode=0600
-#  first_available_file:
-#  - ${playbook_files_private}/${playbook}/template.cnf-${ansible_fqdn}
-#  - ${playbook_files_private}/${playbook}/template.cnf-${host_group}
-#  - ${playbook_files_private}/${playbook}/template.cnf-${datacentre}
-#  - ${playbook_files_private}/${playbook}/template.cnf
-#  - ${playbook_files}/${playbook}/template.cnf-${ansible_fqdn}
-#  - ${playbook_files}/${playbook}/template.cnf-${host_group}
-#  - ${playbook_files}/${playbook}/template.cnf-${datacentre}
-#  - ${playbook_files}/${playbook}/template.cnf
-#  notify:
-#  - restart template
-#  tags:
-#  - template.cfg
+- copy: src=${item} dest=/etc/openldap/cacerts/cacert.pem owner=root group=root mode=0644
+  first_available_file:
+  - ${playbook_files_private}/${playbook}/cacert.pem-${ansible_fqdn}
+  - ${playbook_files_private}/${playbook}/cacert.pem-${host_group}
+  - ${playbook_files_private}/${playbook}/cacert.pem-${datacentre}
+  - ${playbook_files_private}/${playbook}/cacert.pem
+  - ${playbook_files}/${playbook}/cacert.pem-${ansible_fqdn}
+  - ${playbook_files}/${playbook}/cacert.pem-${host_group}
+  - ${playbook_files}/${playbook}/cacert.pem-${datacentre}
+  - ${playbook_files}/${playbook}/cacert.pem
+  tags:
+  - ldap.cfg
 
 - template: src=${item} dest=/etc/sysconfig/dirsrv-admin owner=root group=root mode=0644
   first_available_file:
@@ -67,6 +65,8 @@
   - ${playbook_templates}/${playbook}/root_setup_ds_admin.j2
   tags:
   - ldap.cfg
+
+- shell: /usr/sbin/setup-ds-admin.pl --file=/root/.setup-ds-admin.inf --silent creates=/etc/dirsrv/slapd-${ansible_hostname}/dse.ldif
 
 # manage service
 #- service: name=templated enabled=yes state=started
