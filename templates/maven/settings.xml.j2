@@ -6,27 +6,35 @@
     {{ ansible_managed }}
 //-->
 
-    <mirrors>
-        <mirror>
-            <id>{{ maven_nexus_id }}</id>
-            <mirrorOf>*</mirrorOf>
-            <url>{{ maven_nexus_url }}</url>
-        </mirror>
-    </mirrors>
+	<mirrors>
+		<mirror>
+			<id>{{ maven_nexus_id }}</id>
+			<mirrorOf>*</mirrorOf>
+			<url>{{ maven_nexus_url }}</url>
+		</mirror>
+	</mirrors>
 
-    <profiles>
-        <profile>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <mysql.binary>/usr/bin/mysql</mysql.binary>
-                <mysql.host>{{ maven_nexus_mysql_host }}</mysql.host>
-                <mysql.username>{{ maven_nexus_mysql_user }}</mysql.username>
-                <mysql.password>{{ maven_nexus_mysql_pass }}</mysql.password>
-                <mysql.database>{{ maven_nexus_mysql_database }}</mysql.database>
-                <cluster.id>{{ maven_nexus_cluster_id }}</cluster.id>
-            </properties>
-        </profile>
-    </profiles>
+	<servers>
+		<server>
+			<id>{{ maven_nexus_id }}</id>
+			<username>{{ maven_nexus_username }}</username>
+			<password>{{ maven_nexus_password }}</password>
+		</server>
+	</servers>
+
+	<profiles>
+		<profile>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<mysql.binary>/usr/bin/mysql</mysql.binary>
+				<mysql.host>{{ maven_nexus_mysql_host }}</mysql.host>
+				<mysql.username>{{ maven_nexus_mysql_user }}</mysql.username>
+				<mysql.password>{{ maven_nexus_mysql_pass }}</mysql.password>
+				<mysql.database>{{ maven_nexus_mysql_database }}</mysql.database>
+				<cluster.id>{{ maven_nexus_cluster_id }}</cluster.id>
+			</properties>
+		</profile>
+	</profiles>
 </settings>
