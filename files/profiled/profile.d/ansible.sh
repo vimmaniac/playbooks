@@ -98,7 +98,7 @@ function cf-sys-play() {
 # @param1 playbook
 # @param2 hostname
 # @param3 additional ansible-playbook params
-function cf-sys-viewplayremote() {
+function cf-rmt-viewplay() {
 	if [ ! -z ${1} ] && [ ! -z ${2} ]
 	then
 		_searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --check --diff --extra-vars "hosts=${2}" ${@:3}
@@ -110,7 +110,7 @@ function cf-sys-viewplayremote() {
 # @param1 playbook
 # @param2 hostname
 # @param3 additional ansible-playbook params
-function cf-sys-playremote() {
+function cf-rmt-play() {
 	if [ ! -z ${1} ] && [ ! -z ${2} ]
 	then
 		_searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --extra-vars "hosts=${2}" ${@:3}
