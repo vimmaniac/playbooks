@@ -78,7 +78,7 @@ function cf-sys-setenv() {
 function cf-sys-viewplay() {
 	if [ ! -z ${1} ]
 	then
-		_searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --check --diff --extra-vars "hosts=`hostname`" --connection=local ${@:2}
+		_searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --check --diff --extra-vars "hosts=`hostname -f`" --connection=local ${@:2}
 	else
 		echo 'cf-sys-viewplay [/path/to/playbook.yml|playbook] ...' && return 1
 	fi
@@ -89,33 +89,33 @@ function cf-sys-viewplay() {
 function cf-sys-play() {
 	if [ ! -z ${1} ]
 	then
-		_searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --extra-vars "hosts=`hostname`" --connection=local ${@:2}
+		_searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --extra-vars "hosts=`hostname -f`" --connection=local ${@:2}
 	else
 		echo 'cf-sys-play [/path/to/playbook.yml|playbook] ...' && return 1
 	fi
 	return $?
 }
 # @param1 playbook
-# @param2 hostname
+# @param2 fqdn
 # @param3 additional ansible-playbook params
 function cf-rmt-viewplay() {
 	if [ ! -z ${1} ] && [ ! -z ${2} ]
 	then
 		_searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --check --diff --extra-vars "hosts=${2}" ${@:3}
 	else
-		echo 'cf-sys-viewplayremote [/path/to/playbook.yml|playbook] [hostname] ...' && return 1
+		echo 'cf-sys-viewplayremote [/path/to/playbook.yml|playbook] [fqdn] ...' && return 1
 	fi
 	return $?
 }
 # @param1 playbook
-# @param2 hostname
+# @param2 fqdn
 # @param3 additional ansible-playbook params
 function cf-rmt-play() {
 	if [ ! -z ${1} ] && [ ! -z ${2} ]
 	then
 		_searchplay "${1}" && ${ANSIBLE_HOME}/bin/ansible-playbook ${PLAYBOOK_PATH} --extra-vars "hosts=${2}" ${@:3}
 	else
-		echo 'cf-sys-playremote [/path/to/playbook.yml|playbook] [hostname] ...' && return 1
+		echo 'cf-sys-playremote [/path/to/playbook.yml|playbook] [fqdn] ...' && return 1
 	fi
 	return $?
 }
