@@ -24,6 +24,12 @@
   tags:
   - iptables.service
 
+- name: stop iptables
+  service: name=iptables state=stopped
+  ignore_errors: yes
+  tags:
+  - iptables.service
+
 - name: restart monit
   service: name=monit state=restarted
   tags:
