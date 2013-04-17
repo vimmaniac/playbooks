@@ -38,7 +38,7 @@
   tags:
   - postgres.init
 
-- command: psql -d ${item} -f /usr/share/pgsql/contrib/pgcrypto.sql
+- command: su postgres -c "psql -d ${item} -f /usr/share/pgsql/contrib/pgcrypto.sql"
   with_items: ${databases}
   tags:
   - postgres.init
