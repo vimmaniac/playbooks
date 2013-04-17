@@ -7,8 +7,8 @@
 Hostname: {{ ansible_fqdn }}
 Host_Group: {{ host_group }}
 Hosts:
-{% for host in groups[group_names[0]] %}
-{{ hostvars[host]['ansible_fqdn'] }}
+{% for host in groups[host_group] %}
+- {{ hostvars[host]['ansible_fqdn'] }}
 {% endfor %}
 Contact: {{ noc_email }}
 -------------------------------------------------------------------------------
