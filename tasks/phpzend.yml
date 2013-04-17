@@ -1,0 +1,34 @@
+#
+# PHP Zend Framework Tasks
+#
+---
+# TODO: decide if we want to encapsulate required repos here
+- yum: pkg=${item} state=installed
+  ignore_errors: yes
+  with_items:
+  - php-5.3-zend-server
+  - php-5.3-pdo-pgsql-zend-server
+  - php-5.3-pgsql-zend-server
+  - php-5.3-mongo-zend-server
+  - php-5.3-xdebug-zend-server
+  - php-5.3-bin-zend-server
+  - php-5.3-zip-zend-server
+  - php-5.3-ctype-zend-server
+  - php-5.3-phar-zend-server
+  - zend-server-framework
+  tags:
+  - php.pkgs
+
+- file: path=/etc/zend src=/usr/local/zend/conf.d state=link
+  tags:
+  - phpzend.cfg
+
+- file: path=/etc/php.ini src=/usr/local/zend/etc/php.ini state=link
+  notify:
+  - restart httpd
+  tags:
+  - phpzend.cfg
+
+- file: path=/usr/bin/php src=/usr/local/zend/bin/php state=link
+  tags:
+  - phpzend.cfg
