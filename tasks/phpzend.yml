@@ -19,7 +19,7 @@
   tags:
   - php.pkgs
 
-- file: path=/etc/zend src=/usr/local/zend/conf.d state=link
+- file: path=/etc/zend src=/usr/local/zend/etc/conf.d state=link
   tags:
   - phpzend.cfg
 
