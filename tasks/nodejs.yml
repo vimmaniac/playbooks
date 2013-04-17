@@ -6,9 +6,9 @@
 
 - command: tar zxf node-${nodejs_version}-linux-x64.tar.gz chdir=/opt
 
-- file: path=/usr/bin/node src=/opt/node-${nodejs_version}-linux-x64/bin/node state=link
-
-- file: path=/usr/bin/npm src=/opt/node-${nodejs_version}-linux-x64/bin/npm state=link
+- file: path=/opt/node src=/opt/node-${nodejs_version}-linux-x64 state=link
+- file: path=/usr/bin/node src=/opt/node/bin/node state=link
+- file: path=/usr/bin/npm src=/opt/node/bin/npm state=link
 
 #- yum: pkg=${item} state=installed
 #  with_items:
