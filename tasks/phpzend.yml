@@ -15,6 +15,10 @@
   - php-5.3-zip-zend-server
   - php-5.3-ctype-zend-server
   - php-5.3-phar-zend-server
+  - php-phpunit-PHPUnit
+  - php-phpunit-PHPUnit-MockObject
+  - php-phpunit-PHPUnit-Selenium
+  - php-phpunit-PHPUnit-SkeletonGenerator
   - zend-server-framework
   tags:
   - php.pkgs
