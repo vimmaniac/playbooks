@@ -11,7 +11,9 @@
   tags:
   - postgres.pkgs
 
-- template: src=${item} dest=/var/lib/pgsql/data/pg_hba.conf owner=root group=root mode=0644
+- command: service postgresql initdb creates=/var/lib/pgsql/data/PG_VERSION
+
+- template: src=${item} dest=/var/lib/pgsql/data/pg_hba.conf owner=postgres group=postgres mode=0644
   first_available_file:
   - ${playbook_templates_private}/${playbook}/pg_hba.conf.j2-${ansible_fqdn}
   - ${playbook_templates_private}/${playbook}/pg_hba.conf.j2-${host_group}
