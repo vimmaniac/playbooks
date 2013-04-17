@@ -15,10 +15,9 @@
   - php-5.3-zip-zend-server
   - php-5.3-ctype-zend-server
   - php-5.3-phar-zend-server
-  - php-phpunit-PHPUnit
-  - php-phpunit-PHPUnit-MockObject
-  - php-phpunit-PHPUnit-Selenium
-  - php-phpunit-PHPUnit-SkeletonGenerator
+  - php-5.3-dev-zend-server
+  - php-5.3-pcntl-zend-server
+  - php-5.3-tokenizer-zend-server
   - zend-server-framework
   tags:
   - php.pkgs
@@ -34,5 +33,21 @@
   - phpzend.cfg
 
 - file: path=/usr/bin/php src=/usr/local/zend/bin/php state=link
+  tags:
+  - phpzend.cfg
+
+- file: path=/usr/bin/pear src=/usr/local/zend/bin/pear state=link
+  tags:
+  - phpzend.cfg
+
+- file: path=/usr/bin/phpunit src=/usr/local/zend/bin/phpunit state=link
+  tags:
+  - phpzend.cfg
+
+- command: /usr/bin/pear config-set auto_discover 1
+  tags:
+  - phpzend.cfg
+
+- command: /usr/bin/pear install --alldeps pear.phpunit.de/PHPUnit
   tags:
   - phpzend.cfg
