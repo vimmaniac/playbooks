@@ -1,0 +1,84 @@
+#
+# Postgres Tasks
+#
+---
+- yum: pkg=${item} state=installed
+  with_items:
+  - postgresql
+  - postgresql-server
+  - postgresql-contrib
+  - python-psycopg2
+  tags:
+  - postgres.pkgs
+
+- template: src=${item} dest=/var/lib/pgsql/data/pg_hba.conf owner=root group=root mode=0644
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/pg_hba.conf.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/pg_hba.conf.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/pg_hba.conf.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/pg_hba.conf.j2
+  - ${playbook_templates}/${playbook}/pg_hba.conf.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/pg_hba.conf.j2-${host_group}
+  - ${playbook_templates}/${playbook}/pg_hba.conf.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/pg_hba.conf.j2
+  notify:
+  - restart postgresql
+  tags:
+  - postgres.cfg
+
+- postgresql_db: db=${item}
+  with_items: ${databases}
+  tags:
+  - postgres.init
+
+- postgresql_user: user=${postgres_user} password=${postgres_pass} db=${item} priv=ALL
+  with_items: ${databases}
+  tags:
+  - postgres.init
+
+- command: psql -d ${item} -f /usr/share/pgsql/contrib/pgcrypto.sql
+  with_items: ${databases}
+  tags:
+  - postgres.init
+
+- shell: ${postgres_postinstall}
+  tags:
+  - postgres.init
+
+# manage tree structure
+#- copy: src=${item} dest=/etc/httpd owner=root group=root mode=0600
+#  with_fileglob:
+#  - ${playbook_files_private}/${playbook}/${ansible_fqdn}/*
+#  - ${playbook_files_private}/${playbook}/${host_group}/*
+#  - ${playbook_files_private}/${playbook}/${datacentre}/*
+#  - ${playbook_files_private}/${playbook}/default/*
+#  - ${playbook_files}/${playbook}/${ansible_fqdn}/*
+#  - ${playbook_files}/${playbook}/${host_group}/*
+#  - ${playbook_files}/${playbook}/${datacentre}/*
+#  - ${playbook_files}/${playbook}/default/*
+#  notify:
+#  - restart template
+#  tags:
+#  - template.cfg
+#  - template
+#  - cfg
+
+# manage static configs
+#- copy: src=${item} dest=/etc/template.cnf owner=root group=root mode=0600
+#  first_available_file:
+#  - ${playbook_files_private}/${playbook}/template.cnf-${ansible_fqdn}
+#  - ${playbook_files_private}/${playbook}/template.cnf-${host_group}
+#  - ${playbook_files_private}/${playbook}/template.cnf-${datacentre}
+#  - ${playbook_files_private}/${playbook}/template.cnf
+#  - ${playbook_files}/${playbook}/template.cnf-${ansible_fqdn}
+#  - ${playbook_files}/${playbook}/template.cnf-${host_group}
+#  - ${playbook_files}/${playbook}/template.cnf-${datacentre}
+#  - ${playbook_files}/${playbook}/template.cnf
+#  notify:
+#  - restart template
+#  tags:
+#  - template.cfg
+
+- service: name=postgresql enabled=yes state=started
+  tags:
+  - postgres.srv

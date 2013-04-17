@@ -50,6 +50,11 @@
   tags:
   - mysqld.service
 
+- name: restart postgresql
+  service: name=postgresql state=restarted
+  tags:
+  - postgres.service
+
 - name: restart snmpd
   service: name=snmpd state=restarted
   tags:
