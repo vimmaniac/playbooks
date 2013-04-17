@@ -48,6 +48,10 @@
   tags:
   - phpzend.cfg
 
+- command: /usr/bin/pear install pear.pearplex.net/PHPExcel
+  tags:
+  - phpzend.cfg
+
 - file: path=/usr/bin/phpunit src=/usr/local/zend/bin/phpunit state=link
   tags:
   - phpzend.cfg
