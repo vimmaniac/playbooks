@@ -14,6 +14,22 @@
   tags:
   - mongodb.srv
 
+- template: dest=${zend_confd}/mongo.ini src=${item} owner=root group=root mode=0644
+  when_set: ${mongodb_phpsupport}
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/mongo.ini.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/mongo.ini.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/mongo.ini.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/mongo.ini.j2
+  - ${playbook_templates}/${playbook}/mongo.ini.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/mongo.ini.j2-${host_group}
+  - ${playbook_templates}/${playbook}/mongo.ini.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/mongo.ini.j2
+  notify:
+  - restart httpd
+  tags:
+  - mongodb.cfg
+
 # manage tree structure
 #- copy: src=${item} dest=/etc/httpd owner=root group=root mode=0600
 #  with_fileglob:
