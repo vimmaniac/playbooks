@@ -40,10 +40,6 @@
   tags:
   - phpzend.cfg
 
-- file: path=/usr/bin/phpunit src=/usr/local/zend/bin/phpunit state=link
-  tags:
-  - phpzend.cfg
-
 - command: /usr/bin/pear config-set auto_discover 1
   tags:
   - phpzend.cfg
@@ -51,3 +47,8 @@
 - command: /usr/bin/pear install --alldeps pear.phpunit.de/PHPUnit
   tags:
   - phpzend.cfg
+
+- file: path=/usr/bin/phpunit src=/usr/local/zend/bin/phpunit state=link
+  tags:
+  - phpzend.cfg
+
