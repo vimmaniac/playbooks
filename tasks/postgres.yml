@@ -29,21 +29,25 @@
   - postgres.cfg
 
 - postgresql_db: db=${item}
+  when_set: ${databases}
   with_items: ${databases}
   tags:
   - postgres.init
 
 - postgresql_user: user=${postgres_user} password=${postgres_pass} db=${item} priv=ALL
+  when_set: ${databases}
   with_items: ${databases}
   tags:
   - postgres.init
 
 - command: su postgres -c "psql -d ${item} -f /usr/share/pgsql/contrib/pgcrypto.sql"
+  when_set: ${databases}
   with_items: ${databases}
   tags:
   - postgres.init
 
 - shell: ${postgres_postinstall}
+  when_set: ${postgres_postinstall}
   tags:
   - postgres.init
 
