@@ -11,6 +11,11 @@
   tags:
   - mysql.pkgs
 
+- service: name=mysql enabled=yes state=started
+  ignore_errors: yes
+  tags:
+  - mysql.srv
+
 - template: dest=/etc/my.cnf
   first_available_file:
   - ${playbook_templates_private}/${playbook}/my.cnf.j2-${ansible_fqdn}
@@ -64,8 +69,3 @@
   - ${playbook_templates}/${playbook}/user.my.cnf.j2
   tags:
   - mysql.cfg
-
-- service: name=mysql enabled=yes state=started
-  ignore_errors: yes
-  tags:
-  - mysql.srv

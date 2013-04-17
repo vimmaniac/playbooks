@@ -12,6 +12,12 @@
   - postgres.pkgs
 
 - command: service postgresql initdb creates=/var/lib/pgsql/data/PG_VERSION
+  tags:
+  - postgres.init
+
+- service: name=postgresql enabled=yes state=started
+  tags:
+  - postgres.srv
 
 - template: src=${item} dest=/var/lib/pgsql/data/pg_hba.conf owner=postgres group=postgres mode=0644
   first_available_file:
@@ -84,7 +90,3 @@
 #  - restart template
 #  tags:
 #  - template.cfg
-
-- service: name=postgresql enabled=yes state=started
-  tags:
-  - postgres.srv
