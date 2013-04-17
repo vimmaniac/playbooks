@@ -18,6 +18,8 @@
   - php-5.3-dev-zend-server
   - php-5.3-pcntl-zend-server
   - php-5.3-tokenizer-zend-server
+  - php-5.3-mbstring-zend-server
+  - php-5.3-bcmath-zend-server
   - zend-server-framework
   tags:
   - php.pkgs
