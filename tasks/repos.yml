@@ -9,7 +9,8 @@
 #  tags:
 #  - template.pkgs
 
-- copy: src=${item} dest=/etc/yum.repos.d owner=root group=root mode=0644
+- name: Copy repos glob
+  copy: src=${item} dest=/etc/yum.repos.d owner=root group=root mode=0644
   with_fileglob:
   - ${playbook_files_private}/${playbook}/${ansible_fqdn}/${ansible_lsb.id}${ansible_lsb.major_release}/*
   - ${playbook_files_private}/${playbook}/${host_group}/${ansible_lsb.id}${ansible_lsb.major_release}/*
