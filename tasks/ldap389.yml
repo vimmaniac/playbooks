@@ -106,13 +106,13 @@
   tags:
   - ldap.init
 
-- shell: /usr/bin/certutil -d /etc/dirsrv/slapd-${ansible_hostname} -A -n "server-cert" -t CTu,u,u -i /etc/pki/CA/certs/server-cert.crt -f /root/pwdfile
+- shell: /usr/bin/certutil -d /etc/dirsrv/slapd-${ansible_hostname} -A -n "server-cert" -t u,u,u -i /etc/pki/CA/certs/server-cert.crt -f /root/pwdfile
   notify:
   - restart dirsrv
   tags:
   - ldap.init
 
-- shell: /usr/bin/certutil -d /etc/dirsrv/admin-serv -A -n "admin-cert" -t CTu,u,u -i /etc/pki/CA/certs/admin-cert.crt -f /root/pwdfile
+- shell: /usr/bin/certutil -d /etc/dirsrv/admin-serv -A -n "admin-cert" -t u,u,u -i /etc/pki/CA/certs/admin-cert.crt -f /root/pwdfile
   notify:
   - restart dirsrv-admin
   tags:
