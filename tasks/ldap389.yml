@@ -9,24 +9,6 @@
   tags:
   - ldap.pkgs
 
-# manage tree structure
-#- copy: src=${item} dest=/etc/httpd owner=root group=root mode=0600
-#  with_fileglob:
-#  - ${playbook_files_private}/${playbook}/${ansible_fqdn}/*
-#  - ${playbook_files_private}/${playbook}/${host_group}/*
-#  - ${playbook_files_private}/${playbook}/${datacentre}/*
-#  - ${playbook_files_private}/${playbook}/default/*
-#  - ${playbook_files}/${playbook}/${ansible_fqdn}/*
-#  - ${playbook_files}/${playbook}/${host_group}/*
-#  - ${playbook_files}/${playbook}/${datacentre}/*
-#  - ${playbook_files}/${playbook}/default/*
-#  notify:
-#  - restart template
-#  tags:
-#  - template.cfg
-#  - template
-#  - cfg
-
 - copy: src=${item} dest=/etc/openldap/cacerts/cacert.pem owner=root group=root mode=0644
   first_available_file:
   - ${playbook_files_private}/${playbook}/cacert.pem-${ansible_fqdn}
@@ -40,7 +22,7 @@
   tags:
   - ldap.cfg
 
-- copy: src=${item} dest=/etc/ansible/utils/pki/CA/certs/server-cert.crt owner=root group=root mode=0644
+- copy: src=${item} dest=/etc/pki/CA/certs/server-cert.crt owner=root group=root mode=0644
   first_available_file:
   - ${playbook_files_private}/${playbook}/server-cert.crt-${ansible_fqdn}
   - ${playbook_files_private}/${playbook}/server-cert.crt-${host_group}
@@ -53,7 +35,7 @@
   tags:
   - ldap.cfg
 
-- copy: src=${item} dest=/etc/ansible/utils/pki/CA/certs/admin-cert.crt owner=root group=root mode=0644
+- copy: src=${item} dest=/etc/pki/CA/certs/admin-cert.crt owner=root group=root mode=0644
   first_available_file:
   - ${playbook_files_private}/${playbook}/admin-cert.crt-${ansible_fqdn}
   - ${playbook_files_private}/${playbook}/admin-cert.crt-${host_group}
@@ -79,7 +61,7 @@
   tags:
   - ldap.cfg
 
-- template: src=${item} dest=/root/.setup-ds-admin.inf owner=root group=root mode=0400
+- template: src=${item} dest=/root/setup-ds-admin.inf owner=root group=root mode=0400
   first_available_file:
   - ${playbook_templates_private}/${playbook}/root_setup_ds_admin.j2-${ansible_fqdn}
   - ${playbook_templates_private}/${playbook}/root_setup_ds_admin.j2-${host_group}
@@ -92,27 +74,83 @@
   tags:
   - ldap.cfg
 
-- shell: /usr/sbin/setup-ds-admin.pl --file=/root/.setup-ds-admin.inf --silent creates=/etc/dirsrv/slapd-${ansible_hostname}/dse.ldif
+- shell: /usr/sbin/setup-ds-admin.pl --file=/root/setup-ds-admin.inf --silent creates=/etc/dirsrv/slapd-${ansible_hostname}/dse.ldif
   tags:
   - ldap.init
 
 - shell: /usr/bin/certutil -d /etc/dirsrv/slapd-${ansible_hostname} -A -n "CA certificate" -t CT,, -i /etc/openldap/cacerts/cacert.pem
+  notify:
+  - restart dirsrv
   tags:
   - ldap.init
 
-- shell: /usr/bin/certutil -d /etc/dirsrv/slapd-${ansible_hostname} -A -n "server-cert" -t CT,, -i /etc/ansible/utils/pki/CA/certs/server-cert.crt
+- shell: /usr/bin/certutil -d /etc/dirsrv/slapd-${ansible_hostname} -A -n "server-cert" -t CT,, -i /etc/pki/CA/certs/server-cert.crt
+  notify:
+  - restart dirsrv
   tags:
   - ldap.init
 
 - shell: /usr/bin/certutil -d /etc/dirsrv/admin-serv -A -n "CA certificate" -t CT,, -i /etc/openldap/cacerts/cacert.pem
+  notify:
+  - restart dirsrv-admin
   tags:
   - ldap.init
 
-- shell: /usr/bin/certutil -d /etc/dirsrv/admin-serv -A -n "admin-cert" -t CT,, -i /etc/ansible/utils/pki/CA/certs/admin-cert.crt
+- shell: /usr/bin/certutil -d /etc/dirsrv/admin-serv -A -n "admin-cert" -t CT,, -i /etc/pki/CA/certs/admin-cert.crt
+  notify:
+  - restart dirsrv-admin
   tags:
   - ldap.init
 
-# manage service
-#- service: name=templated enabled=yes state=started
-#  tags:
-#  - templated.srv
+- template: src=${item} dest=/etc/dirsrv/slapd-${ansible_hostname}/pin.txt owner=${ldap389_sysUser} group=${ldap389_sysUser} mode=0400
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/etc_dirsrv_slapd_pin.txt.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/etc_dirsrv_slapd_pin.txt.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/etc_dirsrv_slapd_pin.txt.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/etc_dirsrv_slapd_pin.txt.j2
+  - ${playbook_templates}/${playbook}/etc_dirsrv_slapd_pin.txt.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/etc_dirsrv_slapd_pin.txt.j2-${host_group}
+  - ${playbook_templates}/${playbook}/etc_dirsrv_slapd_pin.txt.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/etc_dirsrv_slapd_pin.txt.j2
+  notify:
+  - restart dirsrv
+  tags:
+  - ldap.cfg
+
+- template: src=${item} dest=/etc/dirsrv/admin-serv/password.conf owner=${ldap389_sysUser} group=${ldap389_sysUser} mode=0400
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/etc_dirsrv_admin-serv_password.conf.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/etc_dirsrv_admin-serv_password.conf.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/etc_dirsrv_admin-serv_password.conf.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/etc_dirsrv_admin-serv_password.conf.txt.j2
+  - ${playbook_templates}/${playbook}/etc_dirsrv_admin-serv_password.conf.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/etc_dirsrv_admin-serv_password.conf.j2-${host_group}
+  - ${playbook_templates}/${playbook}/etc_dirsrv_admin-serv_password.conf.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/etc_dirsrv_admin-serv_password.conf.j2
+  notify:
+  - restart dirsrv-admin
+  tags:
+  - ldap.cfg
+
+- template: src=${item} dest=/etc/dirsrv/admin-serv/nss.conf owner=root group=root mode=0644
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/etc_dirsrv_admin-serv_nss.conf.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/etc_dirsrv_admin-serv_nss.conf.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/etc_dirsrv_admin-serv_nss.conf.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/etc_dirsrv_admin-serv_nss.conf.txt.j2
+  - ${playbook_templates}/${playbook}/etc_dirsrv_admin-serv_nss.conf.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/etc_dirsrv_admin-serv_nss.conf.j2-${host_group}
+  - ${playbook_templates}/${playbook}/etc_dirsrv_admin-serv_nss.conf.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/etc_dirsrv_admin-serv_nss.conf.j2
+  notify:
+  - restart dirsrv-admin
+  tags:
+  - ldap.cfg
+
+- service: name=dirsrv enabled=yes state=started
+  tags:
+  - ldap.srv
+
+- service: name=dirsrv-admin enabled=yes state=started
+  tags:
+  - ldap.srv
