@@ -64,3 +64,13 @@
   service: name=denyhosts state=restarted
   tags:
   - denyhosts.service
+
+- name: restart dirsrv
+  service: name=dirsrv state=restarted
+  tags:
+  - ldap.service
+
+- name: restart dirsrv-admin
+  service: name=dirsrv-admin state=restarted
+  tags:
+  - ldap.service
