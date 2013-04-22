@@ -122,7 +122,7 @@
   - ${playbook_templates_private}/${playbook}/etc_dirsrv_admin-serv_password.conf.j2-${ansible_fqdn}
   - ${playbook_templates_private}/${playbook}/etc_dirsrv_admin-serv_password.conf.j2-${host_group}
   - ${playbook_templates_private}/${playbook}/etc_dirsrv_admin-serv_password.conf.j2-${datacentre}
-  - ${playbook_templates_private}/${playbook}/etc_dirsrv_admin-serv_password.conf.txt.j2
+  - ${playbook_templates_private}/${playbook}/etc_dirsrv_admin-serv_password.conf.j2
   - ${playbook_templates}/${playbook}/etc_dirsrv_admin-serv_password.conf.j2-${ansible_fqdn}
   - ${playbook_templates}/${playbook}/etc_dirsrv_admin-serv_password.conf.j2-${host_group}
   - ${playbook_templates}/${playbook}/etc_dirsrv_admin-serv_password.conf.j2-${datacentre}
@@ -137,7 +137,7 @@
   - ${playbook_templates_private}/${playbook}/etc_dirsrv_admin-serv_nss.conf.j2-${ansible_fqdn}
   - ${playbook_templates_private}/${playbook}/etc_dirsrv_admin-serv_nss.conf.j2-${host_group}
   - ${playbook_templates_private}/${playbook}/etc_dirsrv_admin-serv_nss.conf.j2-${datacentre}
-  - ${playbook_templates_private}/${playbook}/etc_dirsrv_admin-serv_nss.conf.txt.j2
+  - ${playbook_templates_private}/${playbook}/etc_dirsrv_admin-serv_nss.conf.j2
   - ${playbook_templates}/${playbook}/etc_dirsrv_admin-serv_nss.conf.j2-${ansible_fqdn}
   - ${playbook_templates}/${playbook}/etc_dirsrv_admin-serv_nss.conf.j2-${host_group}
   - ${playbook_templates}/${playbook}/etc_dirsrv_admin-serv_nss.conf.j2-${datacentre}
