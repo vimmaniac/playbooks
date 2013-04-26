@@ -86,33 +86,33 @@
   tags:
   - ldap.init
 
-- shell: /usr/bin/certutil -d /etc//dirsrv/slapd-${ansible_hostname} -N -f /root/pwdfile
+- shell: /usr/bin/certutil -N -d /etc/dirsrv/slapd-${ansible_hostname} -f /root/pwdfile
   tags:
   - ldap.init
 
-- shell: /usr/bin/certutil -d /etc//dirsrv/admin-serv -N -f /root/pwdfile
+- shell: /usr/bin/certutil -N -d /etc/dirsrv/admin-serv -f /root/pwdfile
   tags:
   - ldap.init
 
-- shell: /usr/bin/certutil -d /etc/dirsrv/slapd-${ansible_hostname} -A -n "CA certificate" -t CT,, -i /etc/openldap/cacerts/cacert.pem -f /root/pwdfile
+- shell: /usr/bin/certutil -A -d /etc/dirsrv/slapd-${ansible_hostname} -n "CA certificate" -t "CT,," -i /etc/openldap/cacerts/cacert.pem -f /root/pwdfile
   notify:
   - restart dirsrv
   tags:
   - ldap.init
 
-- shell: /usr/bin/certutil -d /etc/dirsrv/admin-serv -A -n "CA certificate" -t CT,, -i /etc/openldap/cacerts/cacert.pem -f /root/pwdfile
+- shell: /usr/bin/certutil -A -d /etc/dirsrv/admin-serv -n "CA certificate" -t "CT,," -i /etc/openldap/cacerts/cacert.pem -f /root/pwdfile
   notify:
   - restart dirsrv-admin
   tags:
   - ldap.init
 
-- shell: /usr/bin/certutil -d /etc/dirsrv/slapd-${ansible_hostname} -A -n "server-cert" -t u,u,u -i /etc/pki/CA/certs/server-cert.crt -f /root/pwdfile
+- shell: /usr/bin/certutil -A -d /etc/dirsrv/slapd-${ansible_hostname} -n "server-cert" -t "u,u,u" -i /etc/pki/CA/certs/server-cert.crt -f /root/pwdfile
   notify:
   - restart dirsrv
   tags:
   - ldap.init
 
-- shell: /usr/bin/certutil -d /etc/dirsrv/admin-serv -A -n "admin-cert" -t u,u,u -i /etc/pki/CA/certs/admin-cert.crt -f /root/pwdfile
+- shell: /usr/bin/certutil -A -d /etc/dirsrv/admin-serv -n "admin-cert" -t "u,u,u" -i /etc/pki/CA/certs/admin-cert.crt -f /root/pwdfile
   notify:
   - restart dirsrv-admin
   tags:
