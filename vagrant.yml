@@ -1,0 +1,8 @@
+#
+# Vagrant Playbook
+#
+---
+- name: Vagrant Playbook
+  hosts: vagrant
+
+- include: base.yml tags=base
