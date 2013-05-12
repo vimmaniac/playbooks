@@ -11,7 +11,7 @@
   # see if we can git rid of this using group_vars/all
   # not possible because group_vars/all is not preprocessed
   vars_files:
-    - [ ${vars_files_ext}, vars/global.yml ]
+    - [ "${vars_files_ext}", "vars/global.yml" ]
 
   tasks:
   - include: ${playbook_tasks}/${playbook}.yml
