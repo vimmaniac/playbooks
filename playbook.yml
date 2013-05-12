@@ -3,7 +3,7 @@
 #
 ---
 - name: Proxy Playbook
-  hosts: ${hosts}
+  hosts: {{hosts}}
 
   vars:
     version: 1.0
@@ -11,10 +11,10 @@
   # see if we can git rid of this using group_vars/all
   # not possible because group_vars/all is not preprocessed
   vars_files:
-  - vars/global.yml
+    - [ {{vars_files_ext}}/vars/global.yml, vars/global.yml ]
 
   tasks:
-  - include: ${playbook_tasks}/${playbook}.yml
+  - include: {{playbook_tasks}}/{{playbook}}.yml
 
   handlers:
-  - include: ${playbook_handlers}/global.yml
+  - include: {{playbook_handlers}}/global.yml
