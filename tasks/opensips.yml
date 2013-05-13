@@ -7,7 +7,7 @@
   - opensips
   - opensips-mysql
   - opensips-perl
-  - opensip-snmpstats
+  - opensips-snmpstats
   tags:
   - opensips.pkgs
 
