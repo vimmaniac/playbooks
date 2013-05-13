@@ -65,6 +65,16 @@
   tags:
   - denyhosts.service
 
+- name: restart asterisk
+  service: name=asterisk state=restarted
+  tags:
+  - asterisk.service
+
+- name: restart opensips
+  service: name=opensips state=restarted
+  tags:
+  - opensips.service
+
 - name: restart dirsrv
   service: name=dirsrv state=restarted
   tags:

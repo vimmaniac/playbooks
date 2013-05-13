@@ -5,6 +5,9 @@
 - yum: pkg=${item} state=installed
   with_items:
   - opensips
+  - opensips-mysql
+  - opensips-perl
+  - opensip-snmpstats
   tags:
   - opensips.pkgs
 
@@ -57,3 +60,9 @@
   #- restart opensips
   tags:
   - opensips.cfg
+
+# manage service
+- service: name=opensips enabled=yes state=started
+  tags:
+  - opensips.srv
+
