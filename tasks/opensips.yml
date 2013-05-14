@@ -89,6 +89,7 @@
 
 # manage service
 - service: name=opensips enabled=yes state=started
+  ignore_errs: yes
   tags:
   - opensips.srv
 
