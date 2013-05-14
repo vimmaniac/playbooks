@@ -14,6 +14,19 @@
   tags:
   - asterisk.pkgs
 
+- template: src=${item} dest=/etc/init.d/asterisk owner=root group=root mode=0755
+  first_available_file:
+  - ${playbook_templates_private}/${playbook}/etc_initd_asterisk.j2-${ansible_fqdn}
+  - ${playbook_templates_private}/${playbook}/etc_initd_asterisk.j2-${host_group}
+  - ${playbook_templates_private}/${playbook}/etc_initd_asterisk.j2-${datacentre}
+  - ${playbook_templates_private}/${playbook}/etc_initd_asterisk.j2
+  - ${playbook_templates}/${playbook}/etc_initd_asterisk.j2-${ansible_fqdn}
+  - ${playbook_templates}/${playbook}/etc_initd_asterisk.j2-${host_group}
+  - ${playbook_templates}/${playbook}/etc_initd_asterisk.j2-${datacentre}
+  - ${playbook_templates}/${playbook}/etc_initd_asterisk.j2
+  tags:
+  - asterisk.cfg
+
 # manage tree structure
 - copy: src=${item} dest=/etc/httpd owner=root group=root mode=0600
   with_fileglob:
