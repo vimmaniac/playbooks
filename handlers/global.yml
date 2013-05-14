@@ -10,11 +10,13 @@
 
 - name: restart nscd
   service: name=nscd state=restarted
+  ignore_errors: yes
   tags:
   - nscd.service
 
 - name: restart ntpd
   service: name=ntpd state=restarted
+  ignore_errors: yes
   tags:
   - ntpd.service
 
@@ -32,55 +34,66 @@
 
 - name: restart monit
   service: name=monit state=restarted
+  ignore_errors: yes
   tags:
   - monit.service
 
 - name: restart httpd
   service: name=httpd state=restarted
+  ignore_errors: yes
   tags:
   - httpd.service
 
 - name: restart mysql
   service: name=mysql state=restarted
+  ignore_errors: yes
   tags:
   - mysql.service
 
 - name: restart mysqld
   service: name=mysqld state=restarted
+  ignore_errors: yes
   tags:
   - mysqld.service
 
 - name: restart postgresql
   service: name=postgresql state=restarted
+  ignore_errors: yes
   tags:
   - postgres.service
 
 - name: restart snmpd
   service: name=snmpd state=restarted
+  ignore_errors: yes
   tags:
   - snmpd.service
 
 - name: restart denyhosts
   service: name=denyhosts state=restarted
+  ignore_errors: yes
   tags:
   - denyhosts.service
 
 - name: restart asterisk
   service: name=asterisk state=restarted
+  ignore_errors: yes
   tags:
   - asterisk.service
 
 - name: restart opensips
   service: name=opensips state=restarted
+  ignore_errors: yes
   tags:
   - opensips.service
 
 - name: restart dirsrv
   service: name=dirsrv state=restarted
+  ignore_errors: yes
   tags:
   - ldap.service
 
 - name: restart dirsrv-admin
   service: name=dirsrv-admin state=restarted
+  ignore_errors: yes
   tags:
   - ldap.service
