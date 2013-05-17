@@ -2,6 +2,10 @@
 # Keys Tasks
 #
 ---
+- file: dest=/root/.ssh state=directory owner=root group=root mode=0700
+  tags:
+  - keys.root
+
 - template: dest=/root/.ssh/authorized_keys
   first_available_file:
   - ${playbook_templates_private}/keys/authorized_keys.j2-${ansible_fqdn}
@@ -15,15 +19,17 @@
   tags:
   - keys.root
 
-- file: dest=/home/${item} state=directory owner=${item} group=users mode=0700
-  when_set: ${shell_accounts}
+# we can ignore these errors as it is not critical
+- file: dest=/home/{{ item }} state=directory owner={{ item }} group=users mode=0700
+  when: shell_accounts is defined
+  ignore_errors: yes
   with_items: ${shell_accounts}
   tags:
   - keys.home
 
 # TODO: ignore_errors because we don't know why this even executes when ${shell_accounts} is not set
-- authorized_key: user=${item} key='$FILE(${playbook_files_private}/keys/${item}_id_rsa.pub)'
-  when_set: ${shell_accounts}
+- authorized_key: user={{ item }} key='$FILE({{ playbook_files_private }}/keys/{{ item }}_id_rsa.pub)'
+  when: shell_accounts is defined
   ignore_errors: yes
   with_items: ${shell_accounts}
   tags:

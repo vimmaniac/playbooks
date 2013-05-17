@@ -2,13 +2,16 @@
 # Monit Tasks
 #
 ---
-- yum: pkg=${item} state=installed
+- yum: pkg={{ item }} state=installed
+  ignore_errors: yes
+  register: success
   with_items:
   - monit
   tags:
   - monit.pkgs
 
 - template: dest=/etc/monitrc owner=root group=root mode=0700
+  when: success.changed
   first_available_file:
   - ${playbook_templates_private}/${playbook}/monit.d/monitrc.j2-${ansible_fqdn}
   - ${playbook_templates_private}/${playbook}/monit.d/monitrc.j2-${host_group}
@@ -23,7 +26,8 @@
   - monit
   - cfg
 
-- copy: src=${item} dest=/etc/monit.d/
+- copy: src={{ item }} dest=/etc/monit.d/
+  when: success.changed
   with_fileglob:
   - ${playbook_files_private}/${playbook}/${ansible_fqdn}/*
   - ${playbook_files_private}/${playbook}/${host_group}/*

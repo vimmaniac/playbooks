@@ -2,13 +2,17 @@
 # Denyhosts Tasks
 #
 ---
-- yum: pkg=${item} state=installed
+- yum: pkg={{ item }} state=installed
+  ignore_errors: yes
+  register: success
   with_items:
   - denyhosts
   tags:
   - denyhosts.pkgs
 
-- template: src=${item} dest=/etc/denyhosts.conf owner=root group=root mode=0600
+- template: src={{ item }} dest=/etc/denyhosts.conf owner=root group=root mode=0600
+  ignore_errors: yes
+  when: success.changed
   first_available_file:
   - ${playbook_templates_private}/${playbook}/denyhosts.conf.j2-${ansible_fqdn}
   - ${playbook_templates_private}/${playbook}/denyhosts.conf.j2-${host_group}
@@ -22,5 +26,7 @@
   - denyhosts.cfg
 
 - service: name=denyhosts enabled=yes state=started
+  ignore_errors: yes
+  when: success.changed
   tags:
   - denyhosts.srv
