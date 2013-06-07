@@ -9,6 +9,7 @@
   - asterisk-dahdi
   - asterisk-snmp
   - asterisk-sounds-core-en
+  - asterisk-sounds-core-en-gsm
   - sox
   #- lame
   tags:
