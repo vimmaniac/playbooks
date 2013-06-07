@@ -31,6 +31,18 @@
   tags:
   - mysql.cfg
 
+- mysql_db: name=${item} state=present  
+  with_items: ${databases}
+  ignore_errors: yes
+  tags:
+  - mysql.init.db
+
+#- mysql_user: host=localhost name=${mysql_user} password=${mysql_passwd} priv=*.*:ALL state=present
+- mysql_user: host=localhost name=${mysql_user} password=${mysql_passwd}
+  ignore_errors: yes  
+  tags:  
+  - mysql.init.user  
+  
 - mysql_user: host=${item} name=root password=${mysql_root_passwd}
   with_items:
   - ${ansible_fqdn}
@@ -40,17 +52,6 @@
   ignore_errors: yes
   tags:
   - mysql.init.root
-
-- mysql_user: host=localhost name=${mysql_user} password=${mysql_passwd} priv=*.*:ALL state=present
-  ignore_errors: yes  
-  tags:  
-  - mysql.init.user  
-  
-- mysql_db: name=${item} state=present  
-  with_items: ${databases}
-  ignore_errors: yes
-  tags:
-  - mysql.init.db
 
 - template: dest=/root/.my.cnf
   first_available_file:
